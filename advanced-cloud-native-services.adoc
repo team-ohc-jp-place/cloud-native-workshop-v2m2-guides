@@ -35,7 +35,7 @@ image::crw-icons.png[cdw, 400]
 
 [NOTE]
 ====
-If things get weird or your browser appears, you can simply reload the browser tab to refresh the view.
+ブラウザの表示がおかしくなった場合には、ブラウザタブを再読み込みして表示を更新してください。
 ====
 
 Many features of CodeReady Workspaces are accessed via *Commands*. You can see a few of the commands listed with links on the home page (e.g. _New File.._, _Git Clone.._, and others).
