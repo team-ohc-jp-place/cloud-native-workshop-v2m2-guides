@@ -52,8 +52,8 @@ echo "This is a bash shell command that you can copy/paste by clicking"
 * https://developers.redhat.com/products/rhamt[Red Hat Application Migration Toolkit^] - これを使用して、既存のアプリケーションを移行します。
 * https://www.redhat.com/en/products/runtimes[Red Hat Runtimes^] - Spring Boot、Node.js、 https://quarkus.io[Quarkus^] などのクラウドネイティブランタイムのコレクション
 * https://www.redhat.com/en/technologies/jboss-middleware/amq[Red Hat AMQ Streams^] - *Apache Kafka* ベースのストリーミングデータプラットフォーム
-* https://access.redhat.com/products/red-hat-single-sign-on[Red Hat SSO^] - For authentication / authorization -
-based on *Keycloak*
+* https://access.redhat.com/products/red-hat-single-sign-on[Red Hat SSO^] - 認証 / 認可 -
+*Keycloak* がベース
 * Other open source projects like https://knative.dev[Knative^] (for serverless apps), https://jenkins.io/[Jenkins^] and
 https://cloud.google.com/tekton/[Tekton^] (CI/CD pipelines),
 https://prometheus.io[Prometheus^] and https://grafana.com[Grafana^] (monitoring apps), and
