@@ -13,9 +13,10 @@ Agenda
 Lab Instructions on OpenShift
 ===
 
-Note that if you have installed the lab infra via APB, the lab instructions are already deployed.
+APB経由で lab infra をインストールした場合、 lab instructions はすでにデプロイされていることに注意してください。
 
-Here is an example Ansible playbook to deploy the lab instruction to your OpenShift cluster manually.
+ここでは、 lab instructions を OpenShift クラスタに手動でデプロイするための Ansible プレイブックの例を示します。
+
 
 ```
 - name: Create Guides Module 2
