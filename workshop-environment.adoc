@@ -44,8 +44,8 @@ echo "This is a bash shell command that you can copy/paste by clicking"
 
 == 使用しているワークショップ環境
 
-Your workshop environment consists of several components which have been pre-installed and are ready to use. Depending on which
-parts of the workshop you’re doing, you will use one or more of:
+ワークショップ環境は、あらかじめインストールされていてすぐに使用できるいくつかのコンポーネントで構成されています。 +
+ワークショップのどの部分を行うかに応じて、1つ以上のコンポーネントを使用します。
 
 * https://www.openshift.com/[Red Hat OpenShift^] - You’ll use one or more **projects** (Kubernetes namespaces)
 that are your own and are isolated from other workshop students
