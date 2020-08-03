@@ -35,7 +35,7 @@ public class CopyMeDirectly {
 一度クリックするだけで、ブロック全体がクリップボードにコピーされ、kbd:[CTRL+V]で貼り付けられるようになります。 +
 ( Mac OS の場合は kbd:[Command+V] )
 
-There are also Linux shell commands that can also be copied and pasted into a Terminal in your Development Environment:
+また、開発環境のターミナルにコピー＆ペーストできるLinuxシェルコマンドもあります。
 
 [source,sh,role="copypaste"]
 ----
