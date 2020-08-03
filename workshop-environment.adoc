@@ -20,7 +20,7 @@ image::setuser.png[Set User ID above, 900]
 
 == Click-to-Copy
 
-You will see various code and command blocks throughout these exercises which can be copy/pasted directly by clicking anywhere on the block of text:
+これらの演習では、テキストブロック上の任意の場所をクリックして直接コピー/ペーストすることができる様々なコードとコマンドブロックを見ることができます。
 
 [source,java,role="copypaste"]
 ----
