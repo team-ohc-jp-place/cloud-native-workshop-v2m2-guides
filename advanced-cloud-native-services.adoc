@@ -14,10 +14,9 @@ Module 1 を学習しなかった場合、または学習を開始したが終�
 Import Projects セクションにスキップしてください。
 ====
 
-You will be using Red Hat CodeReady Workspaces, an online IDE based on https://www.eclipse.org/che/[Eclipse Che^]. *Changes to files are auto-saved every few seconds*, so you don’t need to explicitly save changes.
 https://www.eclipse.org/che/[Eclipse Che^] をベースにしたオンライン IDE である Red Hat CodeReady Workspaces を使用します。 *ファイルへの変更は数秒ごとに自動保存される* ので、明示的に変更を保存する必要はありません。
 
-To get started, {{ ECLIPSE_CHE_URL }}[access the CodeReady Workspaces instance^] and log in using the username and password you’ve been assigned (e.g. `{{ USER_ID }}/{{ CHE_USER_PASSWORD }}`):
+開始するには、 {{ ECLIPSE_CHE_URL }}[CodeReady Workspaces インスタンスにアクセス^] し、 割り当てられたユーザー名とパスワードを使用してログインします。 (例: `{{ USER_ID }}/{{ CHE_USER_PASSWORD }}`)
 
 image::che-login.png[cdw, 700]
 
