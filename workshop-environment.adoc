@@ -8,7 +8,6 @@
 image::alreadyset.png[Set User ID above, 700]
 
 ユーザー名がきちんと設定されていれば、次のステップへ進んでください。
-
 そうでない場合は、上のボックスに、下記のように割り当てられたユーザーIDを入力します :
 
 image::setuser.png[Set User ID above, 900]
