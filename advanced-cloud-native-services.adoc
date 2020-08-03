@@ -1,7 +1,6 @@
 = Advanced Cloud-Native Services
 :experimental:
 
-If you completed the *Cloud Native Workshop - Module 1*, you learned how to take an existing application to the cloud with JBoss EAP and OpenShift, and you got a glimpse into the power of OpenShift for modernizing existing applications with microservices. If you did not, or you started but didn't finish, there are scripts below you can run to catch up.
 *Cloud Native Workshop - Module 1* を終了した場合、JBoss EAP と OpenShift を使用して既存のアプリケーションをクラウドに移行する方法を学び、マイクロサービスを使用して既存のアプリケーションをモダナイズするための OpenShift の力を垣間見ることができました。 +
 Module 1 を学習しなかった場合、または学習を開始したが終了しなかった場合は、以下のスクリプトを実行して追いつくことができます。
 
