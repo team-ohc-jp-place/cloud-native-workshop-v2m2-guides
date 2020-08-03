@@ -29,7 +29,7 @@ image::che-workspace.png[cdw, 900]
 このIDEは、Eclipse Cheをベースにしています。 +
 （Eclipse Che は、MicroSoft VS Code editorをベースにしています）。
 
-You can see icons on the left for navigating between project explorer, search, version control (e.g. Git), debugging, and other plugins.  You’ll use these during the course of this workshop. Feel free to click on them and see what they do:
+プロジェクトエクスプローラ、検索、バージョン管理(Gitなど)、デバッグ、その他のプラグインの間を移動するためのアイコンが左に表示されています。このワークショップではこれらを使います。自由にクリックして何ができるか見てみてください。
 
 image::crw-icons.png[cdw, 400]
 
