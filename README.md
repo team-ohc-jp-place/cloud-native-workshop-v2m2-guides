@@ -1,7 +1,7 @@
-The CCN Roadshow(Dev Track) Module 2 Guide 2019
+The CCN Roadshow(Dev Track) Module 2 Guide 2020
 ===
-This module enables developers to create CI/CD pipeline with cloud-native apps on Red Hat Application Rumties(i.e. Quarkus, Spring Boot) with OpenShift.
-The developers also will learn how to debug, monitoring the cloud-native apps via Web IDE(CodeReady Workspace).
+このモジュールでは、Red Hat Application Rumties(Quarkus, Spring Boot)上のクラウドネイティブアプリをOpenShiftでCI/CDパイプラインを作成することができます。 <br>
+また、開発者は Web IDE(CodeReady Workspace)を介してクラウドネイティブアプリを監視し、デバッグする方法を学びます。
 
 Agenda
 ===
