@@ -4,7 +4,7 @@
 *Cloud Native Workshop - Module 1* を終了した場合、JBoss EAP と OpenShift を使用して既存のアプリケーションをクラウドに移行する方法を学び、マイクロサービスを使用して既存のアプリケーションをモダナイズするための OpenShift の力を垣間見ることができました。 +
 Module 1 を学習しなかった場合、または学習を開始したが終了しなかった場合は、以下のスクリプトを実行して追いつくことができます。
 
-In this lab, you will go deeper into how to use the OpenShift Container Platform as a developer to build and deploy applications. We’ll focus on the core features of OpenShift as it relates to developers, and you’ll learn typical workflows for a developer (develop, build, test, deploy, and repeat).
+このラボでは、開発者としてOpenShift Container Platformを使用してアプリケーションを構築し、デプロイする方法をより深く掘り下げていきます。開発者に関連するOpenShiftのコア機能に焦点を当て、開発者のための典型的なワークフロー（開発、ビルド、テスト、デプロイ、リピート）を学びます。
 
 === Getting Ready for the labs
 
