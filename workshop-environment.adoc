@@ -54,7 +54,7 @@ echo "This is a bash shell command that you can copy/paste by clicking"
 * https://www.redhat.com/en/technologies/jboss-middleware/amq[Red Hat AMQ Streams^] - *Apache Kafka* ベースのストリーミングデータプラットフォーム
 * https://access.redhat.com/products/red-hat-single-sign-on[Red Hat SSO^] - 認証 / 認可 -
 *Keycloak* がベース
-* 他にも、オープンソースプロジェクトが由来の、  https://knative.dev[Knative^] （サーバーレスアプリ）、 https://jenkins.io/[Jenkins^] や https://cloud.google.com/tekton/[Tekton^] （CI/CDパイプライン）、https://prometheus.io[Prometheus^] や https://grafana.com[Grafana^] （モニタリングアプリ）などがあります。
+* 他にも、 https://knative.dev[Knative^] （サーバーレスアプリ）、 https://jenkins.io/[Jenkins^] や https://cloud.google.com/tekton/[Tekton^] （CI/CDパイプライン）、https://prometheus.io[Prometheus^] や https://grafana.com[Grafana^] （モニタリングアプリ）などの、オープンソースプロジェクトが由来のコンポーネントがあります。
 
 You’ll be provided clickable URLs throughout the workshop to access the services that have been installed for you.
 
