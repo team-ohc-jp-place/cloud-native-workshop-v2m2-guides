@@ -6,11 +6,11 @@ Module 1 を学習しなかった場合、または学習を開始したが終�
 
 このラボでは、開発者としてOpenShift Container Platformを使用してアプリケーションを構築し、デプロイする方法をより深く掘り下げていきます。開発者に関連するOpenShiftのコア機能に焦点を当て、開発者のための典型的なワークフロー（開発、ビルド、テスト、デプロイ、リピート）を学びます。
 
-=== Getting Ready for the labs
+=== ラボの準備
 
 [WARNING]
 ====
-If you’ve already completed the *Optimizing Existing Applications* module then you will simply need to import the code for this module. Skip down to the *Import Projects* section.
+ *Optimizing Existing Applications* モジュールをすでに完了している場合は、このモジュールのコードをインポートする必要があります。プロジェクトのインポートセクションにスキップしてください。
 ====
 
 You will be using Red Hat CodeReady Workspaces, an online IDE based on https://www.eclipse.org/che/[Eclipse Che^]. *Changes to files are auto-saved every few seconds*, so you don’t need to explicitly save changes.
