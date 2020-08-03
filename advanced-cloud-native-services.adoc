@@ -10,8 +10,8 @@ Module 1 を学習しなかった場合、または学習を開始したが終�
 
 [WARNING]
 ====
- **Optimizing Existing Applications** モジュールをすでに完了している場合は、このモジュールのコードをインポートする必要があります。
- Import Projects セクションにスキップしてください。
+*Optimizing Existing Applications* モジュールをすでに完了している場合は、このモジュールのコードをインポートする必要があります。
+Import Projects セクションにスキップしてください。
 ====
 
 You will be using Red Hat CodeReady Workspaces, an online IDE based on https://www.eclipse.org/che/[Eclipse Che^]. *Changes to files are auto-saved every few seconds*, so you don’t need to explicitly save changes.
