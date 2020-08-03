@@ -10,7 +10,7 @@ Module 1 を学習しなかった場合、または学習を開始したが終�
 
 [WARNING]
 ====
-  *Optimizing Existing Applications* モジュールをすでに完了している場合は、このモジュールのコードをインポートする必要があります。
+ **Optimizing Existing Applications** モジュールをすでに完了している場合は、このモジュールのコードをインポートする必要があります。
  Import Projects セクションにスキップしてください。
 ====
 
