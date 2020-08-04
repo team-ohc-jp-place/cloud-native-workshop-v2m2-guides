@@ -74,7 +74,6 @@ cd $CHE_PROJECTS_ROOT/cloud-native-workshop-v2m2-labs && git checkout ocp-4.5
 
 [NOTE]
 ====
-The Terminal window in CodeReady Workspaces. You can open a terminal window for any of the containers running in your Developer workspace. For the rest of these labs, anytime you need to run a command in a terminal, you can use the **>_ New Terminal** command on the right:
 CodeReady ワークスペースのターミナルウィンドウ。Developer ワークスペースで実行しているコンテナのいずれかのターミナルウィンドウを開くことができます。これらのラボの残りの部分については、ターミナルでコマンドを実行する必要がある場合はいつでも、右側の **>_ New Terminal** コマンドを使用することができます。
 ====
 
