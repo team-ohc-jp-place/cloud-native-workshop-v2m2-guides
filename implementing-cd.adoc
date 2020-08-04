@@ -119,6 +119,8 @@ OpenShiftは、開発者がJenkins自動化エンジンで実行するための 
 
 The build can get started, monitored, and managed by OpenShift in the same way as any other build types e.g. S2I. Pipeline workflows are defined in a `Jenkinsfile`, either embedded directly in the build configuration, or supplied in Git repository and referenced by the build configuration. They are written using the http://groovy-lang.org/[Groovy scripting language].
 
+ビルドは、S2Iなどの他のビルドタイプと同じ方法でOpenShiftによって開始、監視、管理されます。パイプラインワークフローは `Jenkinsfile` で定義されており、ビルド設定に直接埋め込まれているか、Git リポジトリで提供され、ビルド設定で参照されます。これらは http://groovy-lang.org/[Groovy scripting language] を使って記述します。
+
 As part of the production environment template you used in the last step, a Pipeline build object was created. Ordinarily the pipeline would contain steps to build the project in the _dev_ environment, store the resulting image in the local repository, run the image and execute tests against it, then wait for human approval to _promote_ the resulting image to other environments like test or production.
 
 ==== 3. Inspect the Pipeline Definition
