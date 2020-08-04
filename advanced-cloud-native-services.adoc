@@ -81,7 +81,7 @@ image::codeready-workspace-terminal.png[codeready-workspace-terminal, 700]
 
 === Remove other projects
 
-If you've completed other modules today (such as `cloud-native-workshop-v2m1-labs`), remove them from your workspace by right-clicking on the project name in the explorer and choose *Delete* and accept the warning. Be sure not to delete the new project you just imported for this lab!
+今日、他のモジュール( `cloud-native-workshop-v2m1-lab` など)を完了した場合は、エクスプローラーでプロジェクト名を右クリックして削除を選択し、警告を受け入れてワークスペースから削除してください。このラボのためにインポートした新しいプロジェクトを削除しないように注意してください。
 
 image::remove-workspace.png[remove, 700]
 
