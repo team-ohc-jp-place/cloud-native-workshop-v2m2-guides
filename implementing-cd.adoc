@@ -96,7 +96,7 @@ image::from_catalog_jenkins.png[create_new, 700]
 oc label dc/jenkins app.openshift.io/runtime=jenkins --overwrite
 ----
 
-Back on the {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-coolstore-prod[Topology View^] you can see the production database, and an application called Jenkins which OpenShift uses to manage CI/CD pipeline deployments.
+{{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-coolstore-prod[Topology View^] に戻ると、本番用のデータベースと、OpenShiftがCI/CDパイプラインの配置を管理するために使用している、Jenkinsと呼ばれるアプリケーションを見ることができます。
 
 image::coolstore_prod_jenkins.png[create_new, 700]
 
