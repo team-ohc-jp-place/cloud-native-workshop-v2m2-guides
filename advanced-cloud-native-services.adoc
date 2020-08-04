@@ -89,6 +89,8 @@ image::remove-workspace.png[remove, 700]
 
 Although your Eclipse Che workspace is running on the Kubernetes cluster, it’s running with a default restricted _Service Account_ that prevents you from creating most resource types. If you’ve completed other modules, you’re probably already logged in, but let’s login again: click on *Login to OpenShift*, and enter your given credentials:
 
+Eclipse Che ワークスペースは Kubernetes クラスタ上で実行されていますが、デフォルトの制限付きサービスアカウントで実行されているため、ほとんどのリソースタイプを作成することができません。他のモジュールを完了している場合は、もう一度ログインしてみましょう: *Login to OpenShift* をクリックして、与えられた資格情報を入力します。
+
 * Username: `{{ USER_ID }}`
 * Password: `{{ OPENSHIFT_USER_PASSWORD }}`
 
