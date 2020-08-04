@@ -30,7 +30,7 @@ image::create_project.png[create_dialog, 600]
 プロジェクト名に `{{USER_ID}}-coolstore-prod` を使用しなければなりません。 この名前は後に参照されるため、 `{{USER_ID}}-coolstore-prod` という名前を付けないと失敗することになります。
 ====
 
-This will create a new OpenShift project called *{{USER_ID}}-coolstore-prod* from which our production application will run.
+これで *{{USER_ID}}-coolstore-prod* という新しいOpenShiftプロジェクトが作成され、そこから本番アプリケーションが実行されます。
 
 ==== 2. Add the production elements
 
