@@ -151,12 +151,11 @@ sh /projects/cloud-native-workshop-v2m2-labs/monolith/scripts/deploy-coolstore.s
 
 === Verifying the Dev Environment
 
-In the previous module, you created a new OpenShift project called *{{ USER_ID }}-coolstore-dev* which represents your developer personal
-project in which you deployed the CoolStore monolith.
+前のモジュールでは、 *{{ USER_ID }}-coolstore-dev* という新しいOpenShiftプロジェクトを作成し、CoolStore monolith をデプロイした開発者個人のプロジェクトを表しています。
 
 ==== Verify Application
 
-Let’s take a moment and review the OpenShift resources that are created for the Monolith:
+それでは、 Monolith 用に作成されている OpenShift リソースを確認してみましょう。
 
 * Build Config: *coolstore* build config is the configuration for building the Monolith image from the source code or WAR file.
 * Image Stream: *coolstore* image stream is the virtual view of all coolstore container images built and pushed to the OpenShift integrated registry.
