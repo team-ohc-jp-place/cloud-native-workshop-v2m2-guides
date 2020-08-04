@@ -53,7 +53,7 @@ image::from_catalog_prod_details.png[create_new, 700]
 
 他の値はそのままにして、下にスクロールして *Create* をクリックします。
 
-Go to the {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-coolstore-prod[Topology View^] to see the elements that were deployed.
+ {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-coolstore-prod[Topology View^] に移動して、デプロイされた要素を確認します。
 
 The *Topology* view in the _Developer_ perspective of the web console provides a visual representation of all the applications within a project, their build status, and the components and services associated with them.
 
