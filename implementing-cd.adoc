@@ -173,9 +173,9 @@ image::pipe-done.png[Prod, 700]
 
 ==== 5. Adding Pipeline Approval Steps
 
-In previous steps, you used an OpenShift Pipeline to automate the process of building and deploying changes from the dev environment to production. In this step, we’ll add a final checkpoint to the pipeline which will require you as the project lead to approve the final push to production.
+前のステップでは、OpenShift Pipelineを使用して、開発環境から本番環境への変更のビルドとデプロイのプロセスを自動化しました。このステップでは、パイプラインに最終チェックポイントを追加します。
 
-Ordinarily your pipeline definition would be checked into a source code management system like Git, and to change the pipeline you’d edit the _Jenkinsfile_ in the source base. For this workshop we’ll just edit it directly to add the necessary changes. You can edit it with the *oc* command but we’ll use the Web Console.
+通常、パイプラインの定義はGitのようなソースコード管理システムにチェックされ、パイプラインを変更するにはソースベースのJenkinsfileを編集します。今回のワークショップでは、直接編集して必要な変更を加えます。 *oc* コマンドでも編集できますが、ここではWebコンソールを使用します。
 
 Back on the {{ CONSOLE_URL }}/k8s/ns/{{USER_ID}}-coolstore-prod/buildconfigs/monolith-pipeline[Pipeline Details Page^] click on the *YAML* tab. Add _a new stage_ to the pipeline, just before the _Deploy to PROD_ stage:
 
