@@ -110,14 +110,12 @@ image::coolstore_prod_jenkins.png[create_new, 700]
 
 *Continuous Delivery (CD)* とは、デリバリーソフトウェアの様々な側面を自動化することを目的とした一連のプラクティスのことを指します。これらのプラクティスの1つは、デリバリーパイプラインと呼ばれるもので、コードや設定の変更が上位環境に到達し、最終的には本番環境に到達するまでのステップを定義する自動化されたプロセスです。
 
-OpenShift simplifies building CI/CD Pipelines by integrating the popular https://jenkins.io/doc/book/pipeline/overview/[Jenkins pipelines^] into the platform and enables defining truly complex workflows directly from within OpenShift. OpenShift 4 also introduces https://www.openshift.com/learn/topics/pipelines[Tekton Pipelines^], an evolution of CI/CD for Kubernetes, which you might be exploring in a later module if it's on the agenda for today.
-
 OpenShiftは人気のある https://jenkins.io/doc/book/pipeline/overview/[Jenkins pipelines^] をプラットフォームに統合することでCI/CD Pipelinesの構築を簡素化し、真に複雑なワークフローをOpenShift内から直接定義できるようにしました。OpenShift 4では、Kubernetes向けのCI/CDの進化形である https://www.openshift.com/learn/topics/pipelines[Tekton Pipelines^] も導入されています。
 
-The first step for any deployment pipeline is to store all code and configurations in a source code repository. In this workshop, the source code and configurations are stored in a https://github.com/RedHat-Middleware-Workshops/cloud-native-workshop-v2m2-labs[GitHub repository^] we’ve been
-using.
+あらゆるデプロイメントパイプラインの最初のステップは、すべてのコードと設定をソースコードリポジトリに保存することです。今回のワークショップでは、ソースコードと設定を https://github.com/RedHat-Middleware-Workshops/cloud-native-workshop-v2m2-labs[GitHub repository^] に保存しています。
+を使用しています。
 
-OpenShift has built-in support for *Jenkins CI/CD pipelines* by allowing developers to define a https://jenkins.io/solutions/pipeline/[Jenkins pipeline^] for execution by a Jenkins automation engine.
+OpenShiftは、開発者がJenkins自動化エンジンで実行するための https://jenkins.io/solutions/pipeline/[Jenkins pipeline^] を定義できるようにすることで、 *Jenkins CI/CD pipelines* をビルトインでサポートしています。
 
 The build can get started, monitored, and managed by OpenShift in the same way as any other build types e.g. S2I. Pipeline workflows are defined in a `Jenkinsfile`, either embedded directly in the build configuration, or supplied in Git repository and referenced by the build configuration. They are written using the http://groovy-lang.org/[Groovy scripting language].
 
