@@ -145,12 +145,11 @@ image::coolstore-prod-monolith-bc.png[monolith-pipeline, 700]
 oc describe bc/monolith-pipeline -n {{USER_ID}}-coolstore-prod
 ----
 
-The pipeline syntax allows creating complex deployment scenarios with the possibility of defining checkpoints for manual interaction and approval processes using https://jenkins.io/doc/pipeline/steps/[the large set of steps and plugins that Jenkins provides] in order to adapt the pipeline to the processes used in your team.
-
 パイプライン構文では、複雑なデプロイメントシナリオを作成することができ、 https://jenkins.io/doc/pipeline/steps/[Jenkinsが提供するステップとプラグインの大規模なセット] を使用して手動での相互作用と承認プロセスのチェックポイントを定義することで、チームで使用されるプロセスにパイプラインを適応させることができます。
 
-
 To simplify the pipeline in this workshop, we simulate the build and tests and skip any need for human input. Once the pipeline completes, it deploys the app from the _dev_ environment to our _production_ environment using the above `tag()` method within the `openshift` object, which simply re-tags the image you already created using a tag which will trigger deployment in the production environment.
+
+このワークショップでは、パイプラインを簡単にするために、ビルドとテストをシミュレートして、人間の入力を省略しています。パイプラインが完了すると、 `openshift` オブジェクト内の上記の `tag()` メソッドを使って、開発環境から本番環境にアプリをデプロイします。
 
 ==== 4. Promote the dev image to production using the pipeline
 
