@@ -184,9 +184,7 @@ oc describe route www
 
 それぞれに有効な値を取得していることと、エラーがないことを確認してください。
 
-Visit the {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-coolstore-dev[Topology View^] to see the coolstore app (and its database). The *Topology* view in the _Developer_ perspective of the OpenShift web console provides a visual representation of all the applications within a project, their build status, and the components and services associated with them. You'll visit this often:
-
-coolstoreアプリ（とそのデータベース）を見るには、 {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-coolstore-dev[Topology View^] にアクセスしてください。OpenShiftウェブコンソールの開発者視点の *Topology* view は、プロジェクト内のすべてのアプリケーション、そのビルドステータス、およびそれらに関連するコンポーネントとサービスを視覚的に表示します。これは頻繁に訪れることになります。
+coolstoreアプリ（とそのデータベース）を見るには、 {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-coolstore-dev[Topology View^] にアクセスしてください。OpenShiftウェブコンソールの開発者視点の *Topology* view は、プロジェクト内のすべてのアプリケーション、そのビルドステータス、およびそれらに関連するコンポーネントとサービスを視覚的に表示します。これは頻繁に参照することになります。
 
 image::coolstore-dev-topology.png[crw,700]
 
