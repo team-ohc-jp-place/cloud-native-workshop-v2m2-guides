@@ -203,12 +203,11 @@ image::pipe-edit2.png[Prod, 700]
 
 ==== 6. Make a simple change to the app
 
-With the approval step in place, let’s simulate a new change from a developer who wants to change the color of the header in the coolstore to a blue background color.
+承認ステップが整ったので、coolstore のヘッダーの背景色を青に変更したいという、開発者からの変更をシミュレーションしてみましょう。
 
-First, in CodeReady, in the `cloud-native-workshop-v2m2-labs` project, open _monolith/src/main/webapp/app/css/coolstore.css_, which contains the CSS stylesheet for the
-CoolStore app.
+まず、CodeReadyの `cloud-native-workshop-v2m2-lab` プロジェクトで、CoolStoreアプリのCSSスタイルシートを含む _monolith/src/main/webapp/app/css/coolstore.css_ を開きます。
 
-Add the following CSS to turn the header bar background to Blue (*Copy* to add it at the bottom):
+以下のCSSを追加して、ヘッダーバーの背景をブルーにします（※下の方にコピーして追加します）。
 
 [source,css, role="copypaste"]
 ----
