@@ -50,7 +50,7 @@ Let's import the project source code for this lab. Click on **Git Clone..** (or 
 
 image::che-workspace-gitclone.png[cdw, 900]
 
-Step through the prompts, using the following value for **Repository URL**. If you use *FireFox*, it may end up pasting extra spaces at the end, so just press backspace after pasting:
+リポジトリの URL に次の値を使用して、プロンプトに沿ってステップを実行します。FireFoxを使用している場合、最後に余分なスペースを貼り付けてしまう可能性がありますので、貼り付けた後にバックスペースを押してください。
 
 [source,none,role="copypaste"]
 ----
@@ -59,7 +59,7 @@ https://github.com/RedHat-Middleware-Workshops/cloud-native-workshop-v2m2-labs.g
 
 image::crw-clone-repo.png[crw,900]
 
-The project is imported into your workspace and is visible in the project explorer:
+プロジェクトはワークスペースにインポートされ、プロジェクト エクスプローラに表示されます。
 
 image::crw-clone-explorer.png[crw,900]
 
