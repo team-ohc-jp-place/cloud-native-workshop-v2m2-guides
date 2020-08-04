@@ -19,7 +19,7 @@ OpenShift上の実際のプロジェクトでは、開発環境とテスト環�
 
 image::create_project.png[create_dialog, 600]
 
-Fill in the fields, and click `Create`:
+フィールドに必要事項を入力し、 `Create` をクリックします。
 
 * Name: *{{USER_ID}}-coolstore-prod*
 * Display Name: *{{USER_ID}} Coolstore Monolith - Production*
