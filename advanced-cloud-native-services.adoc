@@ -165,7 +165,7 @@ sh /projects/cloud-native-workshop-v2m2-labs/monolith/scripts/deploy-coolstore.s
 
 [NOTE]
 ====
- `oc` コマンドで Kubernetes や OpenShift のオブジェクトタイプを参照する際には、 *buildconfig* の代わりに *bc* 、 *imagestream* の代わりに *is* 、 *deploymentconfig* の代わりに *dc* 、 *service* の代わりに *svc* などのように、長い単語の代わりに短い同義語を使用することができます。
+`oc` コマンドで Kubernetes や OpenShift のオブジェクトタイプを参照する際には、 *buildconfig* の代わりに *bc* 、 *imagestream* の代わりに *is* 、 *deploymentconfig* の代わりに *dc* 、 *service* の代わりに *svc* などのように、長い単語の代わりに短い同義語を使用することができます。
 
 oc describe の出力を読んで理解しようとしなくても大丈夫です。ただ、コマンドがエラーを報告しないことを確認してください!
 ====
