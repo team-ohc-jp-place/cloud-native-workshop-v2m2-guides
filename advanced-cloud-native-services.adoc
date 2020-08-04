@@ -186,34 +186,36 @@ oc describe route www
 
 Visit the {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-coolstore-dev[Topology View^] to see the coolstore app (and its database). The *Topology* view in the _Developer_ perspective of the OpenShift web console provides a visual representation of all the applications within a project, their build status, and the components and services associated with them. You'll visit this often:
 
+coolstoreアプリ（とそのデータベース）を見るには、 {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-coolstore-dev[Topology View^] にアクセスしてください。OpenShiftウェブコンソールの開発者視点の *Topology* view は、プロジェクト内のすべてのアプリケーション、そのビルドステータス、およびそれらに関連するコンポーネントとサービスを視覚的に表示します。これは頻繁に訪れることになります。
+
 image::coolstore-dev-topology.png[crw,700]
 
-Verify that you can access the monolith by clicking on the route link (the arrow) to access the running monolith:
+実行中の monolith にアクセスするためのルートリンク（矢印）をクリックして、 monolith にアクセスできることを確認してください。
 
 image::route_link.png[route_link]
 
-The coolstore web interface should look like:
+coolstore のウェブインターフェースは、次のようになります。
 
 image::coolstore_web.png[route_link, 600]
 
 
 === Verify Database
 
-You can log into the running Postgres container using the following via CodeReady Workspaces Terminal window:
+実行中のPostgresコンテナには、CodeReady Workspaces Terminalウィンドウを介して以下のようにしてログインすることができます。
 
 [source,sh,role="copypaste"]
 ----
 oc rsh dc/coolstore-postgresql
 ----
 
-Once logged in, use the following command to execute an SQL statement to show some content from the database and then exit:
+ログインしたら、次のコマンドを使用してSQL文を実行し、データベースからいくつかのコンテンツを表示してから終了します。
 
 [source,sh,role="copypaste"]
 ----
 psql -U $POSTGRESQL_USER $POSTGRESQL_DATABASE -c 'select name,price from PRODUCT_CATALOG;' | cat; exit
 ----
 
-You should see the following:
+以下のように表示されているはずです。
 
 ----
           name          | price
@@ -230,6 +232,6 @@ You should see the following:
 (9 rows)
 ----
 
-This shows the content of the monolith's database.
+これは、monolith のデータベースの内容を示しています。
 
-With our running project on OpenShift, in the next step we’ll explore how you as a developer can work with the running app to make changes and debug the application!
+OpenShift上で実行中のプロジェクトで、次のステップでは、開発者として実行中のアプリを使って変更を加えたり、アプリをデバッグしたりする方法を探っていきます。
