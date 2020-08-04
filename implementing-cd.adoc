@@ -100,9 +100,9 @@ oc label dc/jenkins app.openshift.io/runtime=jenkins --overwrite
 
 image::coolstore_prod_jenkins.png[create_new, 700]
 
-There is no running production app just yet. The only running app is back in the _dev_ environment, where you used a binary build to run the app previously.
+まだ本番環境で動作しているアプリはありません。唯一の稼働中のアプリは、以前バイナリビルドを使ってアプリを稼働させていた開発環境に戻っています。
 
-In the next step, we’ll _promote_ the app from the _dev_ environment to the _production_ environment using an OpenShift pipeline build. Let’s get going!
+次のステップでは、OpenShiftのパイプラインビルドを使って、アプリを開発環境から本番環境に昇格させていきます。さっそくやってみましょう。
 
 === Promoting Apps Across Environments with Pipelines
 
