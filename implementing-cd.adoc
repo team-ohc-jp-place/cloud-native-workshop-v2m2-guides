@@ -40,7 +40,7 @@ image::create_project.png[create_dialog, 600]
 
 image::from_catalog.png[create_new, 700]
 
-In the search box, type in `coolstore` and choose _Coolstore Monolith using pipelines_ and then click *Instantiate Template*.
+検索ボックスに `coolstore` と入力し、 `Coolstore Monolith using pipelines` を選択し、 `Instantiate Template` をクリックします。
 
 image::from_catalog_prod.png[create_new, 700]
 
