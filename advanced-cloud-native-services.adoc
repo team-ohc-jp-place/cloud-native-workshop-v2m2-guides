@@ -63,7 +63,7 @@ image::crw-clone-repo.png[crw,900]
 
 image::crw-clone-explorer.png[crw,900]
 
-==== IMPORTANT: Check out proper Git branch
+==== IMPORTANT: 適切な Git branch を check out
 
 プロジェクトファイルの正しいバージョンを使用していることを確認するには、CodeReadyターミナルでこのコマンドを実行してください。
 
