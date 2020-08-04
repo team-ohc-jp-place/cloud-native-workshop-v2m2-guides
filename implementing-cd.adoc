@@ -181,7 +181,7 @@ image::pipe-done.png[Prod, 700]
 
 [NOTE]
 ====
-You will need to copy and paste the below code into the right place of *BuildConfig* as shown in the below image.
+下の画像のように、以下のコードを *BuildConfig* の適切な場所にコピー＆ペーストする必要があります。
 ====
 
 [source,groovy, role="copypaste"]
@@ -195,11 +195,11 @@ You will need to copy and paste the below code into the right place of *BuildCon
             }
 ----
 
-Your final pipeline should look like:
+最終的なパイプラインは以下のようになります。
 
 image::pipe-edit2.png[Prod, 700]
 
-Click *Save*.
+*Save* をクリックしてください。
 
 ==== 6. Make a simple change to the app
 
