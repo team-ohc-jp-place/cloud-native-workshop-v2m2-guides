@@ -81,15 +81,15 @@ image::coolstore_topology.png[create_new, 700]
 
 image::from_catalog_jenkins.png[create_new, 700]
 
-Click *Instantiate Template* and change the following fields, leaving other fields alone:
+*Instantiate Template* をクリックして、以下のフィールドを変更し、他のフィールドはそのままにしておきます。
 
-* *Namespace*: `{{ USER_ID }}-coolstore-prod` (this should already be selected)
+* *Namespace*: `{{ USER_ID }}-coolstore-prod` (これは既に選択されているはずです)
 * *Memory Limit*: `2Gi`
 * *Disable memory intensive administrative monitors*: `true`
 
-Click *Create*.
+*Create* をクリックしてください。
 
-Let's label the new Jenkins server:
+新しい Jenkins server にラベルを付けてみましょう。
 
 [source,sh,role="copypaste"]
 ----
