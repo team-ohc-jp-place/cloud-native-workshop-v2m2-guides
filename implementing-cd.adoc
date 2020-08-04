@@ -283,33 +283,32 @@ image::pipe-jenkins-prompt.png[Prod, 700]
 
 === 8. Approve the change to go live
 
-Click *Proceed*, which will approve the change to be pushed to production. You could also have clicked *Abort* which would stop the pipeline immediately in case the change was unwanted or unapproved.
+*Proceed* をクリックすると、本番環境にプッシュする変更が承認されます。また、変更が不要な場合や承認されていない場合には、パイプラインを直ちに停止する *Abort* をクリックすることもできます。
 
-Once you click _Proceed_, you will see the log file from Jenkins showing the final progress and deployment.
+*Proceed* をクリックすると、Jenkinsからのログファイルが表示され、最終的な進捗状況とデプロイメントが表示されます。
 
-On the {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-coolstore-prod[Production Topology View^], wait for the production deployment to complete (and you get all blue circles!).
+{{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-coolstore-prod[Production Topology View^] 上で、本番環境のデプロイが完了するのを待ちます(青い丸が全部出てきます！)。
 
-Once it completes, verify that the http://www-{{USER_ID}}-coolstore-prod.{{ ROUTE_SUBDOMAIN}}[Coolstore Prod Web frontend^] has the new change (blue header):
+完了したら、 http://www-{{USER_ID}}-coolstore-prod.{{ ROUTE_SUBDOMAIN }}[Coolstore Prod Web frontend^] に新しい変更（青いヘッダー）があることを確認します。
 
 image::nav-blue.png[Prod, 700]
 
 [WARNING]
 ====
-It may take a few seconds for the new app to be available, since we've not configured a proper health check and are not using _Rolling Updates_ when deploying new apps. Real production environments would use this to ensure no downtime.
+適切なヘルスチェックを設定しておらず、新しいアプリをデプロイする際に Rolling Updates を使用していないため、新しいアプリが利用可能になるまでに数秒かかることがあります。実際の本番環境では、ダウンタイムが発生しないようにするためにこれを使用します。
 
-If you don't see a blue header, or you get _Application Not Available_ errors, wait a few moments and reload. If you are still getting a black header, try holding the shift key while clicking the browser refresh button to force a hard refresh.
+青いヘッダーが表示されない場合や、 Application Not Available エラーが表示された場合は、しばらく待ってからリロードしてください。それでも黒いヘッダが表示される場合は、シフトキーを押しながらブラウザの更新ボタンをクリックして、強制的に更新してみてください。
 ====
 
-Congratulations! You have added a human approval step for all future developer changes. You now have two projects that can be
-visualized as:
+おめでとうございます。今後の開発者の変更に対して、人間による承認ステップが追加されました。これで、2つのプロジェクトを可視化することができるようになりました。
 
 image::goal.png[Prod, 700]
 
 === Summary
 
 
-In this lab, you learned how to use the OpenShift Container Platform as a developer to build, and deploy applications. You also learned how OpenShift makes your life easier as a developer, architect, and DevOps engineer.
+このラボでは、開発者として OpenShift Container Platform を使用してアプリケーションを構築し、デプロイする方法を学びました。また、OpenShift を使用すると、開発者、アーキテクト、DevOps エンジニアとしての life がいかに楽になるかを学びました。
 
-You can use these techniques in future projects to modernize your existing applications and add a lot of functionality without major re-writes.
+これらのテクニックを将来のプロジェクトで使用することで、既存のアプリケーションを近代化し、大きなリライトなしで多くの機能を追加することができます。
 
-The monolithic application we’ve been using so far works great, but is starting to show its age. Even small changes to one part of the app require many teams to be involved in the push to production.
+これまで使用してきたモノリシックアプリケーションは、非常にうまく機能していますが、時代の流れを感じ始めています。アプリのある部分への小さな変更でさえ、本番へのプッシュには多くのチームが関与しなければなりません。
