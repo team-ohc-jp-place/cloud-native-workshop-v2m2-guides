@@ -160,14 +160,14 @@ sh /projects/cloud-native-workshop-v2m2-labs/monolith/scripts/deploy-coolstore.s
 * Build Config: *coolstore* build configは、ソースコードまたは WARファイル から Monolith イメージをビルドするための設定です。
 * Image Stream: *coolstore* image stream は、ビルドされたすべての coolstore コンテナイメージの仮想ビューであり、OpenShift統合レジストリにプッシュされます。
 * Deployment Config: *coolstore* deployment config は、新しい coolstore コンテナイメージが利用可能になるたびに、Coolstore コンテナイメージをデプロイして再デプロイします。同様に、*coolstore-postgresql* はデータベースに対しても同様のことを行います。
-* Service: *coolstore* and *coolstore-postgresql* service is an internal load balancer which identifies a set of pods (containers) in order to proxy the connections it receives to them. Anything that depends on the service can to refer to it at a consistent address (service name or IP).
-* Route: *www* route registers the service on the built-in external load-balancer and assigns a public DNS name to it so that it can be reached from outside OpenShift cluster.
+* Service: *coolstore* および *coolstore-postgresql* サービスは、受信した接続をそれらにプロキシするためにポッド(コンテナ)のセットを識別する内部ロードバランサです。サービスに依存するものはすべて、一貫したアドレス(サービス名またはIP)でサービスを参照することができます。
+* Route: *www* route はビルトインの外部ロードバランサーにサービスを登録し、公開 DNS 名を割り当てて OpenShift クラスタの外部からアクセスできるようにします。
 
 [NOTE]
 ====
-When referring to Kubernetes or OpenShift object types in `oc` commands, you can use short synonyms for long words, like *bc* instead of *buildconfig*, *is* for *imagestream*, *dc* for *deploymentconfig*, *svc* for *service*, etc.
+ `oc` コマンドで Kubernetes や OpenShift のオブジェクトタイプを参照する際には、 *buildconfig* の代わりに *bc* 、 *imagestream* の代わりに *is* 、 *deploymentconfig* の代わりに *dc* 、 *service* の代わりに *svc* などのように、長い単語の代わりに短い同義語を使用することができます。
 
-Don’t worry about reading and understanding the output of oc describe. Just make sure the command doesn’t report errors!
+oc describe の出力を読んで理解しようとしなくても大丈夫です。ただ、コマンドがエラーを報告しないことを確認してください!
 ====
 
 Run these commands to inspect the elements via CodeReady Workspaces Terminal window:
