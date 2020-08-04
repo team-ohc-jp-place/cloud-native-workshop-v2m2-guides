@@ -216,7 +216,7 @@ image::pipe-edit2.png[Prod, 700]
 }
 ----
 
-Now we need to update the catalog endpoint in the monolith application. Run the following commands in a Terminal to update the baseUrl to the proper value with your username:
+ここで、monolith アプリケーションのカタログエンドポイントを更新する必要があります。ターミナルで以下のコマンドを実行して、baseUrlをユーザー名で適切な値に更新します。
 
 [source,sh,role="copypaste"]
 ----
