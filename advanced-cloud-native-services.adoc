@@ -87,8 +87,6 @@ image::remove-workspace.png[remove, 700]
 
 === Login to OpenShift
 
-Although your Eclipse Che workspace is running on the Kubernetes cluster, it’s running with a default restricted _Service Account_ that prevents you from creating most resource types. If you’ve completed other modules, you’re probably already logged in, but let’s login again: click on *Login to OpenShift*, and enter your given credentials:
-
 Eclipse Che ワークスペースは Kubernetes クラスタ上で実行されていますが、デフォルトの制限付きサービスアカウントで実行されているため、ほとんどのリソースタイプを作成することができません。他のモジュールを完了している場合は、もう一度ログインしてみましょう: *Login to OpenShift* をクリックして、与えられた資格情報を入力します。
 
 * Username: `{{ USER_ID }}`
@@ -96,7 +94,7 @@ Eclipse Che ワークスペースは Kubernetes クラスタ上で実行され�
 
 image::cmd-login.png[login,700]
 
-You should see something like this (the project names may be different):
+このようなものが表示されるはずです（プロジェクト名が異なる場合があります）。
 
 [source,none]
 ----
@@ -117,16 +115,18 @@ Welcome! See 'oc help' to get started.
 
 [NOTE]
 ====
-After you log in using *Login to OpenShift*, the terminal is no longer usable as a regular terminal. You can close the terminal window. You will still be logged in when you open more terminals later!
+ *Login to OpenShift* でログインした後は、通常のターミナルとしては使えなくなります。ターミナルのウィンドウを閉じることができます。後からさらに端末を開いてもログインしたままになります
 ====
 
-==== Do this if this is the first module you're doing today, otherwise continue to the Verifying the Dev Environment!
+==== 今日の最初のモジュールの場合はこれを行い、そうでない場合は「開発環境の検証」に進みます。
 
-These commands reset and re-play all the steps from module 1 and should take 4-5 minutes to finish.
+これらのコマンドは、module 1 からのすべてのステップをリセットして再生し、終了するまでに4～5分かかるはずです。
 
 [WARNING]
 ====
 *You do not need to run these if you already completed the Optimizing Existing Applications lab and have created `catalog` and `inventory` and the CoolStore `monolith` projects!*
+
+*Optimizing Existing Applications lab を完了し、 `catalog` と `inventory` と CoolStore `monolith` projects を作成している場合は、これらを実行する必要はありません!*
 ====
 
 [source, sh, role="copypaste"]
