@@ -147,31 +147,29 @@ oc describe bc/monolith-pipeline -n {{USER_ID}}-coolstore-prod
 
 パイプライン構文では、複雑なデプロイメントシナリオを作成することができ、 https://jenkins.io/doc/pipeline/steps/[Jenkinsが提供するステップとプラグインの大規模なセット] を使用して手動での相互作用と承認プロセスのチェックポイントを定義することで、チームで使用されるプロセスにパイプラインを適応させることができます。
 
-To simplify the pipeline in this workshop, we simulate the build and tests and skip any need for human input. Once the pipeline completes, it deploys the app from the _dev_ environment to our _production_ environment using the above `tag()` method within the `openshift` object, which simply re-tags the image you already created using a tag which will trigger deployment in the production environment.
-
 このワークショップでは、パイプラインを簡単にするために、ビルドとテストをシミュレートして、人間の入力を省略しています。パイプラインが完了すると、 `openshift` オブジェクト内の上記の `tag()` メソッドを使って、開発環境から本番環境にアプリをデプロイします。
 
 ==== 4. Promote the dev image to production using the pipeline
 
-Let’s invoke the build pipeline.
+ビルドパイプラインを起動してみましょう。
 
-On the {{ CONSOLE_URL }}/k8s/ns/{{USER_ID}}-coolstore-prod/buildconfigs/monolith-pipeline[Pipeline Details Page^], select _Actions > Start Build_:
+{{ CONSOLE_URL }}/k8s/ns/{{USER_ID}}-coolstore-prod/buildconfigs/monolith-pipeline[Pipeline Details Page^]　のページで、 *Actions > Start Build* を選択してください。
 
 image::pipe-start.png[Prod, 700]
 
-This will start the pipeline. _It will take a minute or two to start the pipeline!_ Future runs will not take as much time as the Jenkins infrastructure will already be warmed up. You can watch the progress of the pipeline:
+これでパイプラインが開始されます。パイプラインを開始するのに1～2分かかります! 今後の実行は、Jenkinsのインフラストラクチャがすでにウォームアップされているので、それほど時間はかからないでしょう。パイプラインの進行状況を見ることができます。
 
 image::pipe-prog.png[Prod, 700]
 
-Once the pipeline completes, return to the {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-coolstore-prod[Topology View^] and notice that the application is now deployed and running!
+パイプラインが完了したら、 {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-coolstore-prod[Topology View^] に戻り、アプリケーションがデプロイされて実行されていることを確認します!
 
 image::pipe-done.png[Prod, 700]
 
-It may take a few moments for the container to deploy fully.
+コンテナが完全にデプロイされるまでに時間がかかる場合があります。
 
-*Congratulations!* You have successfully setup a development and production environment for your project and can use this workflow for future projects as well.
+*おめでとうございます！* プロジェクトの開発・生産環境のセットアップが完了し、今後のプロジェクトでもこのワークフローを使用することができます。
 
-In the next step, we’ll add a human interaction element to the pipeline, so that you as a project lead can be in charge of approving changes.
+次のステップでは、パイプラインにヒューマンインタラクション要素を追加して、プロジェクトリーダーであるあなたが変更の承認を担当できるようにします。
 
 ==== 5. Adding Pipeline Approval Steps
 
