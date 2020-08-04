@@ -13,7 +13,7 @@ OpenShift上の実際のプロジェクトでは、開発環境とテスト環�
 
 このシナリオを簡単にするために、私たちは開発環境と本番環境のみを使用し、テスト/QA環境は使用しません。
 
-==== 1. 本番環境の構築
+==== 1. Create the production environment
 
 {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-coolstore-dev[Topology View^] に戻って、 プロジェクトのドロップダウンをクリックして、 *Create Project* を選択します。
 
