@@ -27,7 +27,7 @@ image::create_project.png[create_dialog, 600]
 
 [WARNING]
 ====
-YOU `MUST` USE `{{USER_ID}}-coolstore-prod` AS THE PROJECT NAME, as this name is referenced later on and you will experience failures if you do not name it `{{USER_ID}}-coolstore-prod`.
+プロジェクト名に `{{USER_ID}}-coolstore-prod` を使用しなければなりません。 この名前は後に参照されるため、 `{{USER_ID}}-coolstore-prod` という名前を付けないと失敗することになります。
 ====
 
 This will create a new OpenShift project called *{{USER_ID}}-coolstore-prod* from which our production application will run.
