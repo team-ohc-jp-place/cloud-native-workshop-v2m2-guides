@@ -38,9 +38,10 @@ image::crw-icons.png[cdw, 400]
 ブラウザの表示がおかしくなった場合には、ブラウザタブを再読み込みして表示を更新してください。
 ====
 
-Many features of CodeReady Workspaces are accessed via *Commands*. You can see a few of the commands listed with links on the home page (e.g. _New File.._, _Git Clone.._, and others).
+CodeReady Workspaces の多くの機能は、コマンドからアクセスできます。いくつかのコマンドは、ホームページにリンクが貼られています（例：New File...、Git Clone...など）。
 
-If you ever need to run commands that you don't see in a menu, you can press kbd:[F1] to open the command window, or the more traditional kbd:[Control+SHIFT+P] (or kbd:[Command+SHIFT+P] on Mac OS X).
+メニューに表示されていないコマンドを実行する必要がある場合は、 kbd:[F1] を押してコマンドウィンドウを開くか、従来の kbd:[Control+SHIFT+P]を使うことができます。 +
+ （Mac OS Xでは kbd:[Command+SHIFT+P] ）
 
 ==== Import Projects
 
