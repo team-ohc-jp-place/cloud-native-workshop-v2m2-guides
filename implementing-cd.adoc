@@ -34,9 +34,9 @@ image::create_project.png[create_dialog, 600]
 
 ==== 2. Add the production elements
 
-In this case we’ll use the production template to create the objects.
+今回は本番用のテンプレートを使ってオブジェクトを作成します。
 
-We've pre-installed an application _template_ for use. Click the *+Add* and then *From Catalog* item:
+使用するアプリケーションテンプレートをあらかじめインストールしておきました。 *+Add* をクリックして、 *From Catalog* の項目をクリックします。
 
 image::from_catalog.png[create_new, 700]
 
