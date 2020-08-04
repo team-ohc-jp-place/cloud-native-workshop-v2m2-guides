@@ -127,10 +127,10 @@ The build can get started, monitored, and managed by OpenShift in the same way a
 
 [NOTE]
 ====
-You may notice a _Pipelines_ menu item on the left menu of the OpenShift Console. This menu item is for exploring _Tekton Pipelines_, which is a newer pipeline technology based on the Tekton project. There are other modules as part of this workshop that explore Tekton. For now we'll concentrate on Jenkins.
+OpenShift Consoleの左メニューにPipelinesというメニュー項目があるのに気づくかもしれません。このメニュー項目はTektonプロジェクトをベースにした新しいパイプライン技術であるTekton Pipelinesを探索するためのものです。このワークショップの一部として、Tektonを探索する他のモジュールもあります。今のところはJenkinsに集中しています。
 ====
 
-Our pipeline is somewhat simplified for the purposes of this Workshop. Inspect the contents of the pipeline by navigating to the {{ CONSOLE_URL }}/k8s/ns/{{USER_ID}}-coolstore-prod/buildconfigs[Build Config page^] and click on `monolith-pipeline`:
+このワークショップの目的のために、パイプラインはやや簡略化されています。パイプラインの内容を確認するには、 {{ CONSOLE_URL }}/k8s/ns/{{USER_ID}}-coolstore-prod/buildconfigs[Build Config page^] に移動して、 `monolith-pipeline` をクリックしてください。
 
 image::prod_bc.png[create_new, 700]
 
