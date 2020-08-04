@@ -1,8 +1,6 @@
 = Lab1 - Automating Deployments Using Pipelines
 :experimental:
 
-In the previous scenarios, you deployed the Coolstore monolith using an OpenShift Template into the *{{USER_ID}}-coolstore-dev* Project. The template created the necessary objects (BuildConfig, DeploymentConfig, ImageStreams, Services, and Routes) and gave you as a Developer a playground in which to run the app, make changes and debug.
-
 前のシナリオでは、OpenShiftテンプレートを使用して Coolstore monolith を、 *{{USER_ID}}-coolstore-dev* Project にデプロイしました。このテンプレートによって必要なオブジェクト（BuildConfig、DeploymentConfig、ImageStreams、Services、およびRoute）が作成され、開発者としてアプリを実行し、変更を加え、デバッグするための場が提供されました。
 
 このステップでは、別の本番環境を設定し、開発者や DevOps チームが開発者 *(あなたのことです！)* から本番環境にコードを移行する際のベストプラクティスやテクニックを探っていきます。
