@@ -75,10 +75,9 @@ image::coolstore_topology.png[create_new, 700]
 
 実行中のpostgresデータベース(紺色の円)と、まだデプロイも起動もされていない coolstore monolith を見ることができます。以前のラボでは、開発者プロジェクトのアプリのバイナリビルドから手動でデプロイしました。このラボでは、CI/CD パイプラインを使用してビルドし、本番環境に自動的にデプロイします。
 
-We will use a *Jenkins Server* in our project and  use a _Jenkins Pipeline_ build strategy.
 プロジェクトでは *Jenkins Server* を使用し、Jenkins パイプライン の ビルドストラテジー を使用します。
 
-Click *Add* then click *From Catalog*, type in `jenkins` in the search box, and choose the FIRST *Jenkins (ephemeral)* item:
+*Add* をクリックしてから、 *From Catalog* をクリックし、検索ボックスに `jenkins` と入力して、最初の *Jenkins (ephemeral)* アイテムを選択します。
 
 image::from_catalog_jenkins.png[create_new, 700]
 
