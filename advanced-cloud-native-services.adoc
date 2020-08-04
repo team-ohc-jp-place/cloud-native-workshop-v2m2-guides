@@ -137,7 +137,7 @@ sh /projects/cloud-native-workshop-v2m2-labs/monolith/scripts/deploy-coolstore.s
 [WARNING]
 ====
 OpenShiftではネットワークレイテンシのために新規ビルドイメージの作成に時間がかかることがあります。
-もし、*Error from server (NotFound): services "catalog-springboot" not found※ となり catalog-service のデプロイに失敗した場合は、以下のコマンドを使って、もう一度試してみてください。
+もし、 *Error from server (NotFound): services "catalog-springboot" not found* となり catalog-service のデプロイに失敗した場合は、以下のコマンドを使って、もう一度試してみてください。
 ====
 
 [source, sh, role="copypaste"]
