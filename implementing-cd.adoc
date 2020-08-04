@@ -225,31 +225,33 @@ CATALOGHOST=$(oc get route -n {{ USER_ID}}-catalog catalog-springboot -o jsonpat
 sed -i 's/REPLACEURL/'$CATALOGHOST'/' "$JSPATH"
 ----
 
-Next, re-build the app once more via CodeReady Workspaces Terminal:
+次に、CodeReady Workspaces Terminalでもう一度アプリを再構築します。
 
 [source,sh,role="copypaste"]
 ----
 mvn clean package -Popenshift -DskipTests -f $CHE_PROJECTS_ROOT/cloud-native-workshop-v2m2-labs/monolith
 ----
 
-And re-deploy it to the *dev* environment using a binary build just as we did before via CodeReady Workspaces Terminal:
+そして、CodeReady Workspaces Terminalを介して以前に行ったのと同じように、バイナリビルドを使用して *dev* 環境 に再デプロイします。
 
 [source,sh,role="copypaste"]
 ----
 oc start-build -n {{USER_ID}}-coolstore-dev coolstore --from-file=$CHE_PROJECTS_ROOT/cloud-native-workshop-v2m2-labs/monolith/deployments/ROOT.war --follow
 ----
-Wait for it to complete the deployment via CodeReady Workspaces Terminal:
+CodeReady Workspaces Terminal経由でデプロイが完了するのを待ちます。
 
 [source,sh,role="copypaste"]
 ----
 oc -n {{USER_ID}}-coolstore-dev rollout status -w dc/coolstore
 ----
 
-And verify that the blue header is visible in the *dev* application by navigating to the http://www-{{USER_ID}}-coolstore-dev.{{ ROUTE_SUBDOMAIN}}[Coolstore Dev Web frontend^]. It should look like the following:
+And verify that the blue header is visible in the *dev* application by navigating to the http://www-{{USER_ID}}-coolstore-dev.{{ ROUTE_SUBDOMAIN }}[Coolstore Dev Web frontend^]. It should look like the following:
+
+そして、 http://www-{{USER_ID}}-coolstore-dev.{{ ROUTE_SUBDOMAIN }}[Coolstore Dev Web frontend^] に移動して、*dev* アプリケーションで青いヘッダーが表示されていることを確認してください。以下のようになっているはずです。
 
 [WARNING]
 ====
-If it doesn’t, you may need to do a hard browser refresh. Try holding the shift key while clicking the browser refresh button, or opening a separate "Private Browser" session to access the UI.
+そうでない場合は、ブラウザの更新を行う必要があるかもしれません。シフトキーを押しながらブラウザの更新ボタンをクリックするか、別の「プライベートブラウザ」セッションを開いてUIにアクセスしてみてください
 ====
 
 image::nav-blue.png[Dev, 700]
