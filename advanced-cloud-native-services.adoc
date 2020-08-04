@@ -124,8 +124,6 @@ Welcome! See 'oc help' to get started.
 
 [WARNING]
 ====
-*You do not need to run these if you already completed the Optimizing Existing Applications lab and have created `catalog` and `inventory` and the CoolStore `monolith` projects!*
-
 *Optimizing Existing Applications lab を完了し、 `catalog` と `inventory` と CoolStore `monolith` projects を作成している場合は、これらを実行する必要はありません!*
 ====
 
@@ -138,7 +136,8 @@ sh /projects/cloud-native-workshop-v2m2-labs/monolith/scripts/deploy-coolstore.s
 
 [WARNING]
 ====
-It sometimes takes time to create a new build image for network latency in OpenShift. So if you got failed to deploy catalog-service with *Error from server (NotFound): services "catalog-springboot" not found*. Please try again with delay via the following command:
+OpenShiftではネットワークレイテンシのために新規ビルドイメージの作成に時間がかかることがあります。
+もし、*Error from server (NotFound): services "catalog-springboot" not found※ となり catalog-service のデプロイに失敗した場合は、以下のコマンドを使って、もう一度試してみてください。
 ====
 
 [source, sh, role="copypaste"]
