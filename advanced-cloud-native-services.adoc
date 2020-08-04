@@ -157,8 +157,8 @@ sh /projects/cloud-native-workshop-v2m2-labs/monolith/scripts/deploy-coolstore.s
 
 それでは、 Monolith 用に作成されている OpenShift リソースを確認してみましょう。
 
-* Build Config: *coolstore* build config is the configuration for building the Monolith image from the source code or WAR file.
-* Image Stream: *coolstore* image stream is the virtual view of all coolstore container images built and pushed to the OpenShift integrated registry.
+* Build Config: *coolstore* build configは、ソースコードまたは WARファイル から Monolith イメージをビルドするための設定です。
+* Image Stream: *coolstore* image stream は、ビルドされたすべての coolstore コンテナイメージの仮想ビューであり、OpenShift統合レジストリにプッシュされます。
 * Deployment Config: *coolstore* deployment config deploys and redeploys the Coolstore container image whenever a new coolstore container image becomes available. Similarly, the *coolstore-postgresql* does the same for the database.
 * Service: *coolstore* and *coolstore-postgresql* service is an internal load balancer which identifies a set of pods (containers) in order to proxy the connections it receives to them. Anything that depends on the service can to refer to it at a consistent address (service name or IP).
 * Route: *www* route registers the service on the built-in external load-balancer and assigns a public DNS name to it so that it can be reached from outside OpenShift cluster.
