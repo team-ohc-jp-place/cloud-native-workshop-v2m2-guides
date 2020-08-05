@@ -46,11 +46,11 @@ image::create_monitoring_dialog.png[create_dialog, 700]
 
 新しいプロジェクトで `+Add` をクリックし、 *From Catalog* を選択します。
 
-To deploy a jaeger server, click on `+` icon on the right top corner:
+jaeger サーバーを導入するには、右上の `+` アイコンをクリックします。
 
 image::plus-icon.png[serverless, 500]
 
-Copy the following _Service_ in `YAML` editor then click on *Create*:
+以下の _Service_ を `YAML` エディタでコピーし、 *Create* をクリックします。
 
 [source,yaml,role="copypaste"]
 ----
