@@ -70,9 +70,10 @@ image::debug-che-quarkus-lastletter.png[Quarkus Debug, 700]
 
 image::debug-che-quarkus-attach.png[Quarkus Debug, 700]
 
-You may see `[Warn] The debugger and the debuggee are running in different versions of JVMs. You could see wrong source mapping results.` You can ignore this warning, as long as the JVM versions are in the same major version family it won't be a problem.
+`[Warn] The debugger and the debuggee are running in different versions of JVMs. You could see wrong source mapping results.` というメッセージを見ることができます。
+この警告は無視できます。JVMのバージョンが同じメジャーバージョンファミリーにある限り、問題にはなりません。
 
-You should see a list of Threads in the debug console.
+デバッグコンソールにスレッドの一覧が表示されるはずです。
 
 [WARNING]
 ====
