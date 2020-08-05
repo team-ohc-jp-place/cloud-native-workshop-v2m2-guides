@@ -61,15 +61,16 @@ metadata:
   namespace: {{ USER_ID }}-monitoring
 ----
 
-In the {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-monitoring[Topology View^] you can see Jaeger deploying:
+{{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-monitoring[Topology View^] では、Jaegerがデプロイされているのが確認できます。
 
 image::jaeger_top.png[create_dialog, 500]
 
 ==== 4. Observe Jaeger UI
 
-Once the deployment completes (dark blue circles!), open the https://jaeger-all-in-one-inmemory-{{USER_ID}}-monitoring.{{ ROUTE_SUBDOMAIN}}[Jaeger UI^].
+デプロイが完了したら（紺色の丸印！）、 https://jaeger-all-in-one-inmemory-{{USER_ID}}-monitoring.{{ ROUTE_SUBDOMAIN}}[Jaeger UI^] を開きます。
 
-This is the UI for Jaeger, but currently we have no apps being monitored so it’s rather useless. Don’t worry! We will utilize tracing data in the next step.
+これは Jaeger の UI です。今のところ監視しているアプリがないので割と使い勝手が悪いように見えますが、心配しないしてください！
+次のステップではトレースデータを活用していきます。
 
 image::jaeger-ui.png[jaeger_ui, 700]
 
