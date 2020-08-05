@@ -17,13 +17,13 @@ image::quarkus-jaeger-prometheus.png[logo, 700]
 * サービス依存性分析 (Service dependency analysis)
 * パフォーマンスとレイテンシの最適化 (Performance and latency optimization)
 
-*Prometheus* is an open source systems monitoring and alerting tool that fits in recording any numeric time series including:
+*Prometheus* は、オープンソースのシステム監視およびアラートツールで、以下のような任意の数値時系列の記録に適合しています。
 
-* Multi-dimensional time series data by metric name and key/value pairs
-* No reliance on distributed storage
-* Time series collection over HTTP
-* Pushing time series is supported via an intermediary gateway
-* Service discovery or static configuration
+* メトリック名とキー/値のペアによる多次元時系列データ (Multi-dimensional time series data by metric name and key/value pairs)
+* 分散型ストレージに依存しない (No reliance on distributed storage)
+* HTTPを利用した時系列コレクション (Time series collection over HTTP)
+* 中間ゲートウェイを介して時系列をプッシュすることができます (Pushing time series is supported via an intermediary gateway)
+* サービスの発見または静的な設定 (Service discovery or static configuration)
 
 ==== 1. Create OpenShift Project
 
