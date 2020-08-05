@@ -9,12 +9,11 @@
 
 開発モードのQuarkusは、バックグラウンドコンパイルで「ライブコーディング」を有効にします。つまり、Javaファイルやリソースファイルを変更してブラウザを更新すると、これらの変更が自動的に有効になります。これは、設定プロパティファイルや `pom.xml` の変更などのリソースファイルに対しても機能します。
 
-When run in Developer Mode (i.e. `mvn quarkus:dev`), Quarkus will also listen for debugging sessions on port `5005` (by default). If your want to wait for the debugger to attach before running you can pass `-Ddebug` on the command line. If you don’t want the debugger at all you can use `-Ddebug=false`.
-
 デベロッパーモード(すなわち `mvn quarkus:dev` )で実行すると、Quarkusはポート `5005` (デフォルト)のデバッグセッションもリッスンします。デバッガがアタッチされるのを待ってから実行したい場合は、コマンドラインで `-Ddebug` を渡すことができます。デバッガを全く必要としない場合は `-Ddebug=false` を使用します。
 
-Start up the Inventory microservice locally, in development mode, using this command in a CodeReady Terminal:
-Enable remote debugging on Inventory by running the following command in the CodeReady Workspaces Terminal window:
+CodeReadyターミナルでこのコマンドを使用して、開発モードでローカルにInventoryマイクロサービスを起動します。
+
+CodeReady Workspaces Terminal ウィンドウで次のコマンドを実行して、Inventory のリモート デバッグを有効にします。
 
 [source,sh,role="copypaste"]
 ----
