@@ -83,31 +83,31 @@ image::debug-che-quarkus-attach.png[Quarkus Debug, 700]
 
 image::clean-jls.png[JLS, 900]
 
-This will restart the Java language server. Once it's restarted and you're back in your workspace, click the _Attach to App_ green icon once again to attach the debugger and proceed below.
+これにより、 Java language server が再起動されます。再起動してワークスペースに戻ったら、もう一度 *Attach to App* の緑のアイコンをクリックしてデバッガをアタッチし、以下に進みます。
 ====
 
-Go back to the _Explorer_ view. In the new method you added, add a breakpoint by clicking to the left of the first line in that method to cause a red dot to appear, as shown:
+Explorer view に戻ります。追加した新しいメソッドで、そのメソッドの最初の行の左側をクリックしてブレークポイントを追加し、下図のように赤い点が表示されるようにします。
 
 image::debug-che-breakpoint.png[Add Breakpoint, 700]
 
-Open a new Terminal and invoke the new method using the same `curl` command:
+新しいターミナルを開き、同じ `curl` コマンドを使って新しいメソッドを呼び出します。
 
 [source,sh,role="copypaste"]
 ----
 curl http://localhost:8080/services/inventory/lastletter/165613
 ----
 
-This command will appear to hang, while the debugger intercepts the call. Switch back to the Debugger view to see the state:
+このコマンドは、デバッガが呼び出しを中断している間、ハングしているように表示されます。 Debugger view に切り替えて状態を確認します。
 
 image::debug-che-breakpoint-hit.png[Add Breakpoint, 700]
 
-Click on the _Step Over_ icon to execute one line and retrieve the inventory object for the given product id from the database and see the yellow cursor advance one line.
+*Step Over* アイコンをクリックして1行実行し、データベースから指定された製品IDのインベントリオブジェクトを取得し、黄色のカーソルが1行進むのを確認します。
 
-Expand the _Local Variables_ in the lower left, to see the variables for `itemId` passed to the method and `item` element retrieved from the database. If you don't see them, click on the small arrow next to _Locals_ to expand the list.
+左下の *Local Variables* を展開すると、メソッドに渡された `itemId` とデータベースから取得した `item` 要素の変数が表示されます。表示されない場合は、 *Locals* の横にある小さな矢印をクリックしてリストを展開してください。
 
 image::debug-che-step-over.png[Step Over, 900]
 
-Step over 2 more times, and note the value of `location` is `Seoul` and `len` is set to the length of `Seoul` which is `5`.
+さらに2回ステップオーバーして、`location` の値が `Seoul` であり、`len` には `Seoul` の長さが `5` に設定されていることに注意する。
 
 image::debug-che-step-over2.png[Step Over, 600]
 
