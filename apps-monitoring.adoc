@@ -128,7 +128,7 @@ workspace `cloud-native-workshop-v2m2-lab` の下にある `inventory` プロジ
 
 [NOTE]
 ====
-There is no tracing specific code included in the application. By default, RESTful requests sent to the app will be traced without *any* code changes being required thanks to MicroProfile Tracing. It is also possible to enhance the tracing information and manually trace other methods and classes. For more information on this, please see the https://github.com/eclipse/microprofile-opentracing/blob/master/spec/src/main/asciidoc/microprofile-opentracing.asciidoc[MicroProfile OpenTracing specification^].
+アプリケーションには特定のトレースコードは含まれていません。デフォルトでは、アプリに送信された RESTful リクエストは、MicroProfile Tracing のおかげで *コードの変更を必要とせず* にトレースされます。また、トレース情報を強化し、他のメソッドやクラスを手動でトレースすることも可能です。これについての詳細は、 https://github.com/eclipse/microprofile-opentracing/blob/master/spec/src/main/asciidoc/microprofile-opentracing.asciidoc[MicroProfile OpenTracing specification^] 仕様を参照してください。
 ====
 
 ==== 7. Re-Deploy to OpenShift
