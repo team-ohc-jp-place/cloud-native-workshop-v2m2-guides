@@ -27,7 +27,8 @@ image::quarkus-jaeger-prometheus.png[logo, 700]
 
 ==== 1. Create OpenShift Project
 
-In this step, we will deploy our new monitoring tools for our CoolStore application, so create a separate project to house it and keep it separate from our monolith and our other microservices we already created previously.
+このステップでは、CoolStore アプリケーション用の新しい監視ツールを展開します。
+そのため、monolith や以前に作成した他のマイクロサービスとは別のプロジェクトを作成しておきます。
 
 Back in the {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-coolstore-dev[Topology View^], click on the Project drop-down and select _Create Project_.
 
