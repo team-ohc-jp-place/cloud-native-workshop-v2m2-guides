@@ -22,7 +22,7 @@ mvn quarkus:dev -f $CHE_PROJECTS_ROOT/cloud-native-workshop-v2m2-labs/inventory
 
 [NOTE]
 ====
-Close any popups about port 5005 or 8080 when the app starts up
+アプリ起動時にポート 5005 または 8080 に関するポップアップを閉じてください。
 ====
 
 You are all set now to start debugging using the tools of you choice.
