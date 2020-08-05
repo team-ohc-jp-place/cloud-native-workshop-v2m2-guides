@@ -25,17 +25,19 @@ mvn quarkus:dev -f $CHE_PROJECTS_ROOT/cloud-native-workshop-v2m2-labs/inventory
 アプリ起動時にポート 5005 または 8080 に関するポップアップを閉じてください。
 ====
 
-You are all set now to start debugging using the tools of you choice.
+これで、お好きなツールを使ってデバッグを開始する準備が整いました。
 
-Do not wait for the command to return! The Quarkus maven plugin keeps the forwarded port open so that you can start debugging remotely.
+コマンドが戻るのを待ってはいけません。Quarkus mavenプラグインは、転送されたポートを開いたままにして、リモートでデバッグを開始できるようにします。
 
 image::debug-che-quarkus.png[Quarkus Debug, 700]
 
 ==== 2. Add a bug
 
-Let's add a new endpoint that has a bug we will fix using the debugger.
+デバッガを使って修正するバグを持つ新しいエンドポイントを追加してみましょう。
 
 Go back to the _Explorer_ view, and under the `cloud-native-workshop-v2m2-labs` project, open the `inventory/src/main/java/com/redhat/coolstore/InventoryResource.java` file. Add a new method which has an off-by-one error:
+
+_Explorer_ view に戻り、 `cloud-native-workshop-v2m2-lab` プロジェクトの下で、 `inventory/src/main/java/com/redhat/coolstore/InventoryResource.java` ファイルを開きます。off-by-oneエラーが発生するメソッドを追加します。
 
 [source,java,role="copypaste"]
 ----
