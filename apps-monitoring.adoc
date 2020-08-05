@@ -97,16 +97,16 @@ mvn quarkus:add-extension -Dextensions="smallrye-opentracing" -f $CHE_PROJECTS_R
 
 [NOTE]
 ====
-https://vertx.io/[Vert.x^] 、 http://camel.apache.org/[Apache Camel^] 、 http://infinispan.org/[Infinispan^] 、Spring DI互換性（ `@Autowiredなど` ）など、人気のあるフレームワークの Quarkusの https://quarkus.io/extensions/[拡張機能^] は他にもたくさんあります。
+https://vertx.io/[Vert.x^] 、 http://camel.apache.org/[Apache Camel^] 、 http://infinispan.org/[Infinispan^] 、Spring DI互換性（ `@Autowired` など）など、人気のあるフレームワークの Quarkusの https://quarkus.io/extensions/[拡張機能^] は他にもたくさんあります。
 ====
 
 ==== 6. Create the configuration
 
-Before getting started with this step, confirm the *jaeger-collector* service by visiting the {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-monitoring[Topology View^], and click on the _jaeger_ deployment and select the _Resources_ tab to view the services exposed by Jaeger:
+このステップを始める前に、 {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-monitoring[Topology View^] にアクセスして *jaeger-collector* サービスを確認し、_jaeger_ デプロイメントをクリックして _Resources_ タブを選択して、 Jaeger によって公開されているサービスを表示します。
 
 image::jaeger-services.png[create_dialog, 700]
 
-We will configure our app to use the `http-c-binary-trft` service on port `14268` to report traces.
+ポート `14268` で `http-c-binary-trft` サービスを使用してトレースを報告するようにアプリを設定します。
 
 In the `inventory` project under `cloud-native-workshop-v2m2-labs` workspace, open `src/main/resources/application.properties` file and add the following configuration via CodeReady Workspaces Terminal:
 
