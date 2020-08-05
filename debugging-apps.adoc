@@ -77,8 +77,6 @@ image::debug-che-quarkus-attach.png[Quarkus Debug, 700]
 
 [WARNING]
 ====
-**If you get errors or strange messages about Java Language Server or other failures**, you may need to restart the Java Language Server. To do this, press kbd:[F1] to open the command window, or the more traditional kbd:[Control+SHIFT+P] (or kbd:[Command+SHIFT+P] on Mac OS X). You can also use the *View > Find Command...*. Type `java` and click on the command named *Java: Clean the Java language server workspace* as shown:
-
 **Java Language Server に関するエラーや奇妙なメッセージが表示されたり、その他の障害が発生したりした場合**、Java Language Server を再起動する必要があるかもしれません。そのためには、 kbd:[F1] を押してコマンドウィンドウを開くか、 kbd:[Control+SHIFT+P] (Mac OS X の場合は kbd:[Command+SHIFT+P] ) を押してください。また、 *View > Find Command...* を使用することもできます。 `java` と入力し、 *Java: Clean the Java language server workspace* という名前のコマンドをクリックします。
 
 image::clean-jls.png[JLS, 900]
