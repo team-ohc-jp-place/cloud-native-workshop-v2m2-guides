@@ -123,7 +123,7 @@ workspace `cloud-native-workshop-v2m2-lab` の下にある `inventory` プロジ
 
 [NOTE]
 ====
-If the `quarkus.jaeger.service-name` property (or `JAEGER_SERVICE_NAME` environment variable) is not provided then a ``no-op'' tracer will be configured, resulting in no tracing data being reported to the backend.
+もし `quarkus.jaeger.service-name` プロパティ (または環境変数 `JAEGER_SERVICE_NAME`) が指定されていない場合は、`no-op` トレーサーが設定され、バックエンドにトレースデータが報告されません。
 ====
 
 [NOTE]
