@@ -38,13 +38,13 @@ image::create_project.png[create_dialog, 700]
 
 * Name: `{{USER_ID}}-monitoring`
 * Display Name: `{{USER_ID}} CoolStore App Monitoring Tools`
-* Description: _leave this field empty_
+* Description: 空欄にする
 
 image::create_monitoring_dialog.png[create_dialog, 700]
 
 ==== 2. Deploy Jaeger to OpenShift
 
-In the new project, click `+Add`, select _From Catalog_:
+新しいプロジェクトで `+Add` をクリックし、 *From Catalog* を選択します。
 
 To deploy a jaeger server, click on `+` icon on the right top corner:
 
