@@ -109,11 +109,11 @@ image::debug-che-step-over.png[Step Over, 900]
 
 image::debug-che-step-over2.png[Step Over, 600]
 
-One more step-over, and you can clearly see that `lastLetter` is blank (empty string). It's an off-by-one error!
+もう一歩踏み込んでみると、 `lastLetter` が空白 (空文字列) であることがよくわかります。これは off-by-one のエラーです!
 
 image::debug-che-error.png[Step Over, 800]
 
-Click the Continue button to let the method finish and return the empty value to `curl`:
+Continueボタンをクリックしてメソッドを終了させ、空の値を `curl` に戻します。
 
 image::debug-che-continue.png[Step Over, 600]
 
