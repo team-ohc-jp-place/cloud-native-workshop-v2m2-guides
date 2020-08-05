@@ -108,7 +108,7 @@ image::jaeger-services.png[create_dialog, 700]
 
 ポート `14268` で `http-c-binary-trft` サービスを使用してトレースを報告するようにアプリを設定します。
 
-In the `inventory` project under `cloud-native-workshop-v2m2-labs` workspace, open `src/main/resources/application.properties` file and add the following configuration via CodeReady Workspaces Terminal:
+workspace `cloud-native-workshop-v2m2-lab` の下にある `inventory` プロジェクトで、 `src/main/resources/application.properties` ファイルを開き、 CodeReady Workspaces Terminal を通じて以下の設定を追加します。
 
 [source,properties,role="copypaste"]
 ----
@@ -119,7 +119,7 @@ In the `inventory` project under `cloud-native-workshop-v2m2-labs` workspace, op
 %prod.quarkus.jaeger.endpoint=http://jaeger-all-in-one-inmemory-collector.{{ USER_ID }}-monitoring.svc.cluster.local:14268/api/traces
 ----
 
-You can also specify the configuration using environment variables or JVM properties. See https://www.jaegertracing.io/docs/1.12/client-features/[Jaeger Features^].
+環境変数やJVMのプロパティを使って設定を指定することもできます。 https://www.jaegertracing.io/docs/1.12/client-features/[Jaeger Features^] を参照してください。
 
 [NOTE]
 ====
