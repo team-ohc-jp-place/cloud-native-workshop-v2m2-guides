@@ -51,9 +51,7 @@ _Explorer_ view に戻り、 `cloud-native-workshop-v2m2-lab` プロジェクト
     }
 ----
 
-This method retrieves the location of inventory, and outputs the last letter in the name of the location. After adding this method, try it out with item `165613`, which has inventory in `Seoul` and we'd expect the last letter `l` to be output. Open another Terminal and run the command:
-
-このメソッドは在庫のある場所を取得し、その場所の名前の最後の文字を出力する。このメソッドを追加した後、 'Seoul' に在庫があるアイテム `165613` で試してみると、最後の文字 `l` が出力されるはずです。別のターミナルを開いてコマンドを実行してください。
+このメソッドは在庫のある場所を取得し、その場所の名前の最後の文字を出力する。このメソッドを追加した後、 `Seoul` に在庫があるアイテム `165613` で試してみると、最後の文字 `l` が出力されるはずです。別のターミナルを開いてコマンドを実行してください。
 
 [source,sh,role="copypaste"]
 ----
