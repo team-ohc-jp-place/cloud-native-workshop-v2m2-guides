@@ -5,11 +5,11 @@
 
 ==== 1. Enable Remote Debugging
 
-Remote debugging is a useful debugging technique for application development which allows looking into the code that is being executed somewhere else on a different machine and execute the code line-by-line to help investigate bugs and issues. Remote debugging is part of Java SE standard debugging architecture which you can learn more about it in https://docs.oracle.com/javase/8/docs/technotes/guides/jpda/architecture.html[Java SE docs^].
-
 リモートデバッグは、アプリケーション開発に便利なデバッグ技術で、別のマシン上のどこか別の場所で実行されているコードを調べて、バグや問題を調査するのに役立つコードを行ごとに実行することができます。リモートデバッグはJava SE標準のデバッグアーキテクチャの一部であり、 https://docs.oracle.com/javase/8/docs/technotes/guides/jpda/architecture.html[Java SE docs^] で詳細を学ぶことができます。
 
 Quarkus in development mode enables "Live Coding" with background compilation, which means that when you modify your Java files and/or your resource files and refresh your browser, these changes will automatically take effect. This works too for resource files like the configuration properties files and even `pom.xml` changes.
+
+開発モードのQuarkusは、バックグラウンドコンパイルで「ライブコーディング」を有効にします。つまり、Javaファイルやリソースファイルを変更してブラウザを更新すると、これらの変更が自動的に有効になります。これは、設定プロパティファイルや `pom.xml` の変更などのリソースファイルに対しても機能します。
 
 When run in Developer Mode (i.e. `mvn quarkus:dev`), Quarkus will also listen for debugging sessions on port `5005` (by default). If your want to wait for the debugger to attach before running you can pass `-Ddebug` on the command line. If you don’t want the debugger at all you can use `-Ddebug=false`.
 
