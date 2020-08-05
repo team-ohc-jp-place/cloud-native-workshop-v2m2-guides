@@ -97,7 +97,7 @@ mvn quarkus:add-extension -Dextensions="smallrye-opentracing" -f $CHE_PROJECTS_R
 
 [NOTE]
 ====
-There are many https://quarkus.io/extensions/[more extensions^] for Quarkus for popular frameworks like https://vertx.io/[Vert.x^], http://camel.apache.org/[Apache Camel^], http://infinispan.org/[Infinispan^], Spring DI compatibility (e.g. `@Autowired`), and more.
+https://vertx.io/[Vert.x^] 、 http://camel.apache.org/[Apache Camel^] 、 http://infinispan.org/[Infinispan^] 、Spring DI互換性（ `@Autowiredなど` ）など、人気のあるフレームワークの Quarkusの https://quarkus.io/extensions/[拡張機能^] は他にもたくさんあります。
 ====
 
 ==== 6. Create the configuration
