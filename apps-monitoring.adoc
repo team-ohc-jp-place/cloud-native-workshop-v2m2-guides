@@ -76,23 +76,24 @@ image::jaeger-ui.png[jaeger_ui, 700]
 
 ==== 5. Utilizing Opentracing with Inventory (Quarkus)
 
-We have a catalog service written with Spring Boot that calls the inventory service written with Quarkus as part of our cloud-native application. These applications are easy to trace using Jaeger.
+クラウドネイティブアプリケーションの一部として Quarkus で書かれたインベントリサービスを呼び出す、 Spring Boot で書かれたカタログサービスがあります。これらのアプリケーションは、 Jaeger を使って簡単にトレースすることができます。
 
-In this step, we will add the Quarkus extensions to the Inventory application for using *smallrye-opentracing*. Run the following commands to add the tracing extension via CodeReady Workspaces Terminal:
+このステップでは、 *smallrye-opentracing* を使用するためのインベントリアプリケーションに Quarkus の拡張機能を追加します。以下のコマンドを実行して、 CodeReady Workspaces Terminal 経由でトレース拡張機能を追加します。
 
 [source,sh,role="copypaste"]
 ----
 mvn quarkus:add-extension -Dextensions="smallrye-opentracing" -f $CHE_PROJECTS_ROOT/cloud-native-workshop-v2m2-labs/inventory
 ----
 
-You should see:
+下記を見てください。
 
 [source,console]
 ----
 ✅ Adding extension io.quarkus:quarkus-smallrye-opentracing
 ----
 
-and `BUILD SUCCESS`. This ensures that the extension's dependencies are added to `pom.xml` for the inventory microservice.
+それから `BUILD SUCCESS`。
+これにより、インベントリマイクロサービスのために拡張機能の依存関係が `pom.xml` に追加されることが保証されます。
 
 [NOTE]
 ====
