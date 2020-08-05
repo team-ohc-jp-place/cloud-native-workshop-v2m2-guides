@@ -119,21 +119,21 @@ image::debug-che-continue.png[Step Over, 600]
 
 ==== 3. Fix and Confirm
 
-The off-by-one error can be fixed simply by fixing the call to `substring()`. Fix the bug by changing the line with `substring()` to read:
+off-by-one エラーは `substring()` の呼び出しを修正するだけで修正できます。 `substring()` の行を読み込むように変更することでバグを修正してください。
 
 [source,java,role="copypaste"]
 ----
         String lastLetter = location.substring(len - 1);
 ----
 
-Execute the command again:
+再度コマンドを実行してください。
 
 [source,sh,role="copypaste"]
 ----
 curl http://localhost:8080/services/inventory/lastletter/165613
 ----
 
-The debugger will again catch the execution. Step through with the debugger as you did previously and confirm the value of `lastLetter` is `l` and is properly returned when the method is finished:
+デバッガは再び実行をキャッチします。先ほどと同じようにデバッガを使ってステップスルーし、 `lastLetter` の値が `l` であること、メソッドが終了したときに適切に返されることを確認してください。
 
 image::debug-che-final.png[Step Over, 900]
 
@@ -141,9 +141,9 @@ image::debug-che-final2.png[Step Over, 1000]
 
 [NOTE]
 ====
-Click on the _Stop Debugger_ (red box) to disconnect the debugger, then stop the app by typing kbd:[CTRL-C] in the Terminal in which the app runs.
+デバッガを停止するには、 *Stop Debugger* (赤枠)をクリックしてデバッガを切断し、アプリを実行しているターミナルで kbd:[CTRL-C] と入力してアプリを停止します。
 ====
 
 ==== Congratulations!
 
-Quarkus apps are just like any other Java app, so debugging is straightforward and supported by many IDEs and CLIs out there. Combined with Live Reload and CodeReady Workspaces, it makes development quick and (relatively) painless!
+Quarkusアプリは、他のJavaアプリと同じようなものなので、デバッグは簡単で、多くのIDEやCLIでサポートされています。Live Reload や CodeReady Workspaces と組み合わせることで、開発を迅速かつ（比較的）苦痛なく行うことができます。
