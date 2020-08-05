@@ -35,8 +35,6 @@ image::debug-che-quarkus.png[Quarkus Debug, 700]
 
 デバッガを使って修正するバグを持つ新しいエンドポイントを追加してみましょう。
 
-Go back to the _Explorer_ view, and under the `cloud-native-workshop-v2m2-labs` project, open the `inventory/src/main/java/com/redhat/coolstore/InventoryResource.java` file. Add a new method which has an off-by-one error:
-
 _Explorer_ view に戻り、 `cloud-native-workshop-v2m2-lab` プロジェクトの下で、 `inventory/src/main/java/com/redhat/coolstore/InventoryResource.java` ファイルを開きます。off-by-oneエラーが発生するメソッドを追加します。
 
 [source,java,role="copypaste"]
