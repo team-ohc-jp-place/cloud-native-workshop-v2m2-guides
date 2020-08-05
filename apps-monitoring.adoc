@@ -1,21 +1,21 @@
 = Lab3 - Application Monitoring
 :experimental:
 
-In the previous labs, you learned how to debug cloud-native apps to fix errors quickly using CodeReady Workspaces with Quarkus framework, and you got a glimpse into the power of Quarkus for developer joy.
+前回のラボでは、Quarkus フレームワークを使った CodeReady Workspaces を使って、クラウドネイティブアプリをデバッグしてエラーを素早く修正する方法を学び、開発者の喜びのための Quarkus の力を垣間見ることができました。
 
-You will now begin observing applications in term of a distributed transaction, performance and latency because as cloud-native applications are developed quickly, a distributed architecture in production gets ultimately complex in two areas: networking and observability. Later on we’ll explore how you can better manage and monitor the application using service mesh.
+クラウドネイティブ・アプリケーションが急速に開発されているため、本番環境での分散アーキテクチャは、ネットワークと観測性という2つの分野で最終的に複雑になるからです。後日、service mesh を使用してアプリケーションをより良く管理・監視する方法を探ります。
 
-In this lab, you will monitor coolstore applications using https://www.jaegertracing.io/[Jaeger^] and https://prometheus.io/[Prometheus^].
+このラボでは、 https://www.jaegertracing.io/[Jaeger^] と https://prometheus.io/[Prometheus^] を使用して coolstore アプリケーションを監視します。
 
 image::quarkus-jaeger-prometheus.png[logo, 700]
 
-*Jaeger* is an open source distributed tracing tool for monitoring and troubleshooting microservices-based distributed systems including:
+*Jaeger* は、以下のようなマイクロサービスベースの分散システムを監視し、トラブルシューティングを行うためのオープンソースの分散トレースツールです。
 
-* Distributed context propagation
-* Distributed transaction monitoring
-* Root cause analysis
-* Service dependency analysis
-* Performance and latency optimization
+* 分散型トランザクションの監視 (Distributed context propagation)
+* 分散型トランザクションの監視 (Distributed transaction monitoring)
+* 根本原因分析 (Root cause analysis)
+* サービス依存性分析 (Service dependency analysis)
+* パフォーマンスとレイテンシの最適化 (Performance and latency optimization)
 
 *Prometheus* is an open source systems monitoring and alerting tool that fits in recording any numeric time series including:
 
@@ -476,4 +476,4 @@ It is beyond the scope of this lab, but if you're interested, give it a go if yo
 
 === Summary
 
-In this lab, you learned how to monitor cloud-native applications using Jaeger, Prometheus, and Grafana. You also learned how Quarkus makes your observation tasks easier as a developer and operator. You can use these techniques in future projects to observe your distributed cloud-native applications.
+このラボでは、 Jaeger、Prometheus、Grafana を使用してクラウドネイティブアプリケーションを監視する方法を学びました。また、 Quarkus を使用することで、開発者やオペレータとしての観察タスクが容易になることも学びました。これらのテクニックを将来のプロジェクトで使用して、分散型クラウドネイティブアプリケーションを監視することができます。
