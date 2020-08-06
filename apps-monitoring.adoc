@@ -242,19 +242,19 @@ image::grafana-webui.png[Grafana, 700]
 
 ==== 10. Add a data source to Grafana
 
-Click Add data source and select *Prometheus* as data source type.
+Add data source をクリックし、データソースのタイプとして *Prometheus* を選択します。
 
 image::grafana-datasource-types.png[Grafana, 700]
 
-Fill out the form with the following values:
+以下の値を記入してください。
 
 * *URL*: `http://prometheus.{{USER_ID}}-monitoring:9090`
 
-Click on *Save & Test* and confirm you get a success message:
+*Save & Test* をクリックして、成功のメッセージが表示されたことを確認します。
 
 image::grafana-ds-success.png[Grafana, 300]
 
-At this point Granana is set up to pull collected metrics from Prometheus as they are collected from the application(s) you are monitoring.
+この時点で、 Granana は、監視しているアプリケーションから収集したメトリクスを Prometheus から引き出すように設定されています。
 
 ==== 11. Utilize metrics specification for Inventory Microservice
 
