@@ -175,33 +175,33 @@ image::jaeger-span.png[jaeger_ui, 700]
 
 ==== 9. Deploy Prometheus and Grafana to OpenShift
 
-OpenShift Container Platform ships with a pre-configured and self-updating monitoring stack that is based on the https://prometheus.io[Prometheus] open source project and its wider eco-system. It provides monitoring of cluster components and ships with a set of alerts to immediately notify the cluster administrator about any occurring problems and a set of https://grafana.com/[Grafana] dashboards.
+OpenShift Container Platformは、 https://prometheus.io[Prometheus] オープンソースプロジェクトとその広範なエコシステムをベースにした、構成済みで自己更新型の監視スタックを搭載して提供されます。クラスタコンポーネントの監視を提供し、発生した問題をクラスタ管理者に即座に通知する一連のアラートと一連の https://grafana.com/[Grafana] ダッシュボードを搭載しています。
 
 image::monitoring-diagram.png[Prometheus, 700]
 
-However, we will deploy custom *Prometheus* to scrape services metrics of Inventory and Catalog applications. Then we will visualize the metrics data via custom *Grafana* dashboards deployment.
+ただし、インベントリとカタログアプリケーションのサービスメトリクスをスクレイプするために、カスタムの *Prometheus* をデプロイします。そして、そのメトリクスデータを *Grafana* ダッシュボードを使って可視化していきます。
 
-On the {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-monitoring[Monitoring Topology View^], click on `+Add`, and choose "Container Image"
+{{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-monitoring[Monitoring Topology View^] で、 `+Add` をクリックし、 *Container Image* を選択します。
 
 image::add-to-project.png[Prometheus, 800]
 
-Fill out the following fields:
+以下の項目を記入してください。
 
 * *Image Name*: `prom/prometheus:latest`
 * *Application Name*: `prometheus-app`
 * *Name*: `prometheus`
 
-Press *Enter* then you will see *green checked* icon and *Validated* in 30 seconds.
+*Enter* を押すと、30秒後に *緑色のチェック付き* アイコンと *Validated* が表示されます。
 
-Leave the rest as-is and click *Create*:
+残りはそのままにして、 *Create* をクリックします。
 
 image::search-prometheus-image.png[Prometheus, 700]
 
-On the Topology view, you'll see prometheus spinning up. Once it completes, click on the arrow to access the prometheus query UI:
+Topology view では、 prometheus が回転しているのがわかります。それが完了したら、矢印をクリックして prometheus query UI にアクセスします。
 
 image::prometheus-route.png[Prometheus, 700]
 
-Which should load the Prometheus Web UI (we'll use this later):
+これは Prometheus Web UI をロードするはずです（これは後で使います）。
 
 image::prometheus-webui.png[Prometheus, 700]
 
