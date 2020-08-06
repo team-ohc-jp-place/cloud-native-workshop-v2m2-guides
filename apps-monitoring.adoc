@@ -286,8 +286,8 @@ mvn quarkus:add-extension -Dextensions="metrics" -f $CHE_PROJECTS_ROOT/cloud-nat
 * *performedChecksAvail*: _getAvailability()_ が何回呼ばれたかを表すカウンタ
 * *checksTimerAvail*: _getAvailability()_ メソッドを実行するのにかかる時間の目安。
 
-In the _cloud-native-workshop-v2m2-labs/inventory_ project, open `src/main/java/com/redhat/coolstore/InventoryResource.java`. Replace the two methods _getAll()_ and
-_getAvailability()_ with the below code which adds several annotations for custom metrics (*@Counted*, *@Timed*):
+_cloud-native-workshop-v2m2-labs/inventory_ プロジェクトで、 `src/main/java/com/redhat/coolstore/InventoryResource.java` を開きます。
+2 つのメソッド _getAll()_ と _getAvailability()_ を、カスタム・メトリクス ( *@Counted* , *@Timed* ) のためのいくつかのアノテーションを追加した以下のコードで置き換えます。
 
 [source,java,role="copypaste"]
 ----
