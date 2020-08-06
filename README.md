@@ -1,7 +1,7 @@
 The CCN Roadshow(Dev Track) Module 2 Guide 2019
 ===
-This module enables developers to create CI/CD pipeline with cloud-native apps on Red Hat Application Rumties(i.e. Quarkus, Spring Boot) with OpenShift.
-The developers also will learn how to debug, monitoring the cloud-native apps via Web IDE(CodeReady Workspace).
+このモジュールでは、OpenShift上でRed Hat Application Rumties(Quarkus, Spring Boot)を用いたクラウドネイティブアプリのCI/CDパイプラインを作成することができます。
+また、開発者は Web IDE(CodeReady Workspace)を介してクラウドネイティブアプリをモニタリングし、デバッグする方法を学びます。
 
 Agenda
 ===
@@ -13,9 +13,10 @@ Agenda
 Lab Instructions on OpenShift
 ===
 
-Note that if you have installed the lab infra via APB, the lab instructions are already deployed.
+APB経由で lab infra をインストールした場合、 lab instructions はすでにデプロイされていることに注意してください。
 
-Here is an example Ansible playbook to deploy the lab instruction to your OpenShift cluster manually.
+ここでは、 lab instructions を OpenShift クラスタに手動でデプロイするための Ansible プレイブックの例を示します。
+
 
 ```
 - name: Create Guides Module 2

@@ -1,18 +1,19 @@
 = Lab2 - Debugging Applications
 :experimental:
 
-In this lab, you will debug the coolstore microservice application using Java remote debugging and look into line-by-line code execution as the code runs on Quarkus.
+このラボでは、Javaリモートデバッグを使用して、coolstore マイクロサービスアプリケーションをデバッグし、Quarkus上でコードが実行される際の line-by-line のコード実行を調べます。
 
 ==== 1. Enable Remote Debugging
 
-Remote debugging is a useful debugging technique for application development which allows looking into the code that is being executed somewhere else on a different machine and execute the code line-by-line to help investigate bugs and issues. Remote debugging is part of Java SE standard debugging architecture which you can learn more about it in https://docs.oracle.com/javase/8/docs/technotes/guides/jpda/architecture.html[Java SE docs^].
+リモートデバッグは、アプリケーション開発に便利なデバッグ技術で、別のマシン上のどこか別の場所で実行されているコードを調べて、バグや問題を調査するのに役立つコードを行ごとに実行することができます。リモートデバッグはJava SE標準のデバッグアーキテクチャの一部であり、 https://docs.oracle.com/javase/8/docs/technotes/guides/jpda/architecture.html[Java SE docs^] で詳細を学ぶことができます。
 
-Quarkus in development mode enables "Live Coding" with background compilation, which means that when you modify your Java files and/or your resource files and refresh your browser, these changes will automatically take effect. This works too for resource files like the configuration properties files and even `pom.xml` changes.
+開発モードのQuarkusは、バックグラウンドコンパイルで「ライブコーディング」を有効にします。つまり、Javaファイルやリソースファイルを変更してブラウザを更新すると、これらの変更が自動的に有効になります。これは、設定プロパティファイルや `pom.xml` の変更などのリソースファイルに対しても機能します。
 
-When run in Developer Mode (i.e. `mvn quarkus:dev`), Quarkus will also listen for debugging sessions on port `5005` (by default). If your want to wait for the debugger to attach before running you can pass `-Ddebug` on the command line. If you don’t want the debugger at all you can use `-Ddebug=false`.
+デベロッパーモード(すなわち `mvn quarkus:dev` )で実行すると、Quarkusはポート `5005` (デフォルト)のデバッグセッションもリッスンします。デバッガがアタッチされるのを待ってから実行したい場合は、コマンドラインで `-Ddebug` を渡すことができます。デバッガを全く必要としない場合は `-Ddebug=false` を使用します。
 
-Start up the Inventory microservice locally, in development mode, using this command in a CodeReady Terminal:
-Enable remote debugging on Inventory by running the following command in the CodeReady Workspaces Terminal window:
+CodeReadyターミナルでこのコマンドを使用して、開発モードでローカルにInventoryマイクロサービスを起動します。
+
+CodeReady Workspaces Terminal ウィンドウで次のコマンドを実行して、Inventory のリモート デバッグを有効にします。
 
 [source,sh,role="copypaste"]
 ----
@@ -21,20 +22,20 @@ mvn quarkus:dev -f $CHE_PROJECTS_ROOT/cloud-native-workshop-v2m2-labs/inventory
 
 [NOTE]
 ====
-Close any popups about port 5005 or 8080 when the app starts up
+アプリ起動時にポート 5005 または 8080 に関するポップアップを閉じてください。
 ====
 
-You are all set now to start debugging using the tools of you choice.
+これで、お好きなツールを使ってデバッグを開始する準備が整いました。
 
-Do not wait for the command to return! The Quarkus maven plugin keeps the forwarded port open so that you can start debugging remotely.
+コマンドが戻るのを待ってはいけません。Quarkus mavenプラグインは、転送されたポートを開いたままにして、リモートでデバッグを開始できるようにします。
 
 image::debug-che-quarkus.png[Quarkus Debug, 700]
 
 ==== 2. Add a bug
 
-Let's add a new endpoint that has a bug we will fix using the debugger.
+デバッガを使って修正するバグを持つ新しいエンドポイントを追加してみましょう。
 
-Go back to the _Explorer_ view, and under the `cloud-native-workshop-v2m2-labs` project, open the `inventory/src/main/java/com/redhat/coolstore/InventoryResource.java` file. Add a new method which has an off-by-one error:
+_Explorer_ view に戻り、 `cloud-native-workshop-v2m2-lab` プロジェクトの下で、 `inventory/src/main/java/com/redhat/coolstore/InventoryResource.java` ファイルを開きます。off-by-oneエラーが発生するメソッドを追加します。
 
 [source,java,role="copypaste"]
 ----
@@ -50,88 +51,89 @@ Go back to the _Explorer_ view, and under the `cloud-native-workshop-v2m2-labs` 
     }
 ----
 
-This method retrieves the location of inventory, and outputs the last letter in the name of the location. After adding this method, try it out with item `165613`, which has inventory in `Seoul` and we'd expect the last letter `l` to be output. Open another Terminal and run the command:
+このメソッドは在庫のある場所を取得し、その場所の名前の最後の文字を出力する。このメソッドを追加した後、 `Seoul` に在庫があるアイテム `165613` で試してみると、最後の文字 `l` が出力されるはずです。別のターミナルを開いてコマンドを実行してください。
 
 [source,sh,role="copypaste"]
 ----
 curl http://localhost:8080/services/inventory/lastletter/165613
 ----
 
-You don't see the letter `l` do you? You should see:
+`l` の文字がありませんか？ よく見てください。
 
 image::debug-che-quarkus-lastletter.png[Quarkus Debug, 700]
 
-There's no `l`! You can probably spot the error, but let's walk through the debugger.
+`l` はありません! おそらくエラーを見つけることができるでしょうが、デバッガを見てみましょう。
 
-==== 2. Debug with CodeReady Workspaces
+==== 3. Debug with CodeReady Workspaces
 
-Click on the Debug icon on the left, select _Attach to App_ in the drop-down, and click the green _Start Debugging_ Icon:
+左側のデバッグアイコンをクリックし、ドロップダウンで *Attach to App* を選択し、緑色の *Start Debugging* アイコンををクリックします。
 
 image::debug-che-quarkus-attach.png[Quarkus Debug, 700]
 
-You may see `[Warn] The debugger and the debuggee are running in different versions of JVMs. You could see wrong source mapping results.` You can ignore this warning, as long as the JVM versions are in the same major version family it won't be a problem.
+`[Warn] The debugger and the debuggee are running in different versions of JVMs. You could see wrong source mapping results.` というメッセージを見ることができます。
+この警告は無視できます。JVMのバージョンが同じメジャーバージョンファミリーにある限り、問題にはなりません。
 
-You should see a list of Threads in the debug console.
+デバッグコンソールにスレッドの一覧が表示されるはずです。
 
 [WARNING]
 ====
-**If you get errors or strange messages about Java Language Server or other failures**, you may need to restart the Java Language Server. To do this, press kbd:[F1] to open the command window, or the more traditional kbd:[Control+SHIFT+P] (or kbd:[Command+SHIFT+P] on Mac OS X). You can also use the *View > Find Command...*. Type `java` and click on the command named *Java: Clean the Java language server workspace* as shown:
+**Java Language Server に関するエラーや奇妙なメッセージが表示されたり、その他の障害が発生したりした場合**、Java Language Server を再起動する必要があるかもしれません。そのためには、 kbd:[F1] を押してコマンドウィンドウを開くか、 kbd:[Control+SHIFT+P] (Mac OS X の場合は kbd:[Command+SHIFT+P] ) を押してください。また、 *View > Find Command...* を使用することもできます。 `java` と入力し、 *Java: Clean the Java language server workspace* という名前のコマンドをクリックします。
 
 image::clean-jls.png[JLS, 900]
 
-This will restart the Java language server. Once it's restarted and you're back in your workspace, click the _Attach to App_ green icon once again to attach the debugger and proceed below.
+これにより、 Java language server が再起動されます。再起動してワークスペースに戻ったら、もう一度 *Attach to App* の緑のアイコンをクリックしてデバッガをアタッチし、以下に進みます。
 ====
 
-Go back to the _Explorer_ view. In the new method you added, add a breakpoint by clicking to the left of the first line in that method to cause a red dot to appear, as shown:
+Explorer view に戻ります。追加した新しいメソッドで、そのメソッドの最初の行の左側をクリックしてブレークポイントを追加し、下図のように赤い点が表示されるようにします。
 
 image::debug-che-breakpoint.png[Add Breakpoint, 700]
 
-Open a new Terminal and invoke the new method using the same `curl` command:
+新しいターミナルを開き、同じ `curl` コマンドを使って新しいメソッドを呼び出します。
 
 [source,sh,role="copypaste"]
 ----
 curl http://localhost:8080/services/inventory/lastletter/165613
 ----
 
-This command will appear to hang, while the debugger intercepts the call. Switch back to the Debugger view to see the state:
+このコマンドは、デバッガが呼び出しを中断している間、ハングしているように表示されます。 Debugger view に切り替えて状態を確認します。
 
 image::debug-che-breakpoint-hit.png[Add Breakpoint, 700]
 
-Click on the _Step Over_ icon to execute one line and retrieve the inventory object for the given product id from the database and see the yellow cursor advance one line.
+*Step Over* アイコンをクリックして1行実行し、データベースから指定された製品IDのインベントリオブジェクトを取得し、黄色のカーソルが1行進むのを確認します。
 
-Expand the _Local Variables_ in the lower left, to see the variables for `itemId` passed to the method and `item` element retrieved from the database. If you don't see them, click on the small arrow next to _Locals_ to expand the list.
+左下の *Local Variables* を展開すると、メソッドに渡された `itemId` とデータベースから取得した `item` 要素の変数が表示されます。表示されない場合は、 *Locals* の横にある小さな矢印をクリックしてリストを展開してください。
 
 image::debug-che-step-over.png[Step Over, 900]
 
-Step over 2 more times, and note the value of `location` is `Seoul` and `len` is set to the length of `Seoul` which is `5`.
+さらに2回ステップオーバーして、`location` の値が `Seoul` であり、`len` には `Seoul` の長さが `5` に設定されていることに注意する。
 
 image::debug-che-step-over2.png[Step Over, 600]
 
-One more step-over, and you can clearly see that `lastLetter` is blank (empty string). It's an off-by-one error!
+もう一歩踏み込んでみると、 `lastLetter` が空白 (空文字列) であることがよくわかります。これは off-by-one のエラーです!
 
 image::debug-che-error.png[Step Over, 800]
 
-Click the Continue button to let the method finish and return the empty value to `curl`:
+Continueボタンをクリックしてメソッドを終了させ、空の値を `curl` に戻します。
 
 image::debug-che-continue.png[Step Over, 600]
 
-==== 3. Fix and Confirm
+==== 4. Fix and Confirm
 
-The off-by-one error can be fixed simply by fixing the call to `substring()`. Fix the bug by changing the line with `substring()` to read:
+off-by-one エラーは `substring()` の呼び出しを修正するだけで修正できます。 `substring()` の行を読み込むように変更することでバグを修正してください。
 
 [source,java,role="copypaste"]
 ----
         String lastLetter = location.substring(len - 1);
 ----
 
-Execute the command again:
+再度コマンドを実行してください。
 
 [source,sh,role="copypaste"]
 ----
 curl http://localhost:8080/services/inventory/lastletter/165613
 ----
 
-The debugger will again catch the execution. Step through with the debugger as you did previously and confirm the value of `lastLetter` is `l` and is properly returned when the method is finished:
+デバッガは再び実行をキャッチします。先ほどと同じようにデバッガを使ってステップスルーし、 `lastLetter` の値が `l` であること、メソッドが終了したときに適切に返されることを確認してください。
 
 image::debug-che-final.png[Step Over, 900]
 
@@ -139,9 +141,9 @@ image::debug-che-final2.png[Step Over, 1000]
 
 [NOTE]
 ====
-Click on the _Stop Debugger_ (red box) to disconnect the debugger, then stop the app by typing kbd:[CTRL-C] in the Terminal in which the app runs.
+デバッガを停止するには、 *Stop Debugger* (赤枠)をクリックしてデバッガを切断し、アプリを実行しているターミナルで kbd:[CTRL-C] と入力してアプリを停止します。
 ====
 
 ==== Congratulations!
 
-Quarkus apps are just like any other Java app, so debugging is straightforward and supported by many IDEs and CLIs out there. Combined with Live Reload and CodeReady Workspaces, it makes development quick and (relatively) painless!
+Quarkusアプリは、他のJavaアプリと同じようなものなので、デバッグは簡単で、多くのIDEやCLIでサポートされています。Live Reload や CodeReady Workspaces と組み合わせることで、開発を迅速かつ（比較的）苦痛なく行うことができます。

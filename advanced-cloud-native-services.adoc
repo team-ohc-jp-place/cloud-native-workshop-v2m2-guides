@@ -1,51 +1,56 @@
 = Advanced Cloud-Native Services
 :experimental:
 
-If you completed the *Cloud Native Workshop - Module 1*, you learned how to take an existing application to the cloud with JBoss EAP and OpenShift, and you got a glimpse into the power of OpenShift for modernizing existing applications with microservices. If you did not, or you started but didn't finish, there are scripts below you can run to catch up.
+*Cloud Native Workshop - Module 1* を終了した場合、JBoss EAP と OpenShift を使用して既存のアプリケーションをクラウドに移行する方法を学び、マイクロサービスを使用して既存のアプリケーションをモダナイズするための OpenShift の力を垣間見ることができました。 +
+Module 1 を学習しなかった場合、または学習を開始したが終了しなかった場合は、以下のスクリプトを実行して追いつくことができます。
 
-In this lab, you will go deeper into how to use the OpenShift Container Platform as a developer to build and deploy applications. We’ll focus on the core features of OpenShift as it relates to developers, and you’ll learn typical workflows for a developer (develop, build, test, deploy, and repeat).
+このラボでは、開発者としてOpenShift Container Platformを使用してアプリケーションを構築し、デプロイする方法をより深く掘り下げていきます。開発者に関連するOpenShiftのコア機能に焦点を当て、開発者のための典型的なワークフロー（開発、ビルド、テスト、デプロイ、リピート）を学びます。
 
-=== Getting Ready for the labs
+=== ラボの準備
 
 [WARNING]
 ====
-If you’ve already completed the *Optimizing Existing Applications* module then you will simply need to import the code for this module. Skip down to the *Import Projects* section.
+*Optimizing Existing Applications* モジュールをすでに完了している場合は、このモジュールのコードをインポートする必要があります。
+Import Projects セクションにスキップしてください。
 ====
 
-You will be using Red Hat CodeReady Workspaces, an online IDE based on https://www.eclipse.org/che/[Eclipse Che^]. *Changes to files are auto-saved every few seconds*, so you don’t need to explicitly save changes.
+https://www.eclipse.org/che/[Eclipse Che^] をベースにしたオンライン IDE である Red Hat CodeReady Workspaces を使用します。 *ファイルへの変更は数秒ごとに自動保存される* ので、明示的に変更を保存する必要はありません。
 
-To get started, {{ ECLIPSE_CHE_URL }}[access the CodeReady Workspaces instance^] and log in using the username and password you’ve been assigned (e.g. `{{ USER_ID }}/{{ CHE_USER_PASSWORD }}`):
+開始するには、 {{ ECLIPSE_CHE_URL }}[CodeReady Workspaces インスタンスにアクセス^] し、 割り当てられたユーザー名とパスワードを使用してログインします。 (例: `{{ USER_ID }}/{{ CHE_USER_PASSWORD }}`)
 
 image::che-login.png[cdw, 700]
 
-Once you log in, you’ll be placed on your personal dashboard. Click on the name of the pre-created workspace on the left, as shown below (the name will be different depending on your assigned number). You can also click on the name of the workspace in the center, and then click on the green {{ USER_ID}}-namespace that says _Open_ on the top right hand side of the screen.
+ログインすると、個人のダッシュボードが表示されます。以下のように、左側にあるあらかじめ作成されたワークスペースの名前をクリックします（割り当てられた番号によって名前が異なります）。また、中央のワークスペースの名前をクリックして、画面右上のOpenと書かれた緑色の {{ USER_ID }}-namespace をクリックします。
 
-After a minute or two, you’ll be placed in the workspace:
+1～2分後、ワークスペースに入れられます。
 
 image::che-workspace.png[cdw, 900]
 
-This IDE is based on Eclipse Che (which is in turn based on MicroSoft VS Code editor).
+このIDEは、Eclipse Cheをベースにしています。 +
+（Eclipse Che は、MicroSoft VS Code editorをベースにしています）。
 
-You can see icons on the left for navigating between project explorer, search, version control (e.g. Git), debugging, and other plugins.  You’ll use these during the course of this workshop. Feel free to click on them and see what they do:
+プロジェクトエクスプローラ、検索、バージョン管理(Gitなど)、デバッグ、その他のプラグインの間を移動するためのアイコンが左に表示されています。このワークショップではこれらを使います。自由にクリックして何ができるか見てみてください。
 
 image::crw-icons.png[cdw, 400]
 
 [NOTE]
 ====
-If things get weird or your browser appears, you can simply reload the browser tab to refresh the view.
+ブラウザの表示がおかしくなった場合には、ブラウザタブを再読み込みして表示を更新してください。
 ====
 
-Many features of CodeReady Workspaces are accessed via *Commands*. You can see a few of the commands listed with links on the home page (e.g. _New File.._, _Git Clone.._, and others).
+CodeReady Workspaces の多くの機能は、コマンドからアクセスできます。いくつかのコマンドは、ホームページにリンクが貼られています（例：New File...、Git Clone...など）。
 
-If you ever need to run commands that you don't see in a menu, you can press kbd:[F1] to open the command window, or the more traditional kbd:[Control+SHIFT+P] (or kbd:[Command+SHIFT+P] on Mac OS X).
+メニューに表示されていないコマンドを実行する必要がある場合は、 kbd:[F1] を押すか、 kbd:[Control+SHIFT+P]を押してコマンドウィンドウを開くことができます。 +
+ （Mac OS Xでは kbd:[Command+SHIFT+P] ）
 
 ==== Import Projects
 
 Let's import the project source code for this lab. Click on **Git Clone..** (or type kbd:[F1], enter 'git' and click on the auto-completed _Git Clone.._ )
+このラボのプロジェクトのソースコードをインポートしてみましょう。 **Git Clone..** をクリックします。(または kbd:[F1] と入力して 'git' と入力し、自動で作成された Git クローンをクリックします。)
 
 image::che-workspace-gitclone.png[cdw, 900]
 
-Step through the prompts, using the following value for **Repository URL**. If you use *FireFox*, it may end up pasting extra spaces at the end, so just press backspace after pasting:
+リポジトリの URL に次の値を使用して、プロンプトに沿ってステップを実行します。FireFoxを使用している場合、最後に余分なスペースを貼り付けてしまう可能性がありますので、貼り付けた後にバックスペースを押してください。
 
 [source,none,role="copypaste"]
 ----
@@ -54,13 +59,13 @@ https://github.com/RedHat-Middleware-Workshops/cloud-native-workshop-v2m2-labs.g
 
 image::crw-clone-repo.png[crw,900]
 
-The project is imported into your workspace and is visible in the project explorer:
+プロジェクトはワークスペースにインポートされ、プロジェクト エクスプローラに表示されます。
 
 image::crw-clone-explorer.png[crw,900]
 
-==== IMPORTANT: Check out proper Git branch
+==== IMPORTANT: 適切な Git branch を check out
 
-To make sure you're using the right version of the project files, run this command in a CodeReady Terminal:
+プロジェクトファイルの正しいバージョンを使用していることを確認するには、CodeReadyターミナルでこのコマンドを実行してください。
 
 [source,sh,role="copypaste"]
 ----
@@ -69,27 +74,27 @@ cd $CHE_PROJECTS_ROOT/cloud-native-workshop-v2m2-labs && git checkout ocp-4.5
 
 [NOTE]
 ====
-The Terminal window in CodeReady Workspaces. You can open a terminal window for any of the containers running in your Developer workspace. For the rest of these labs, anytime you need to run a command in a terminal, you can use the **>_ New Terminal** command on the right:
+CodeReady ワークスペースのターミナルウィンドウ。Developer ワークスペースで実行しているコンテナのいずれかのターミナルウィンドウを開くことができます。これらのラボの残りの部分については、ターミナルでコマンドを実行する必要がある場合はいつでも、右側の **>_ New Terminal** コマンドを使用することができます。
 ====
 
 image::codeready-workspace-terminal.png[codeready-workspace-terminal, 700]
 
 === Remove other projects
 
-If you've completed other modules today (such as `cloud-native-workshop-v2m1-labs`), remove them from your workspace by right-clicking on the project name in the explorer and choose *Delete* and accept the warning. Be sure not to delete the new project you just imported for this lab!
+今日、他のモジュール( `cloud-native-workshop-v2m1-lab` など)を完了した場合は、エクスプローラーでプロジェクト名を右クリックして削除を選択し、警告を受け入れてワークスペースから削除してください。このラボのためにインポートした新しいプロジェクトを削除しないように注意してください。
 
 image::remove-workspace.png[remove, 700]
 
 === Login to OpenShift
 
-Although your Eclipse Che workspace is running on the Kubernetes cluster, it’s running with a default restricted _Service Account_ that prevents you from creating most resource types. If you’ve completed other modules, you’re probably already logged in, but let’s login again: click on *Login to OpenShift*, and enter your given credentials:
+Eclipse Che ワークスペースは Kubernetes クラスタ上で実行されていますが、デフォルトの制限付きサービスアカウントで実行されているため、ほとんどのリソースタイプを作成することができません。他のモジュールを完了している場合は、もう一度ログインしてみましょう: *Login to OpenShift* をクリックして、与えられた資格情報を入力します。
 
 * Username: `{{ USER_ID }}`
 * Password: `{{ OPENSHIFT_USER_PASSWORD }}`
 
 image::cmd-login.png[login,700]
 
-You should see something like this (the project names may be different):
+このようなものが表示されるはずです（プロジェクト名が異なる場合があります）。
 
 [source,none]
 ----
@@ -110,16 +115,16 @@ Welcome! See 'oc help' to get started.
 
 [NOTE]
 ====
-After you log in using *Login to OpenShift*, the terminal is no longer usable as a regular terminal. You can close the terminal window. You will still be logged in when you open more terminals later!
+ *Login to OpenShift* でログインした後は、通常のターミナルとしては使えなくなります。ターミナルのウィンドウを閉じることができます。後からさらに端末を開いてもログインしたままになります
 ====
 
-==== Do this if this is the first module you're doing today, otherwise continue to the Verifying the Dev Environment!
+==== 今日の最初のモジュールの場合はこれを行い、そうでない場合は Verifying the Dev Environment に進みます。
 
-These commands reset and re-play all the steps from module 1 and should take 4-5 minutes to finish.
+これらのコマンドは、module 1 からのすべてのステップをリセットして再生し、終了するまでに4～5分かかるはずです。
 
 [WARNING]
 ====
-*You do not need to run these if you already completed the Optimizing Existing Applications lab and have created `catalog` and `inventory` and the CoolStore `monolith` projects!*
+*Optimizing Existing Applications lab を完了し、 `catalog` と `inventory` と CoolStore `monolith` projects を作成している場合は、これらを実行する必要はありません!*
 ====
 
 [source, sh, role="copypaste"]
@@ -131,7 +136,8 @@ sh /projects/cloud-native-workshop-v2m2-labs/monolith/scripts/deploy-coolstore.s
 
 [WARNING]
 ====
-It sometimes takes time to create a new build image for network latency in OpenShift. So if you got failed to deploy catalog-service with *Error from server (NotFound): services "catalog-springboot" not found*. Please try again with delay via the following command:
+OpenShiftではネットワークレイテンシのために新規ビルドイメージの作成に時間がかかることがあります。
+もし、 *Error from server (NotFound): services "catalog-springboot" not found* となり catalog-service のデプロイに失敗した場合は、以下のコマンドを使って、もう一度試してみてください。
 ====
 
 [source, sh, role="copypaste"]
@@ -141,31 +147,30 @@ sh /projects/cloud-native-workshop-v2m2-labs/monolith/scripts/deploy-catalog.sh 
 sh /projects/cloud-native-workshop-v2m2-labs/monolith/scripts/deploy-coolstore.sh {{ USER_ID }}
 ----
 
-Wait for the commands to complete.
+コマンドが完了するのを待ちます。
 
 === Verifying the Dev Environment
 
-In the previous module, you created a new OpenShift project called *{{ USER_ID }}-coolstore-dev* which represents your developer personal
-project in which you deployed the CoolStore monolith.
+前のモジュールでは、 *{{ USER_ID }}-coolstore-dev* という新しいOpenShiftプロジェクトを作成し、CoolStore monolith をデプロイした開発者個人のプロジェクトを表しています。
 
 ==== Verify Application
 
-Let’s take a moment and review the OpenShift resources that are created for the Monolith:
+それでは、 Monolith 用に作成されている OpenShift リソースを確認してみましょう。
 
-* Build Config: *coolstore* build config is the configuration for building the Monolith image from the source code or WAR file.
-* Image Stream: *coolstore* image stream is the virtual view of all coolstore container images built and pushed to the OpenShift integrated registry.
-* Deployment Config: *coolstore* deployment config deploys and redeploys the Coolstore container image whenever a new coolstore container image becomes available. Similarly, the *coolstore-postgresql* does the same for the database.
-* Service: *coolstore* and *coolstore-postgresql* service is an internal load balancer which identifies a set of pods (containers) in order to proxy the connections it receives to them. Anything that depends on the service can to refer to it at a consistent address (service name or IP).
-* Route: *www* route registers the service on the built-in external load-balancer and assigns a public DNS name to it so that it can be reached from outside OpenShift cluster.
+* Build Config: *coolstore* build configは、ソースコードまたは WARファイル から Monolith イメージをビルドするための設定です。
+* Image Stream: *coolstore* image stream は、ビルドされたすべての coolstore コンテナイメージの仮想ビューであり、OpenShift統合レジストリにプッシュされます。
+* Deployment Config: *coolstore* deployment config は、新しい coolstore コンテナイメージが利用可能になるたびに、Coolstore コンテナイメージをデプロイして再デプロイします。同様に、*coolstore-postgresql* はデータベースに対しても同様のことを行います。
+* Service: *coolstore* および *coolstore-postgresql* サービスは、受信した接続をそれらにプロキシするためにポッド(コンテナ)のセットを識別する内部ロードバランサです。サービスに依存するものはすべて、一貫したアドレス(サービス名またはIP)でサービスを参照することができます。
+* Route: *www* route はビルトインの外部ロードバランサーにサービスを登録し、公開 DNS 名を割り当てて OpenShift クラスタの外部からアクセスできるようにします。
 
 [NOTE]
 ====
-When referring to Kubernetes or OpenShift object types in `oc` commands, you can use short synonyms for long words, like *bc* instead of *buildconfig*, *is* for *imagestream*, *dc* for *deploymentconfig*, *svc* for *service*, etc.
+`oc` コマンドで Kubernetes や OpenShift のオブジェクトタイプを参照する際には、 *buildconfig* の代わりに *bc* 、 *imagestream* の代わりに *is* 、 *deploymentconfig* の代わりに *dc* 、 *service* の代わりに *svc* などのように、長い単語の代わりに短い同義語を使用することができます。
 
-Don’t worry about reading and understanding the output of oc describe. Just make sure the command doesn’t report errors!
+oc describe の出力を読んで理解しようとしなくても大丈夫です。ただ、コマンドがエラーを報告しないことを確認してください!
 ====
 
-Run these commands to inspect the elements via CodeReady Workspaces Terminal window:
+これらのコマンドを実行して、CodeReady Workspacesターミナルウィンドウを介して要素を検査します。
 
 [source,sh,role="copypaste"]
 ----
@@ -177,38 +182,38 @@ oc get svc coolstore && \
 oc describe route www
 ----
 
-You should get a valid value for each, and no errors!
+それぞれに有効な値を取得していることと、エラーがないことを確認してください。
 
-Visit the {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-coolstore-dev[Topology View^] to see the coolstore app (and its database). The *Topology* view in the _Developer_ perspective of the OpenShift web console provides a visual representation of all the applications within a project, their build status, and the components and services associated with them. You'll visit this often:
+coolstoreアプリ（とそのデータベース）を見るには、 {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-coolstore-dev[Topology View^] にアクセスしてください。OpenShiftウェブコンソールの開発者視点の *Topology* view は、プロジェクト内のすべてのアプリケーション、そのビルドステータス、およびそれらに関連するコンポーネントとサービスを視覚的に表示します。これは頻繁に参照することになります。
 
 image::coolstore-dev-topology.png[crw,700]
 
-Verify that you can access the monolith by clicking on the route link (the arrow) to access the running monolith:
+実行中の monolith にアクセスするためのルートリンク（矢印）をクリックして、 monolith にアクセスできることを確認してください。
 
 image::route_link.png[route_link]
 
-The coolstore web interface should look like:
+coolstore のウェブインターフェースは、次のようになります。
 
 image::coolstore_web.png[route_link, 600]
 
 
 === Verify Database
 
-You can log into the running Postgres container using the following via CodeReady Workspaces Terminal window:
+実行中のPostgresコンテナには、CodeReady Workspaces Terminalウィンドウを介して以下のようにしてログインすることができます。
 
 [source,sh,role="copypaste"]
 ----
 oc rsh dc/coolstore-postgresql
 ----
 
-Once logged in, use the following command to execute an SQL statement to show some content from the database and then exit:
+ログインしたら、次のコマンドを使用してSQL文を実行し、データベースからいくつかのコンテンツを表示してから終了します。
 
 [source,sh,role="copypaste"]
 ----
 psql -U $POSTGRESQL_USER $POSTGRESQL_DATABASE -c 'select name,price from PRODUCT_CATALOG;' | cat; exit
 ----
 
-You should see the following:
+以下のように表示されているはずです。
 
 ----
           name          | price
@@ -225,6 +230,6 @@ You should see the following:
 (9 rows)
 ----
 
-This shows the content of the monolith's database.
+これは、monolith のデータベースの内容を示しています。
 
-With our running project on OpenShift, in the next step we’ll explore how you as a developer can work with the running app to make changes and debug the application!
+OpenShift上で実行中のプロジェクトで、次のステップでは、開発者として実行中のアプリを使って変更を加えたり、アプリをデバッグしたりする方法を探っていきます。

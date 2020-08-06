@@ -1,63 +1,63 @@
 = Lab1 - Automating Deployments Using Pipelines
 :experimental:
 
-In the previous scenarios, you deployed the Coolstore monolith using an OpenShift Template into the *{{USER_ID}}-coolstore-dev* Project. The template created the necessary objects (BuildConfig, DeploymentConfig, ImageStreams, Services, and Routes) and gave you as a Developer a playground in which to run the app, make changes and debug.
+前のシナリオでは、OpenShiftテンプレートを使用して Coolstore monolith を、 *{{USER_ID}}-coolstore-dev* Project にデプロイしました。このテンプレートによって必要なオブジェクト（BuildConfig、DeploymentConfig、ImageStreams、Services、およびRoute）が作成され、開発者としてアプリを実行し、変更を加え、デバッグするための場が提供されました。
 
-In this step, we are now going to setup a separate production environment and explore some best practices and techniques for developers and DevOps teams for getting code from the developer *(that’s YOU!)* to production with less downtime and greater consistency.
+このステップでは、別の本番環境を設定し、開発者や DevOps チームが開発者 *(あなたのことです！)* から本番環境にコードを移行する際のベストプラクティスやテクニックを探っていきます。
 
 === Production vs. Development
 
-The existing *{{USER_ID}}-coolstore-dev* project is used as a developer environment for building new versions of the app after code changes and deploying them to the development environment.
+既存の *{{USER_ID}}-coolstore-dev* project は、コード変更後のアプリの新バージョンをビルドしてデプロイするための開発環境として利用されています。
 
-In a real project on OpenShift, _dev_, _test_ and _production_ environments would typically use different OpenShift projects and perhaps even different OpenShift clusters.
+OpenShift上の実際のプロジェクトでは、開発環境とテスト環境と本番環境では、通常、異なるOpenShiftプロジェクトを使用し、おそらくは異なるOpenShiftクラスタを使用することになるでしょう。.
 
-For simplicity in this scenario we will only use a _dev_ and _prod_ environment, and no test/QA environment.
+このシナリオを簡単にするために、私たちは開発環境と本番環境のみを使用し、テスト/QA環境は使用しません。
 
 ==== 1. Create the production environment
 
-Back in the {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-coolstore-dev[Topology View^], click on the project drop-down and select *Create Project*.
+{{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-coolstore-dev[Topology View^] に戻って、 プロジェクトのドロップダウンをクリックして、 *Create Project* を選択します。
 
 image::create_project.png[create_dialog, 600]
 
-Fill in the fields, and click `Create`:
+フィールドに必要事項を入力し、 `Create` をクリックします。
 
 * Name: *{{USER_ID}}-coolstore-prod*
 * Display Name: *{{USER_ID}} Coolstore Monolith - Production*
-* Description: _leave this field empty_
+* Description: _空欄にする_
 
 [WARNING]
 ====
-YOU `MUST` USE `{{USER_ID}}-coolstore-prod` AS THE PROJECT NAME, as this name is referenced later on and you will experience failures if you do not name it `{{USER_ID}}-coolstore-prod`.
+プロジェクト名に `{{USER_ID}}-coolstore-prod` を使用しなければなりません。 この名前は後に参照されるため、 `{{USER_ID}}-coolstore-prod` という名前を付けないと失敗することになります。
 ====
 
-This will create a new OpenShift project called *{{USER_ID}}-coolstore-prod* from which our production application will run.
+これで *{{USER_ID}}-coolstore-prod* という新しいOpenShiftプロジェクトが作成され、そこから本番アプリケーションが実行されます。
 
 ==== 2. Add the production elements
 
-In this case we’ll use the production template to create the objects.
+今回は本番用のテンプレートを使ってオブジェクトを作成します。
 
-We've pre-installed an application _template_ for use. Click the *+Add* and then *From Catalog* item:
+使用するアプリケーションテンプレートをあらかじめインストールしておきました。 *+Add* をクリックして、 *From Catalog* の項目をクリックします。
 
 image::from_catalog.png[create_new, 700]
 
-In the search box, type in `coolstore` and choose _Coolstore Monolith using pipelines_ and then click *Instantiate Template*.
+検索ボックスに `coolstore` と入力し、 `Coolstore Monolith using pipelines` を選択し、 `Instantiate Template` をクリックします。
 
 image::from_catalog_prod.png[create_new, 700]
 
-Fill in the following fields:
+以下の項目を記入してください。
 
-* *Namespace*: `{{ USER_ID }}-coolstore-prod` (this should already be selected)
+* *Namespace*: `{{ USER_ID }}-coolstore-prod` (これは既に選択されているはずです)
 * *User ID*: `{{ USER_ID }}`
 
 image::from_catalog_prod_details.png[create_new, 700]
 
-Keep the other values as-is and scroll down and click *Create*.
+他の値はそのままにして、下にスクロールして *Create* をクリックします。
 
-Go to the {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-coolstore-prod[Topology View^] to see the elements that were deployed.
+{{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-coolstore-prod[Topology View^] に移動して、デプロイされた要素を確認します。
 
-The *Topology* view in the _Developer_ perspective of the web console provides a visual representation of all the applications within a project, their build status, and the components and services associated with them.
+ウェブコンソールの開発者視点の *Topology* view では、プロジェクト内のすべてのアプリケーション、そのビルドステータス、およびそれらに関連するコンポーネントとサービスを視覚的に表示します。
 
-Label the components so that they get proper icons by running this command in the CodeReady Terminal:
+CodeReadyターミナルでこのコマンドを実行することで、コンポーネントに適切なアイコンが表示されるようにラベルを付けます。
 
 [source,sh,role="copypaste"]
 ----
@@ -73,113 +73,113 @@ oc annotate dc/coolstore-prod app.openshift.io/vcs-ref=ocp-4.5 --overwrite
 
 image::coolstore_topology.png[create_new, 700]
 
-You can see the _postgres_ database running (with a dark blue circle), and the coolstore monolith, which has not yet been deployed or started. In previous labs we deployed manually from a binary build of our app in our developer project. In this lab we will use a _CI/CD pipeline_ to build and deploy automatically go our production environment.
+実行中のpostgresデータベース(紺色の円)と、まだデプロイも起動もされていない coolstore monolith を見ることができます。以前のラボでは、開発者プロジェクトのアプリのバイナリビルドから手動でデプロイしました。このラボでは、CI/CD パイプラインを使用してビルドし、本番環境に自動的にデプロイします。
 
-We will use a *Jenkins Server* in our project and  use a _Jenkins Pipeline_ build strategy.
+プロジェクトでは *Jenkins Server* を使用し、Jenkins パイプライン の ビルドストラテジー を使用します。
 
-Click *Add* then click *From Catalog*, type in `jenkins` in the search box, and choose the FIRST *Jenkins (ephemeral)* item:
+*Add* をクリックしてから、 *From Catalog* をクリックし、検索ボックスに `jenkins` と入力して、最初の *Jenkins (ephemeral)* アイテムを選択します。
 
 image::from_catalog_jenkins.png[create_new, 700]
 
-Click *Instantiate Template* and change the following fields, leaving other fields alone:
+*Instantiate Template* をクリックして、以下のフィールドを変更し、他のフィールドはそのままにしておきます。
 
-* *Namespace*: `{{ USER_ID }}-coolstore-prod` (this should already be selected)
+* *Namespace*: `{{ USER_ID }}-coolstore-prod` (これは既に選択されているはずです)
 * *Memory Limit*: `2Gi`
 * *Disable memory intensive administrative monitors*: `true`
 
-Click *Create*.
+*Create* をクリックしてください。
 
-Let's label the new Jenkins server:
+新しい Jenkins server にラベルを付けてみましょう。
 
 [source,sh,role="copypaste"]
 ----
 oc label dc/jenkins app.openshift.io/runtime=jenkins --overwrite
 ----
 
-Back on the {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-coolstore-prod[Topology View^] you can see the production database, and an application called Jenkins which OpenShift uses to manage CI/CD pipeline deployments.
+{{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-coolstore-prod[Topology View^] に戻ると、本番用のデータベースと、OpenShiftがCI/CDパイプラインの配置を管理するために使用している、Jenkinsと呼ばれるアプリケーションを見ることができます。
 
 image::coolstore_prod_jenkins.png[create_new, 700]
 
-There is no running production app just yet. The only running app is back in the _dev_ environment, where you used a binary build to run the app previously.
+まだ本番環境で動作しているアプリはありません。唯一の稼働中のアプリは、以前バイナリビルドを使ってアプリを稼働させていた開発環境に戻っています。
 
-In the next step, we’ll _promote_ the app from the _dev_ environment to the _production_ environment using an OpenShift pipeline build. Let’s get going!
+次のステップでは、OpenShiftのパイプラインビルドを使って、アプリを開発環境から本番環境に昇格させていきます。さっそくやってみましょう。
 
 === Promoting Apps Across Environments with Pipelines
 
-So far you have built and deployed the app manually to OpenShift in the _dev_ environment. Although it’s convenient for local development, it’s an error-prone way of delivering software when extended to test and production environments.
+ここまでは開発環境のOpenShiftに手動でアプリをビルドしてデプロイしてきました。ローカル開発には便利なのですが、テスト環境や本番環境に拡張するとエラーになりやすい配信方法です。
 
-*Continuous Delivery (CD)* refers to a set of practices with the intention of automating various aspects of delivery software. One of these practices is called delivery pipeline which is an automated process to define the steps a change in code or configuration has to go through in order to reach upper environments and eventually to production.
+*Continuous Delivery (CD)* とは、デリバリーソフトウェアの様々な側面を自動化することを目的とした一連のプラクティスのことを指します。これらのプラクティスの1つは、デリバリーパイプラインと呼ばれるもので、コードや設定の変更が上位環境に到達し、最終的には本番環境に到達するまでのステップを定義する自動化されたプロセスです。
 
-OpenShift simplifies building CI/CD Pipelines by integrating the popular https://jenkins.io/doc/book/pipeline/overview/[Jenkins pipelines^] into the platform and enables defining truly complex workflows directly from within OpenShift. OpenShift 4 also introduces https://www.openshift.com/learn/topics/pipelines[Tekton Pipelines^], an evolution of CI/CD for Kubernetes, which you might be exploring in a later module if it's on the agenda for today.
+OpenShiftは人気のある https://jenkins.io/doc/book/pipeline/overview/[Jenkins pipelines^] をプラットフォームに統合することでCI/CD Pipelinesの構築を簡素化し、真に複雑なワークフローをOpenShift内から直接定義できるようにしました。OpenShift 4では、Kubernetes向けのCI/CDの進化形である https://www.openshift.com/learn/topics/pipelines[Tekton Pipelines^] も導入されています。
 
-The first step for any deployment pipeline is to store all code and configurations in a source code repository. In this workshop, the source code and configurations are stored in a https://github.com/RedHat-Middleware-Workshops/cloud-native-workshop-v2m2-labs[GitHub repository^] we’ve been
-using.
+あらゆるデプロイメントパイプラインの最初のステップは、すべてのコードと設定をソースコードリポジトリに保存することです。今回のワークショップでは、ソースコードと設定を https://github.com/RedHat-Middleware-Workshops/cloud-native-workshop-v2m2-labs[GitHub repository^] に保存しています。
+を使用しています。
 
-OpenShift has built-in support for *Jenkins CI/CD pipelines* by allowing developers to define a https://jenkins.io/solutions/pipeline/[Jenkins pipeline^] for execution by a Jenkins automation engine.
+OpenShiftは、開発者がJenkins自動化エンジンで実行するための https://jenkins.io/solutions/pipeline/[Jenkins pipeline^] を定義できるようにすることで、 *Jenkins CI/CD pipelines* をビルトインでサポートしています。
 
-The build can get started, monitored, and managed by OpenShift in the same way as any other build types e.g. S2I. Pipeline workflows are defined in a `Jenkinsfile`, either embedded directly in the build configuration, or supplied in Git repository and referenced by the build configuration. They are written using the http://groovy-lang.org/[Groovy scripting language].
+ビルドは、S2Iなどの他のビルドタイプと同じ方法でOpenShiftによって開始、監視、管理されます。パイプラインワークフローは `Jenkinsfile` で定義されており、ビルド設定に直接埋め込まれているか、Git リポジトリで提供され、ビルド設定で参照されます。これらは http://groovy-lang.org/[Groovy scripting language] を使って記述します。
 
-As part of the production environment template you used in the last step, a Pipeline build object was created. Ordinarily the pipeline would contain steps to build the project in the _dev_ environment, store the resulting image in the local repository, run the image and execute tests against it, then wait for human approval to _promote_ the resulting image to other environments like test or production.
+最後のステップで使用した本番環境テンプレートの一部として、Pipeline ビルドオブジェクトが作成されました。通常、パイプラインには、開発環境でプロジェクトをビルドし、結果のイメージをローカルリポジトリに保存し、イメージを実行してそれに対してテストを実行し、結果のイメージをテストや本番環境などの他の環境に転送するために人の承認を待つというステップが含まれています。
 
 ==== 3. Inspect the Pipeline Definition
 
 [NOTE]
 ====
-You may notice a _Pipelines_ menu item on the left menu of the OpenShift Console. This menu item is for exploring _Tekton Pipelines_, which is a newer pipeline technology based on the Tekton project. There are other modules as part of this workshop that explore Tekton. For now we'll concentrate on Jenkins.
+OpenShift Consoleの左メニューにPipelinesというメニュー項目があるのに気づくかもしれません。このメニュー項目はTektonプロジェクトをベースにした新しいパイプライン技術であるTekton Pipelinesを探索するためのものです。このワークショップの一部として、Tektonを探索する他のモジュールもあります。今のところはJenkinsに集中しています。
 ====
 
-Our pipeline is somewhat simplified for the purposes of this Workshop. Inspect the contents of the pipeline by navigating to the {{ CONSOLE_URL }}/k8s/ns/{{USER_ID}}-coolstore-prod/buildconfigs[Build Config page^] and click on `monolith-pipeline`:
+このワークショップの目的のために、パイプラインはやや簡略化されています。パイプラインの内容を確認するには、 {{ CONSOLE_URL }}/k8s/ns/{{USER_ID}}-coolstore-prod/buildconfigs[Build Config page^] に移動して、 `monolith-pipeline` をクリックしてください。
 
 image::prod_bc.png[create_new, 700]
 
-Then, you will see the details of _Jenkinsfile_ on the right side:
+すると、右側にJenkinsfileの詳細が表示されます。
 
 image::coolstore-prod-monolith-bc.png[monolith-pipeline, 700]
 
-You can also inspect this via the following command via CodeReady Workspaces Terminal window:
+また、CodeReady Workspacesのターミナルウィンドウから以下のコマンドで検査することもできます。
 
 [source,sh,role="copypaste"]
 ----
 oc describe bc/monolith-pipeline -n {{USER_ID}}-coolstore-prod
 ----
 
-The pipeline syntax allows creating complex deployment scenarios with the possibility of defining checkpoints for manual interaction and approval processes using https://jenkins.io/doc/pipeline/steps/[the large set of steps and plugins that Jenkins provides] in order to adapt the pipeline to the processes used in your team.
+パイプライン構文では、複雑なデプロイメントシナリオを作成することができ、 https://jenkins.io/doc/pipeline/steps/[Jenkinsが提供するステップとプラグインの大規模なセット] を使用して手動での相互作用と承認プロセスのチェックポイントを定義することで、チームで使用されるプロセスにパイプラインを適応させることができます。
 
-To simplify the pipeline in this workshop, we simulate the build and tests and skip any need for human input. Once the pipeline completes, it deploys the app from the _dev_ environment to our _production_ environment using the above `tag()` method within the `openshift` object, which simply re-tags the image you already created using a tag which will trigger deployment in the production environment.
+このワークショップでは、パイプラインを簡単にするために、ビルドとテストをシミュレートして、人間の入力を省略しています。パイプラインが完了すると、 `openshift` オブジェクト内の上記の `tag()` メソッドを使って、開発環境から本番環境にアプリをデプロイします。
 
 ==== 4. Promote the dev image to production using the pipeline
 
-Let’s invoke the build pipeline.
+ビルドパイプラインを起動してみましょう。
 
-On the {{ CONSOLE_URL }}/k8s/ns/{{USER_ID}}-coolstore-prod/buildconfigs/monolith-pipeline[Pipeline Details Page^], select _Actions > Start Build_:
+{{ CONSOLE_URL }}/k8s/ns/{{USER_ID}}-coolstore-prod/buildconfigs/monolith-pipeline[Pipeline Details Page^]　のページで、 *Actions > Start Build* を選択してください。
 
 image::pipe-start.png[Prod, 700]
 
-This will start the pipeline. _It will take a minute or two to start the pipeline!_ Future runs will not take as much time as the Jenkins infrastructure will already be warmed up. You can watch the progress of the pipeline:
+これでパイプラインが開始されます。パイプラインを開始するのに1～2分かかります! 今後の実行は、Jenkinsのインフラストラクチャがすでにウォームアップされているので、それほど時間はかからないでしょう。パイプラインの進行状況を見ることができます。
 
 image::pipe-prog.png[Prod, 700]
 
-Once the pipeline completes, return to the {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-coolstore-prod[Topology View^] and notice that the application is now deployed and running!
+パイプラインが完了したら、 {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-coolstore-prod[Topology View^] に戻り、アプリケーションがデプロイされて実行されていることを確認します!
 
 image::pipe-done.png[Prod, 700]
 
-It may take a few moments for the container to deploy fully.
+コンテナが完全にデプロイされるまでに時間がかかる場合があります。
 
-*Congratulations!* You have successfully setup a development and production environment for your project and can use this workflow for future projects as well.
+*おめでとうございます！* プロジェクトの開発・生産環境のセットアップが完了し、今後のプロジェクトでもこのワークフローを使用することができます。
 
-In the next step, we’ll add a human interaction element to the pipeline, so that you as a project lead can be in charge of approving changes.
+次のステップでは、パイプラインにヒューマンインタラクション要素を追加して、プロジェクトリーダーであるあなたが変更の承認を担当できるようにします。
 
 ==== 5. Adding Pipeline Approval Steps
 
-In previous steps, you used an OpenShift Pipeline to automate the process of building and deploying changes from the dev environment to production. In this step, we’ll add a final checkpoint to the pipeline which will require you as the project lead to approve the final push to production.
+前のステップでは、OpenShift Pipelineを使用して、開発環境から本番環境への変更のビルドとデプロイのプロセスを自動化しました。このステップでは、パイプラインに最終チェックポイントを追加します。
 
-Ordinarily your pipeline definition would be checked into a source code management system like Git, and to change the pipeline you’d edit the _Jenkinsfile_ in the source base. For this workshop we’ll just edit it directly to add the necessary changes. You can edit it with the *oc* command but we’ll use the Web Console.
+通常、パイプラインの定義はGitのようなソースコード管理システムにチェックされ、パイプラインを変更するにはソースベースのJenkinsfileを編集します。今回のワークショップでは、直接編集して必要な変更を加えます。 *oc* コマンドでも編集できますが、ここではWebコンソールを使用します。
 
-Back on the {{ CONSOLE_URL }}/k8s/ns/{{USER_ID}}-coolstore-prod/buildconfigs/monolith-pipeline[Pipeline Details Page^] click on the *YAML* tab. Add _a new stage_ to the pipeline, just before the _Deploy to PROD_ stage:
+{{ CONSOLE_URL }}/k8s/ns/{{ USER_ID }}-coolstore-prod/buildconfigs/monolith-pipeline[Pipeline Details Page^] に戻って、 *YAML* タブをクリックします。Deploy to PROD ステージの直前に、パイプラインに新しいステージを追加します。
 
 [NOTE]
 ====
-You will need to copy and paste the below code into the right place of *BuildConfig* as shown in the below image.
+下の画像のように、以下のコードを *BuildConfig* の適切な場所にコピー＆ペーストする必要があります。
 ====
 
 [source,groovy, role="copypaste"]
@@ -193,20 +193,19 @@ You will need to copy and paste the below code into the right place of *BuildCon
             }
 ----
 
-Your final pipeline should look like:
+最終的なパイプラインは以下のようになります。
 
 image::pipe-edit2.png[Prod, 700]
 
-Click *Save*.
+*Save* をクリックしてください。
 
 ==== 6. Make a simple change to the app
 
-With the approval step in place, let’s simulate a new change from a developer who wants to change the color of the header in the coolstore to a blue background color.
+承認ステップが整ったので、coolstore のヘッダーの背景色を青に変更したいという、開発者からの変更をシミュレーションしてみましょう。
 
-First, in CodeReady, in the `cloud-native-workshop-v2m2-labs` project, open _monolith/src/main/webapp/app/css/coolstore.css_, which contains the CSS stylesheet for the
-CoolStore app.
+まず、CodeReadyの `cloud-native-workshop-v2m2-lab` プロジェクトで、CoolStoreアプリのCSSスタイルシートを含む _monolith/src/main/webapp/app/css/coolstore.css_ を開きます。
 
-Add the following CSS to turn the header bar background to Blue (*Copy* to add it at the bottom):
+以下のCSSを追加して、ヘッダーバーの背景をブルーにします（※下の方にコピーして追加します）。
 
 [source,css, role="copypaste"]
 ----
@@ -215,7 +214,7 @@ Add the following CSS to turn the header bar background to Blue (*Copy* to add i
 }
 ----
 
-Now we need to update the catalog endpoint in the monolith application. Run the following commands in a Terminal to update the baseUrl to the proper value with your username:
+ここで、monolith アプリケーションのカタログエンドポイントを更新する必要があります。ターミナルで以下のコマンドを実行して、baseUrlをユーザー名で適切な値に更新します。
 
 [source,sh,role="copypaste"]
 ----
@@ -224,89 +223,88 @@ CATALOGHOST=$(oc get route -n {{ USER_ID}}-catalog catalog-springboot -o jsonpat
 sed -i 's/REPLACEURL/'$CATALOGHOST'/' "$JSPATH"
 ----
 
-Next, re-build the app once more via CodeReady Workspaces Terminal:
+次に、CodeReady Workspaces Terminalでもう一度アプリを再構築します。
 
 [source,sh,role="copypaste"]
 ----
 mvn clean package -Popenshift -DskipTests -f $CHE_PROJECTS_ROOT/cloud-native-workshop-v2m2-labs/monolith
 ----
 
-And re-deploy it to the *dev* environment using a binary build just as we did before via CodeReady Workspaces Terminal:
+そして、CodeReady Workspaces Terminalを介して以前に行ったのと同じように、バイナリビルドを使用して *dev* 環境 に再デプロイします。
 
 [source,sh,role="copypaste"]
 ----
 oc start-build -n {{USER_ID}}-coolstore-dev coolstore --from-file=$CHE_PROJECTS_ROOT/cloud-native-workshop-v2m2-labs/monolith/deployments/ROOT.war --follow
 ----
-Wait for it to complete the deployment via CodeReady Workspaces Terminal:
+CodeReady Workspaces Terminal経由でデプロイが完了するのを待ちます。
 
 [source,sh,role="copypaste"]
 ----
 oc -n {{USER_ID}}-coolstore-dev rollout status -w dc/coolstore
 ----
 
-And verify that the blue header is visible in the *dev* application by navigating to the http://www-{{USER_ID}}-coolstore-dev.{{ ROUTE_SUBDOMAIN}}[Coolstore Dev Web frontend^]. It should look like the following:
+そして、 http://www-{{USER_ID}}-coolstore-dev.{{ ROUTE_SUBDOMAIN }}[Coolstore Dev Web frontend^] に移動して、*dev* アプリケーションで青いヘッダーが表示されていることを確認してください。以下のようになっているはずです。
 
 [WARNING]
 ====
-If it doesn’t, you may need to do a hard browser refresh. Try holding the shift key while clicking the browser refresh button, or opening a separate "Private Browser" session to access the UI.
+そうでない場合は、ブラウザの更新を行う必要があるかもしれません。シフトキーを押しながらブラウザの更新ボタンをクリックするか、別の「プライベートブラウザ」セッションを開いてUIにアクセスしてみてください
 ====
 
 image::nav-blue.png[Dev, 700]
 
-Confirm the http://www-{{USER_ID}}-coolstore-prod.{{ ROUTE_SUBDOMAIN}}[Coolstore Prod Web frontend^] is still using the original black header:
+http://www-{{USER_ID}}-coolstore-prod.{{ ROUTE_SUBDOMAIN }}[Coolstore Prod Web frontend^] が元の黒いヘッダーをそのまま使用していることを確認します。
 
 image::pipe-orig.png[Prod, 700]
 
-We’re happy with this change in *dev*, so let’s promote the new change to *prod*, using the new approval step!
+*dev* での変更は上手くいったので、新しい承認ステップを使って、 *prod* への変更を進めていきましょう。
 
 ==== 7. Run the pipeline again
 
-Invoke the pipeline once more by navigating to the {{ CONSOLE_URL }}/k8s/ns/{{USER_ID}}-coolstore-prod/buildconfigs/monolith-pipeline[Pipeline Details Page^], select _Actions > Start Build_.
+もう一度、 {{ CONSOLE_URL }}/k8s/ns/{{USER_ID}}-coolstore-prod/buildconfigs/monolith-pipeline[Pipeline Details Page^] に移動して、 *Actions > Start Build* を選択してパイプラインを起動します。
 
-The same pipeline progress will be shown, however before deploying to prod, you will see a prompt in the pipeline:
+同じパイプラインの進行状況が表示されますが、prodにデプロイする前に、パイプライン内にプロンプトが表示されます。
 
 image::pipe-start2.png[Prod, 700]
 
-Click on the link for *Input Required*. This will open a new tab and direct you to Jenkins itself, where you can login with the same credentials as OpenShift:
+*Input Required* のリンクをクリックします。すると新しいタブが開き、Jenkins自体に誘導され、OpenShiftと同じ資格情報でログインできるようになります。
 
 * Username: `{{USER_ID}}`
 * Password: `{{OPENSHIFT_USER_PASSWORD}}`
 
-Accept the browser certificate warning and the Jenkins/OpenShift permissions, and then you’ll find yourself at the approval prompt:
+ブラウザ証明書の警告とJenkins/OpenShiftのパーミッションを受け入れると、承認のプロンプトが表示されます。
 
-Click on *Console Output* on left menu then click on `Proceed`.
+左メニューの *Console Output* をクリックし、 `Proceed` をクリックする。
 
 image::pipe-jenkins-prompt.png[Prod, 700]
 
 === 8. Approve the change to go live
 
-Click *Proceed*, which will approve the change to be pushed to production. You could also have clicked *Abort* which would stop the pipeline immediately in case the change was unwanted or unapproved.
+*Proceed* をクリックすると、本番環境にプッシュする変更が承認されます。また、変更が不要な場合や承認されていない場合には、パイプラインを直ちに停止する *Abort* をクリックすることもできます。
 
-Once you click _Proceed_, you will see the log file from Jenkins showing the final progress and deployment.
+*Proceed* をクリックすると、Jenkinsからのログファイルが表示され、最終的な進捗状況とデプロイメントが表示されます。
 
-On the {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-coolstore-prod[Production Topology View^], wait for the production deployment to complete (and you get all blue circles!).
+{{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-coolstore-prod[Production Topology View^] 上で、本番環境のデプロイが完了するのを待ちます(青い丸が全部出てきます！)。
 
-Once it completes, verify that the http://www-{{USER_ID}}-coolstore-prod.{{ ROUTE_SUBDOMAIN}}[Coolstore Prod Web frontend^] has the new change (blue header):
+完了したら、 http://www-{{USER_ID}}-coolstore-prod.{{ ROUTE_SUBDOMAIN }}[Coolstore Prod Web frontend^] に新しい変更（青いヘッダー）があることを確認します。
 
 image::nav-blue.png[Prod, 700]
 
 [WARNING]
 ====
-It may take a few seconds for the new app to be available, since we've not configured a proper health check and are not using _Rolling Updates_ when deploying new apps. Real production environments would use this to ensure no downtime.
+適切なヘルスチェックを設定しておらず、新しいアプリをデプロイする際に Rolling Updates を使用していないため、新しいアプリが利用可能になるまでに数秒かかることがあります。実際の本番環境では、ダウンタイムが発生しないようにするためにこれを使用します。
 
-If you don't see a blue header, or you get _Application Not Available_ errors, wait a few moments and reload. If you are still getting a black header, try holding the shift key while clicking the browser refresh button to force a hard refresh.
+青いヘッダーが表示されない場合や、 Application Not Available エラーが表示された場合は、しばらく待ってからリロードしてください。それでも黒いヘッダが表示される場合は、シフトキーを押しながらブラウザの更新ボタンをクリックして、強制的に更新してみてください。
 ====
 
-Congratulations! You have added a human approval step for all future developer changes. You now have two projects that can be
-visualized as:
+おめでとうございます。今後の開発者の変更に対して、人間による承認ステップが追加されました。これで、2つのプロジェクトを可視化することができるようになりました。
 
 image::goal.png[Prod, 700]
 
 === Summary
 
 
-In this lab, you learned how to use the OpenShift Container Platform as a developer to build, and deploy applications. You also learned how OpenShift makes your life easier as a developer, architect, and DevOps engineer.
+このラボでは、開発者として OpenShift Container Platform を使用してアプリケーションを構築し、デプロイする方法を学びました。また、OpenShift を使用すると、開発者、アーキテクト、DevOps エンジニアとしての life がいかに楽になるかを学びました。
 
-You can use these techniques in future projects to modernize your existing applications and add a lot of functionality without major re-writes.
+これらのテクニックを将来のプロジェクトで使用することで、既存のアプリケーションを近代化し、大きなリライトなしで多くの機能を追加することができます。
 
-The monolithic application we’ve been using so far works great, but is starting to show its age. Even small changes to one part of the app require many teams to be involved in the push to production.
+これまで使用してきたモノリシックアプリケーションは、非常にうまく機能していますが、時代の流れを感じ始めています。アプリのある部分への小さな変更でさえ、本番へのプッシュには多くのチームが関与しなければなりません。
