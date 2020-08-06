@@ -260,30 +260,31 @@ image::grafana-ds-success.png[Grafana, 300]
 
 このステップでは、 _Inventory(Quarkus)_ アプリケーションが *SmallRye Metrics extension* を通じて MicroProfile Metrics 仕様を利用する方法を学びます。 _MicroProfile Metrics_ を使用すると、アプリケーション内で何が起こっているかについての洞察を提供する様々なメトリクスや統計情報を収集することができます。
 
-The metrics can be read remotely using JSON format or the *OpenMetrics* format, so that they can be processed by additional tools such as _Prometheus_, and stored for analysis and visualisation.
+メトリクスは、JSON 形式または *OpenMetrics* 形式を使用してリモートで読み込むことができます。
+_Prometheus_のような追加ツールで処理し、分析や可視化のために保存することができるようにします。
 
-Add the necessary Quarkus extensions to the Inventory application for using _smallrye-metrics_ using the following commands in a CodeReady terminal:
+CodeReady ターミナルで以下のコマンドを使用して、 _smallrye-metrics_ を使用するために必要な Quarkus の拡張機能を Inventory アプリケーションに追加します。
 
 [source,sh,role="copypaste"]
 ----
 mvn quarkus:add-extension -Dextensions="metrics" -f $CHE_PROJECTS_ROOT/cloud-native-workshop-v2m2-labs/inventory
 ----
 
-You should see in the output:
+出力を確認してみてください。
 
 [source,console]
 ----
 ✅ Adding extension io.quarkus:quarkus-smallrye-metrics
 ----
 
-Let’s add a few annotations to make sure that our desired metrics are calculated over time and can be exported for processing by _Prometheus_ and _Grafana_.
+目的のメトリクスが時間の経過とともに計算され、 _Prometheus_ や _Grafana_ で処理するためにエクスポートできるように、いくつかのアノテーションを追加してみましょう。
 
-The metrics that we will gather are these:
+集めようとしているメトリクスは、以下のようなものです。
 
-* *performedChecksAll*: A counter of how many times _getAll()_ has been performed.
-* *checksTimerAll*: A measure of how long it takes to perform the _getAll()_ method
-* *performedChecksAvail*: A counter of how many times _getAvailability()_ is called
-* *checksTimerAvail*: A measure of how long it takes to perform the _getAvailability()_ method
+* *performedChecksAll*: _getAll()_ が何回実行されたかを表すカウンタ。
+* *checksTimerAll*: _getAll()_ メソッドを実行するのにかかる時間の目安。
+* *performedChecksAvail*: _getAvailability()_ が何回呼ばれたかを表すカウンタ
+* *checksTimerAvail*: _getAvailability()_ メソッドを実行するのにかかる時間の目安。
 
 In the _cloud-native-workshop-v2m2-labs/inventory_ project, open `src/main/java/com/redhat/coolstore/InventoryResource.java`. Replace the two methods _getAll()_ and
 _getAvailability()_ with the below code which adds several annotations for custom metrics (*@Counted*, *@Timed*):
