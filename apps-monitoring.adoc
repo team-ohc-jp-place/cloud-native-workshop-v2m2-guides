@@ -159,7 +159,7 @@ for i in $(seq 1 10) ; do
 done
 ----
 
-http://jaeger-query-{{USER_ID}}-monitoring.{{ ROUTE_SUBDOMAIN}}[Jaeger UI^] をリロードすると、新しい `inventory` サービスが Jaeger 自身のサービスと並んで表示されることに気づくでしょう。
+https://jaeger-all-in-one-inmemory-{{USER_ID}}-monitoring.{{ ROUTE_SUBDOMAIN }}[Jaeger UI^] をリロードすると、新しい `inventory` サービスが Jaeger 自身のサービスと並んで表示されることに気づくでしょう。
 
 image::jaeger-2-services.png[jaeger_ui, 700]
 
