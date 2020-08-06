@@ -258,7 +258,7 @@ image::grafana-ds-success.png[Grafana, 300]
 
 ==== 11. Utilize metrics specification for Inventory Microservice
 
-In this step, we will learn how _Inventory(Quarkus)_ application can utilize the MicroProfile Metrics specification through the *SmallRye Metrics extension*. _MicroProfile Metrics_ allows applications to gather various metrics and statistics that provide insights into what is happening inside the application.
+このステップでは、 _Inventory(Quarkus)_ アプリケーションが *SmallRye Metrics extension* を通じて MicroProfile Metrics 仕様を利用する方法を学びます。 _MicroProfile Metrics_ を使用すると、アプリケーション内で何が起こっているかについての洞察を提供する様々なメトリクスや統計情報を収集することができます。
 
 The metrics can be read remotely using JSON format or the *OpenMetrics* format, so that they can be processed by additional tools such as _Prometheus_, and stored for analysis and visualisation.
 
