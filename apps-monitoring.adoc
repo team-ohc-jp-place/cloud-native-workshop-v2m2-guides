@@ -1,4 +1,4 @@
-= Lab3 - Application Monitoring
+= Lab3 - Application Monitoring 
 :experimental:
 
 前回のラボでは、Quarkus フレームワークを使った CodeReady Workspaces を使って、クラウドネイティブアプリをデバッグしてエラーを素早く修正する方法を学び、開発者の喜びのための Quarkus の力を垣間見ることができました。
