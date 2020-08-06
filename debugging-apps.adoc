@@ -1,4 +1,4 @@
-= Lab2 - Debugging Applications 
+= Lab2 - Debugging Applications
 :experimental:
 
 このラボでは、Javaリモートデバッグを使用して、coolstore マイクロサービスアプリケーションをデバッグし、Quarkus上でコードが実行される際の line-by-line のコード実行を調べます。
