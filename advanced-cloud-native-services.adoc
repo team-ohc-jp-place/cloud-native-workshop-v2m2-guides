@@ -1,4 +1,4 @@
-= Advanced Cloud-Native Services 
+= Advanced Cloud-Native Services
 :experimental:
 
 *Cloud Native Workshop - Module 1* を終了した場合、JBoss EAP と OpenShift を使用して既存のアプリケーションをクラウドに移行する方法を学び、マイクロサービスを使用して既存のアプリケーションをモダナイズするための OpenShift の力を垣間見ることができました。 +
