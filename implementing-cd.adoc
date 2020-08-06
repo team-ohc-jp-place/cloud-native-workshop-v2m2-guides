@@ -252,7 +252,7 @@ oc -n {{USER_ID}}-coolstore-dev rollout status -w dc/coolstore
 
 image::nav-blue.png[Dev, 700]
 
-http://www-{{USER_ID}}-coolstore-prod.{{ ROUTE_SUBDOMAIN}}}[Coolstore Prod Web frontend^] が元の黒いヘッダーをそのまま使用していることを確認します。
+http://www-{{USER_ID}}-coolstore-prod.{{ ROUTE_SUBDOMAIN }}[Coolstore Prod Web frontend^] が元の黒いヘッダーをそのまま使用していることを確認します。
 
 image::pipe-orig.png[Prod, 700]
 
