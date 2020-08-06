@@ -133,20 +133,21 @@ workspace `cloud-native-workshop-v2m2-lab` の下にある `inventory` プロジ
 
 ==== 7. Re-Deploy to OpenShift
 
-Repackage and re-deploy the inventory application via the Terminal:
+ターミナルを介してインベントリアプリケーションをリパッケージし、再デプロイします。
 
 [source,sh,role="copypaste"]
 ----
 oc project {{ USER_ID }}-inventory && \
 mvn package -DskipTests -f $CHE_PROJECTS_ROOT/cloud-native-workshop-v2m2-labs/inventory
 ----
-In the console and on the {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-inventory[Inventory Topology View^], wait for the re-build and re-deployment to complete.
+
+コンソールと {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-inventory[Inventory Topology View^] で、再構築と再展開が完了するのを待ちます。
 
 ==== 8. Observing Jaeger Tracing
 
-In order to trace networking and data transaction, we will call the Inventory service using *curl* commands via CodeReady Workspaces Terminal.
+ネットワークとデータトランザクションをトレースするために、 CodeReady Workspaces Terminal を介して *curl* コマンドを使用してInventoryサービスを呼び出します。
 
-To generate traces, call the inventory 10 times:
+トレースを生成するには、インベントリを10回呼び出します。
 
 [source,sh,role="copypaste"]
 ----
