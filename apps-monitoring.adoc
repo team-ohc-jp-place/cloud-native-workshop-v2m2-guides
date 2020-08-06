@@ -392,16 +392,17 @@ data:
 
 *Create* をクリックして下さい。
 
-Config maps hold key-value pairs and in the above command a *prometheus-config* config map is created with *prometheus.yml* as the key and the above content as the value. Whenever a config map is injected into a container, it would appear as a file with the same name as the key, at specified path on the filesystem.
+Config maps はキーと値のペアを保持しており、上記のコマンドでは *prometheus-config* という Config maps が *prometheus.yml* をキー、上記の内容を値として作成されています。コンフィグマップがコンテナに注入されるたびに、ファイルシステム上の指定されたパスに、キーと同じ名前のファイルとして表示されます。
 
-Next, we need to _mount_ this ConfigMap in the filesystem of the Prometheus container so that it can read it. Run this command to alter the Prometheus deployment to mount it:
+次に、Prometheus コンテナが読めるように、この Config Map をファイルシステムに _マウント_ する必要があります。このコマンドを実行して、Prometheus デプロイメントをマウントするように変更します。
 
 [source,sh,role="copypaste"]
 ----
 oc set volume -n {{USER_ID}}-monitoring deployment/prometheus --add -t configmap --configmap-name=prometheus-config -m /etc/prometheus/prometheus.yml --sub-path=prometheus.yml && \
 oc rollout status -n {{USER_ID}}-monitoring -w deployment/prometheus
 ----
-This will trigger a new deployment of prometheus. Wait for it to finish!
+
+これは prometheus の新しいデプロイメントを指示します。完了までお待ちください!
 
 ==== 13. Generate some values for the metrics
 
