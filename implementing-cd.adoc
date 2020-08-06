@@ -117,8 +117,6 @@ OpenShiftは人気のある https://jenkins.io/doc/book/pipeline/overview/[Jenki
 
 OpenShiftは、開発者がJenkins自動化エンジンで実行するための https://jenkins.io/solutions/pipeline/[Jenkins pipeline^] を定義できるようにすることで、 *Jenkins CI/CD pipelines* をビルトインでサポートしています。
 
-The build can get started, monitored, and managed by OpenShift in the same way as any other build types e.g. S2I. Pipeline workflows are defined in a `Jenkinsfile`, either embedded directly in the build configuration, or supplied in Git repository and referenced by the build configuration. They are written using the http://groovy-lang.org/[Groovy scripting language].
-
 ビルドは、S2Iなどの他のビルドタイプと同じ方法でOpenShiftによって開始、監視、管理されます。パイプラインワークフローは `Jenkinsfile` で定義されており、ビルド設定に直接埋め込まれているか、Git リポジトリで提供され、ビルド設定で参照されます。これらは http://groovy-lang.org/[Groovy scripting language] を使って記述します。
 
 最後のステップで使用した本番環境テンプレートの一部として、Pipeline ビルドオブジェクトが作成されました。通常、パイプラインには、開発環境でプロジェクトをビルドし、結果のイメージをローカルリポジトリに保存し、イメージを実行してそれに対してテストを実行し、結果のイメージをテストや本番環境などの他の環境に転送するために人の承認を待つというステップが含まれています。
