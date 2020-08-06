@@ -473,9 +473,8 @@ https://grafana.com/grafana/dashboards[Grafana Labs Dashboard community^] から
 
 Spring Boot は Prometheus が収集したメトリクスを公開し、Grafana で表示することもできます。Spring Boot で書かれたカタログサービスにメトリクスのサポートを追加するには、以下のようにする必要があります。
 
-. Add dependencies for Spring Boot Actuator and Prometheus
-* Spring Boot Actuator と Prometheus の依存関係を追加します
-. Configure `application-openshift.properties` with config values
+. Spring Boot Actuator と Prometheus の依存関係を追加します
+.  `application-openshift.properties` を config 値で設定します。
 . Re-build and Re-deploy the app to OpenShift (in the {{USER_ID}}-catalog project) using commands from previous modules
 . Edit the Prometheus _ConfigMap_ to add another scrape job pointing at `catalog-springboot.{{USER_ID}}-catalog.svc.cluster.local:8080`
 . Re-deploy Prometheus to pick up the new config
