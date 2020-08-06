@@ -1,4 +1,4 @@
-= Lab1 - Automating Deployments Using Pipelines 
+= Lab1 - Automating Deployments Using Pipelines
 :experimental:
 
 前のシナリオでは、OpenShiftテンプレートを使用して Coolstore monolith を、 *{{USER_ID}}-coolstore-dev* Project にデプロイしました。このテンプレートによって必要なオブジェクト（BuildConfig、DeploymentConfig、ImageStreams、Services、およびRoute）が作成され、開発者としてアプリを実行し、変更を加え、デバッグするための場が提供されました。
