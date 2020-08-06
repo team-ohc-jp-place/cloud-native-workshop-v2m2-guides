@@ -309,7 +309,7 @@ _cloud-native-workshop-v2m2-labs/inventory_ プロジェクトで、 `src/main/j
     }
 ----
 
-Add the necessary imports at the top:
+上部に必要なインポートを追加します。
 
 [source,java,role="copypaste"]
 ----
@@ -320,7 +320,7 @@ import org.eclipse.microprofile.metrics.annotation.Timed;
 
 ==== 12. Redeploy to OpenShift
 
-Repackage and redeploy the inventory application:
+インベントリアプリケーションをリパッケージして再配置します。
 
 [source,sh,role="copypaste"]
 ----
@@ -328,9 +328,10 @@ oc project {{ USER_ID }}-inventory && \
 mvn clean package -DskipTests -f $CHE_PROJECTS_ROOT/cloud-native-workshop-v2m2-labs/inventory
 ----
 
-You should get `BUILD SUCCESS` and then the application should be re-deployed. Watch the {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-inventory[Inventory Topology View^] until the app is re-deployed.
+`BUILD SUCCESS` を取得して、アプリが再デプロイされるはずです。
+アプリが再デプロイされるまで {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-inventory[Inventory Topology View^] を監視してください。
 
-Once it's done you should be able to see the raw metrics exposed by the app with this command in a Terminal:
+これが完了すると、ターミナルでこのコマンドを使用して、アプリによって公開されている生のメトリクスを見ることができるはずです。
 
 [source,sh,role="copypaste"]
 ----
