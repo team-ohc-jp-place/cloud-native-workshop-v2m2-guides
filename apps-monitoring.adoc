@@ -451,7 +451,7 @@ image::grafana-create-dashboard.png[metrics_grafana, 900]
 
 image::grafana-add-query.png[metrics_grafana, 700]
 
-_Metrics_フィールドに `performedChecks` と入力し、最初に自動補完された値を選択します。
+_Metrics_ フィールドに `performedChecks` と入力し、最初に自動補完された値を選択します。
 
 image::grafana-add-query-detail.png[metrics_grafana, 700]
 
