@@ -207,36 +207,36 @@ image::prometheus-webui.png[Prometheus, 700]
 
 ==== Deploy Grafana
 
-Follow the same process as before: On the {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-monitoring[Monitoring Topology View^], click on `+Add`, and choose "Container Image", and fill in the fields:
+先ほどと同じ手順で行います。 {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-monitoring[Monitoring Topology View^] で、 `+Add` をクリックして、 *Container Image* ,を選択し、フィールドに記入します。
 
 * *Image Name*: `grafana/grafana:latest`
 * *Application*: `grafana-app`
 * *Name*: `grafana`
 
-Click the "Magnifying Glass" search icon next to the image name to confirm the image exists.
+image名の横にある "虫眼鏡" の検索アイコンをクリックして、image が存在することを確認してください。
 
-Press *Enter* then you will see *green checked* icon and *Validated* in 30 seconds.
+*Enter* を押すと、30秒後に *緑色のチェック付き* アイコンと *Validated* が表示されます。
 
-Leave the rest as-is and click *Create*:
+残りはそのままにして、 *Create* をクリックします。
 
 image::search-grafana-image.png[Grafana, 700]
 
-On the Topology view, you'll see Grafana spinning up. Once it completes, click on the arrow to access the Grafana UI:
+Topology view では、 Grafana が回転しているのがわかります。それが完了したら、矢印をクリックして Grafana UI にアクセスします。
 
 image::grafana-route.png[Prometheus, 700]
 
-Which should load the Grafana Web UI:
+これは Grafana Web UI をロードする必要があります。
 
 image::grafana-login.png[Grafana, 700]
 
-Log into Grafana web UI using the following values:
+以下の値を使用して Grafana Web UI にログインします。
 
 * Username: `admin`
 * Password: `admin`
 
-*Skip* the New Password (or change it to something else that you can remember)
+新しいパスワードを *スキップ* して下さい。(または覚えている他のものに変更)
 
-You will see the landing page of Grafana as shown:
+このように Grafana のランディングページが表示されます。
 
 image::grafana-webui.png[Grafana, 700]
 
