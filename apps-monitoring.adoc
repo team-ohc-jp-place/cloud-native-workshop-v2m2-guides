@@ -338,7 +338,7 @@ mvn clean package -DskipTests -f $CHE_PROJECTS_ROOT/cloud-native-workshop-v2m2-l
 curl http://inventory-{{USER_ID}}-inventory.{{ ROUTE_SUBDOMAIN }}/metrics
 ----
 
-You will see a bunch of metrics in the OpenMetrics format:
+OpenMetrics形式のメトリクスの束が表示されます。
 
 [source,console]
 ----
@@ -357,17 +357,17 @@ vendor_memory_usedNonHeap_bytes 5.4685184E7
 ... and more
 ----
 
-This is what Prometheus will use to access and index the metrics from our app when we deploy it to the cluster. But first you must tell Prometheus about it!
+これは、クラスタにデプロイしたときに、プロメテウスがアプリのメトリクスにアクセスしてインデックスを作成するために使用するものです。しかし、最初に Prometheus にこのことを伝えなければなりません。
 
 ==== Configure Prometheus ConfigMap
 
-To instruct Prometheus to scrape metrics from our app, we need to create a Kubernetes _ConfigMap_.
+Prometheus にアプリからメトリクスをスクレイプするように指示するには、Kubernetes _ConfigMap_ を作成する必要があります。
 
-On the {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-monitoring[Monitoring Topology View^], click `+Add` on the left, and this time choose *YAML*:
+{{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-monitoring[Monitoring Topology View^] 上で、左の `+Add` をクリックし、今回は *YAML* を選択します。
 
 image::add-yaml.png[prometheus, 700]
 
-In the empty box, paste in the following YAML code:
+空のボックスに、以下のYAMLコードを貼り付けます。
 
 [source,yaml,role="copypaste"]
 ----
@@ -390,7 +390,7 @@ data:
         - targets: ['inventory.{{USER_ID}}-inventory.svc.cluster.local:8080']
 ----
 
-And click *Create*.
+*Create* をクリックして下さい。
 
 Config maps hold key-value pairs and in the above command a *prometheus-config* config map is created with *prometheus.yml* as the key and the above content as the value. Whenever a config map is injected into a container, it would appear as a file with the same name as the key, at specified path on the filesystem.
 
