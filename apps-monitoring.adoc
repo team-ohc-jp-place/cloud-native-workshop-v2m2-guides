@@ -163,15 +163,15 @@ http://jaeger-query-{{USER_ID}}-monitoring.{{ ROUTE_SUBDOMAIN}}[Jaeger UI^] を�
 
 image::jaeger-2-services.png[jaeger_ui, 700]
 
-Select the `inventory` service and then click on *Find Traces* and observe the first trace in the graph:
+`inventory` サービスを選択し、 *Find Traces* をクリックして、グラフ上の最初のトレースを観察します。
 
 image::jaeger-reload.png[jaeger_ui, 700]
 
-If you click on the single *Span* and you will see a logical unit of work in Jaeger that has an operation name, the start time of the operation, and the duration. Spans may be nested and ordered to model causal relationships:
+単一の *Span* をクリックすると、操作名、操作の開始時刻、期間を持つ論理的な作業単位が Jaeger に表示されます。 Span は、因果関係をモデル化するために入れ子にしたり、順序をつけたりすることができます。
 
 image::jaeger-span.png[jaeger_ui, 700]
 
-As applications get more complex and many microservices are calling each other, these spans and traces will become more complex but also reveal issues with the app.
+アプリケーションがより複雑になり、多くのマイクロサービスが互いに呼び合うようになると、これらの Span やトレースはより複雑になりますが、アプリの問題点も明らかになります。
 
 ==== 9. Deploy Prometheus and Grafana to OpenShift
 
