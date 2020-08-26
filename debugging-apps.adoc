@@ -66,7 +66,7 @@ image::debug-che-quarkus-lastletter.png[Quarkus Debug, 700]
 
 ==== 3. Debug with CodeReady Workspaces
 
-左側のデバッグアイコンをクリックし、ドロップダウンで *Attach to App* を選択し、緑色の *Start Debugging* アイコンををクリックします。
+左側のデバッグアイコンをクリックし、ドロップダウンで *Attach to App* を選択し、緑色の *Start Debugging* アイコンをクリックします。
 
 image::debug-che-quarkus-attach.png[Quarkus Debug, 700]
 
