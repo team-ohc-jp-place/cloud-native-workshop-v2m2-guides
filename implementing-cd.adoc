@@ -5,7 +5,7 @@
 
 このステップでは、別の本番環境を設定し、開発者や DevOps チームが開発者 *(あなたのことです！)* から本番環境にコードを移行する際のベストプラクティスやテクニックを探っていきます。
 
-=== Production vs. Development
+== Production vs. Development
 
 既存の *{{USER_ID}}-coolstore-dev* project は、コード変更後のアプリの新バージョンをビルドしてデプロイするための開発環境として利用されています。
 
@@ -13,7 +13,7 @@ OpenShift上の実際のプロジェクトでは、開発環境とテスト環�
 
 このシナリオを簡単にするために、私たちは開発環境と本番環境のみを使用し、テスト/QA環境は使用しません。
 
-==== 1. Create the production environment
+=== 1. Create the production environment
 
 {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-coolstore-dev[Topology View^] に戻って、 プロジェクトのドロップダウンをクリックして、 *Create Project* を選択します。
 
@@ -32,7 +32,7 @@ image::create_project.png[create_dialog, 600]
 
 これで *{{USER_ID}}-coolstore-prod* という新しいOpenShiftプロジェクトが作成され、そこから本番アプリケーションが実行されます。
 
-==== 2. Add the production elements
+=== 2. Add the production elements
 
 今回は本番用のテンプレートを使ってオブジェクトを作成します。
 
@@ -203,7 +203,7 @@ image::pipe-edit2.png[Prod, 700]
 
 承認ステップが整ったので、coolstore のヘッダーの背景色を青に変更したいという、開発者からの変更をシミュレーションしてみましょう。
 
-まず、CodeReadyの `cloud-native-workshop-v2m2-lab` プロジェクトで、CoolStoreアプリのCSSスタイルシートを含む _monolith/src/main/webapp/app/css/coolstore.css_ を開きます。
+まず、CodeReadyの `cloud-native-workshop-v2m2-lab` プロジェクトで、CoolStoreアプリのCSSスタイルシートを含む `monolith/src/main/webapp/app/css/coolstore.css` を開きます。
 
 以下のCSSを追加して、ヘッダーバーの背景をブルーにします（※下の方にコピーして追加します）。
 

@@ -82,7 +82,7 @@ image::jaeger-ui.png[jaeger_ui, 700]
 
 [source,sh,role="copypaste"]
 ----
-mvn quarkus:add-extension -Dextensions="smallrye-opentracing" -f $CHE_PROJECTS_ROOT/cloud-native-workshop-v2m2-labs/inventory
+mvn -q quarkus:add-extension -Dextensions="smallrye-opentracing" -f $CHE_PROJECTS_ROOT/cloud-native-workshop-v2m2-labs/inventory
 ----
 
 下記を見てください。
@@ -159,7 +159,7 @@ for i in $(seq 1 10) ; do
 done
 ----
 
-https://jaeger-all-in-one-inmemory-{{USER_ID}}-monitoring.{{ ROUTE_SUBDOMAIN }}[Jaeger UI^] をリロードすると、新しい `inventory` サービスが Jaeger 自身のサービスと並んで表示されることに気づくでしょう。
+https://jaeger-all-in-one-inmemory-{{USER_ID}}-monitoring.{{ ROUTE_SUBDOMAIN}}[Jaeger UI^] をリロードすると、新しい `inventory` サービスが Jaeger 自身のサービスと並んで表示されることに気づくでしょう。
 
 image::jaeger-2-services.png[jaeger_ui, 700]
 
@@ -267,7 +267,7 @@ CodeReady ターミナルで以下のコマンドを使用して、 _smallrye-me
 
 [source,sh,role="copypaste"]
 ----
-mvn quarkus:add-extension -Dextensions="metrics" -f $CHE_PROJECTS_ROOT/cloud-native-workshop-v2m2-labs/inventory
+mvn -q quarkus:add-extension -Dextensions="metrics" -f $CHE_PROJECTS_ROOT/cloud-native-workshop-v2m2-labs/inventory
 ----
 
 出力を確認してみてください。
