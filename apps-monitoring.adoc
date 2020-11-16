@@ -89,7 +89,7 @@ mvn -q quarkus:add-extension -Dextensions="smallrye-opentracing" -f $CHE_PROJECT
 
 [source,console]
 ----
-✅ Adding extension io.quarkus:quarkus-smallrye-opentracing
+✅ Extension io.quarkus:quarkus-smallrye-opentracing has been installed
 ----
 
 それから `BUILD SUCCESS`。
@@ -267,14 +267,14 @@ CodeReady ターミナルで以下のコマンドを使用して、 _smallrye-me
 
 [source,sh,role="copypaste"]
 ----
-mvn -q quarkus:add-extension -Dextensions="metrics" -f $CHE_PROJECTS_ROOT/cloud-native-workshop-v2m2-labs/inventory
+mvn -q quarkus:add-extension -Dextensions="smallrye-metrics" -f $CHE_PROJECTS_ROOT/cloud-native-workshop-v2m2-labs/inventory
 ----
 
 出力を確認してみてください。
 
 [source,console]
 ----
-✅ Adding extension io.quarkus:quarkus-smallrye-metrics
+✅ Extension io.quarkus:quarkus-smallrye-metrics has been installed
 ----
 
 目的のメトリクスが時間の経過とともに計算され、 _Prometheus_ や _Grafana_ で処理するためにエクスポートできるように、いくつかのアノテーションを追加してみましょう。
