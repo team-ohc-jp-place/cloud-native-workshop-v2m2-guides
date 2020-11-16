@@ -1,55 +1,56 @@
 = Lab3 - Application Monitoring
 :experimental:
 
-In the previous labs, you learned how to debug cloud-native apps to fix errors quickly using CodeReady Workspaces with Quarkus framework, and you got a glimpse into the power of Quarkus for developer joy.
+前回のラボでは、Quarkus フレームワークを使った CodeReady Workspaces を使って、クラウドネイティブアプリをデバッグしてエラーを素早く修正する方法を学び、開発者の喜びのための Quarkus の力を垣間見ることができました。
 
-You will now begin observing applications in term of a distributed transaction, performance and latency because as cloud-native applications are developed quickly, a distributed architecture in production gets ultimately complex in two areas: networking and observability. Later on we’ll explore how you can better manage and monitor the application using service mesh.
+クラウドネイティブ・アプリケーションが急速に開発されているため、本番環境での分散アーキテクチャは、ネットワークと観測性という2つの分野で最終的に複雑になるからです。後日、service mesh を使用してアプリケーションをより良く管理・監視する方法を探ります。
 
-In this lab, you will monitor coolstore applications using https://www.jaegertracing.io/[Jaeger^] and https://prometheus.io/[Prometheus^].
+このラボでは、 https://www.jaegertracing.io/[Jaeger^] と https://prometheus.io/[Prometheus^] を使用して coolstore アプリケーションを監視します。
 
 image::quarkus-jaeger-prometheus.png[logo, 700]
 
-*Jaeger* is an open source distributed tracing tool for monitoring and troubleshooting microservices-based distributed systems including:
+*Jaeger* は、以下のようなマイクロサービスベースの分散システムを監視し、トラブルシューティングを行うためのオープンソースの分散トレースツールです。
 
-* Distributed context propagation
-* Distributed transaction monitoring
-* Root cause analysis
-* Service dependency analysis
-* Performance and latency optimization
+* 分散型トランザクションの監視 (Distributed context propagation)
+* 分散型トランザクションの監視 (Distributed transaction monitoring)
+* 根本原因分析 (Root cause analysis)
+* サービス依存性分析 (Service dependency analysis)
+* パフォーマンスとレイテンシの最適化 (Performance and latency optimization)
 
-*Prometheus* is an open source systems monitoring and alerting tool that fits in recording any numeric time series including:
+*Prometheus* は、オープンソースのシステム監視およびアラートツールで、以下のような任意の数値時系列の記録に適合しています。
 
-* Multi-dimensional time series data by metric name and key/value pairs
-* No reliance on distributed storage
-* Time series collection over HTTP
-* Pushing time series is supported via an intermediary gateway
-* Service discovery or static configuration
+* メトリック名とキー/値のペアによる多次元時系列データ (Multi-dimensional time series data by metric name and key/value pairs)
+* 分散型ストレージに依存しない (No reliance on distributed storage)
+* HTTPを利用した時系列コレクション (Time series collection over HTTP)
+* 中間ゲートウェイを介して時系列をプッシュすることができます (Pushing time series is supported via an intermediary gateway)
+* サービスの発見または静的な設定 (Service discovery or static configuration)
 
 ==== 1. Create OpenShift Project
 
-In this step, we will deploy our new monitoring tools for our CoolStore application, so create a separate project to house it and keep it separate from our monolith and our other microservices we already created previously.
+このステップでは、CoolStore アプリケーション用の新しい監視ツールを展開します。
+そのため、monolith や以前に作成した他のマイクロサービスとは別のプロジェクトを作成しておきます。
 
-Back in the {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-coolstore-dev[Topology View^], click on the Project drop-down and select _Create Project_.
+{{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-coolstore-dev[Topology View^] に戻り、プロジェクトのドロップダウンをクリックして、Create Project を選択します。 
 
 image::create_project.png[create_dialog, 700]
 
-Fill in the fields, and click *Create*:
+フィールドに以下の内容を入力し、 *Create* をクリックします。
 
 * Name: `{{USER_ID}}-monitoring`
 * Display Name: `{{USER_ID}} CoolStore App Monitoring Tools`
-* Description: _leave this field empty_
+* Description: 空欄にする
 
 image::create_monitoring_dialog.png[create_dialog, 700]
 
 ==== 2. Deploy Jaeger to OpenShift
 
-In the new project, click `+Add`, select _From Catalog_:
+新しいプロジェクトで `+Add` をクリックし、 *From Catalog* を選択します。
 
-To deploy a jaeger server, click on `+` icon on the right top corner:
+jaeger サーバーを導入するには、右上の `+` アイコンをクリックします。
 
 image::plus-icon.png[serverless, 500]
 
-Copy the following _Service_ in `YAML` editor then click on *Create*:
+以下の _Service_ を `YAML` エディタでコピーし、 *Create* をクリックします。
 
 [source,yaml,role="copypaste"]
 ----
@@ -60,52 +61,54 @@ metadata:
   namespace: {{ USER_ID }}-monitoring
 ----
 
-In the {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-monitoring[Topology View^] you can see Jaeger deploying:
+{{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-monitoring[Topology View^] では、Jaegerがデプロイされているのが確認できます。
 
 image::jaeger_top.png[create_dialog, 500]
 
 ==== 4. Observe Jaeger UI
 
-Once the deployment completes (dark blue circles!), open the https://jaeger-all-in-one-inmemory-{{USER_ID}}-monitoring.{{ ROUTE_SUBDOMAIN}}[Jaeger UI^].
+デプロイが完了したら（紺色の丸印！）、 https://jaeger-all-in-one-inmemory-{{USER_ID}}-monitoring.{{ ROUTE_SUBDOMAIN}}[Jaeger UI^] を開きます。
 
-This is the UI for Jaeger, but currently we have no apps being monitored so it’s rather useless. Don’t worry! We will utilize tracing data in the next step.
+これは Jaeger の UI です。今のところ監視しているアプリがないので割と使い勝手が悪いように見えますが、心配しないしてください！
+次のステップではトレースデータを活用していきます。
 
 image::jaeger-ui.png[jaeger_ui, 700]
 
 ==== 5. Utilizing Opentracing with Inventory (Quarkus)
 
-We have a catalog service written with Spring Boot that calls the inventory service written with Quarkus as part of our cloud-native application. These applications are easy to trace using Jaeger.
+クラウドネイティブアプリケーションの一部として Quarkus で書かれたインベントリサービスを呼び出す、 Spring Boot で書かれたカタログサービスがあります。これらのアプリケーションは、 Jaeger を使って簡単にトレースすることができます。
 
-In this step, we will add the Quarkus extensions to the Inventory application for using *smallrye-opentracing*. Run the following commands to add the tracing extension via CodeReady Workspaces Terminal:
+このステップでは、 *smallrye-opentracing* を使用するためのインベントリアプリケーションに Quarkus の拡張機能を追加します。以下のコマンドを実行して、 CodeReady Workspaces Terminal 経由でトレース拡張機能を追加します。
 
 [source,sh,role="copypaste"]
 ----
 mvn -q quarkus:add-extension -Dextensions="smallrye-opentracing" -f $CHE_PROJECTS_ROOT/cloud-native-workshop-v2m2-labs/inventory
 ----
 
-You should see:
+下記を見てください。
 
 [source,console]
 ----
-✅ Extension io.quarkus:quarkus-smallrye-opentracing has been installed
+✅ Adding extension io.quarkus:quarkus-smallrye-opentracing
 ----
 
-and `BUILD SUCCESS`. This ensures that the extension's dependencies are added to `pom.xml` for the inventory microservice.
+それから `BUILD SUCCESS`。
+これにより、インベントリマイクロサービスのために拡張機能の依存関係が `pom.xml` に追加されることが保証されます。
 
 [NOTE]
 ====
-NOTE: There are many https://quarkus.io/extensions/[more extensions^] for Quarkus for popular frameworks like https://vertx.io/[Vert.x^], http://camel.apache.org/[Apache Camel^], http://infinispan.org/[Infinispan^], Spring DI compatibility (e.g. `@Autowired`), and more.
+https://vertx.io/[Vert.x^] 、 http://camel.apache.org/[Apache Camel^] 、 http://infinispan.org/[Infinispan^] 、Spring DI互換性（ `@Autowired` など）など、人気のあるフレームワークの Quarkusの https://quarkus.io/extensions/[拡張機能^] は他にもたくさんあります。
 ====
 
 ==== 6. Create the configuration
 
-Before getting started with this step, confirm the *jaeger-collector* service by visiting the {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-monitoring[Topology View^], and click on the _jaeger_ deployment and select the _Resources_ tab to view the services exposed by Jaeger:
+このステップを始める前に、 {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-monitoring[Topology View^] にアクセスして *jaeger-collector* サービスを確認し、_jaeger_ デプロイメントをクリックして _Resources_ タブを選択して、 Jaeger によって公開されているサービスを表示します。
 
 image::jaeger-services.png[create_dialog, 700]
 
-We will configure our app to use the `http-c-binary-trft` service on port `14268` to report traces.
+ポート `14268` で `http-c-binary-trft` サービスを使用してトレースを報告するようにアプリを設定します。
 
-In the `inventory` project under `cloud-native-workshop-v2m2-labs` workspace, open `src/main/resources/application.properties` file and add the following configuration via CodeReady Workspaces Terminal:
+workspace `cloud-native-workshop-v2m2-lab` の下にある `inventory` プロジェクトで、 `src/main/resources/application.properties` ファイルを開き、 CodeReady Workspaces Terminal を通じて以下の設定を追加します。
 
 [source,properties,role="copypaste"]
 ----
@@ -116,34 +119,35 @@ In the `inventory` project under `cloud-native-workshop-v2m2-labs` workspace, op
 %prod.quarkus.jaeger.endpoint=http://jaeger-all-in-one-inmemory-collector.{{ USER_ID }}-monitoring.svc.cluster.local:14268/api/traces
 ----
 
-You can also specify the configuration using environment variables or JVM properties. See https://www.jaegertracing.io/docs/1.12/client-features/[Jaeger Features^].
+環境変数やJVMのプロパティを使って設定を指定することもできます。 https://www.jaegertracing.io/docs/1.12/client-features/[Jaeger Features^] を参照してください。
 
 [NOTE]
 ====
-If the `quarkus.jaeger.service-name` property (or `JAEGER_SERVICE_NAME` environment variable) is not provided then a ``no-op'' tracer will be configured, resulting in no tracing data being reported to the backend.
+もし `quarkus.jaeger.service-name` プロパティ (または環境変数 `JAEGER_SERVICE_NAME`) が指定されていない場合は、`no-op` トレーサーが設定され、バックエンドにトレースデータが報告されません。
 ====
 
 [NOTE]
 ====
-There is no tracing specific code included in the application. By default, RESTful requests sent to the app will be traced without *any* code changes being required thanks to MicroProfile Tracing. It is also possible to enhance the tracing information and manually trace other methods and classes. For more information on this, please see the https://github.com/eclipse/microprofile-opentracing/blob/master/spec/src/main/asciidoc/microprofile-opentracing.asciidoc[MicroProfile OpenTracing specification^].
+アプリケーションには特定のトレースコードは含まれていません。デフォルトでは、アプリに送信された RESTful リクエストは、MicroProfile Tracing のおかげで *コードの変更を必要とせず* にトレースされます。また、トレース情報を強化し、他のメソッドやクラスを手動でトレースすることも可能です。これについての詳細は、 https://github.com/eclipse/microprofile-opentracing/blob/master/spec/src/main/asciidoc/microprofile-opentracing.asciidoc[MicroProfile OpenTracing specification^] 仕様を参照してください。
 ====
 
 ==== 7. Re-Deploy to OpenShift
 
-Repackage and re-deploy the inventory application via the Terminal:
+ターミナルを介してインベントリアプリケーションをリパッケージし、再デプロイします。
 
 [source,sh,role="copypaste"]
 ----
 oc project {{ USER_ID }}-inventory && \
 mvn package -DskipTests -f $CHE_PROJECTS_ROOT/cloud-native-workshop-v2m2-labs/inventory
 ----
-In the console and on the {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-inventory[Inventory Topology View^], wait for the re-build and re-deployment to complete.
+
+コンソールと {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-inventory[Inventory Topology View^] で、再構築と再展開が完了するのを待ちます。
 
 ==== 8. Observing Jaeger Tracing
 
-In order to trace networking and data transaction, we will call the Inventory service using *curl* commands via CodeReady Workspaces Terminal.
+ネットワークとデータトランザクションをトレースするために、 CodeReady Workspaces Terminal を介して *curl* コマンドを使用してInventoryサービスを呼び出します。
 
-To generate traces, call the inventory 10 times:
+トレースを生成するには、インベントリを10回呼び出します。
 
 [source,sh,role="copypaste"]
 ----
@@ -155,134 +159,135 @@ for i in $(seq 1 10) ; do
 done
 ----
 
-Now, reload the https://jaeger-all-in-one-inmemory-{{USER_ID}}-monitoring.{{ ROUTE_SUBDOMAIN}}[Jaeger UI^] and you will find that a new `inventory` service appears alongside the service for Jaeger itself:
+https://jaeger-all-in-one-inmemory-{{USER_ID}}-monitoring.{{ ROUTE_SUBDOMAIN}}[Jaeger UI^] をリロードすると、新しい `inventory` サービスが Jaeger 自身のサービスと並んで表示されることに気づくでしょう。
 
 image::jaeger-2-services.png[jaeger_ui, 700]
 
-Select the `inventory` service and then click on *Find Traces* and observe the first trace in the graph:
+`inventory` サービスを選択し、 *Find Traces* をクリックして、グラフ上の最初のトレースを観察します。
 
 image::jaeger-reload.png[jaeger_ui, 700]
 
-If you click on the single *Span* and you will see a logical unit of work in Jaeger that has an operation name, the start time of the operation, and the duration. Spans may be nested and ordered to model causal relationships:
+単一の *Span* をクリックすると、操作名、操作の開始時刻、期間を持つ論理的な作業単位が Jaeger に表示されます。 Span は、因果関係をモデル化するために入れ子にしたり、順序をつけたりすることができます。
 
 image::jaeger-span.png[jaeger_ui, 700]
 
-As applications get more complex and many microservices are calling each other, these spans and traces will become more complex but also reveal issues with the app.
+アプリケーションがより複雑になり、多くのマイクロサービスが互いに呼び合うようになると、これらの Span やトレースはより複雑になりますが、アプリの問題点も明らかになります。
 
 ==== 9. Deploy Prometheus and Grafana to OpenShift
 
-OpenShift Container Platform ships with a pre-configured and self-updating monitoring stack that is based on the https://prometheus.io[Prometheus] open source project and its wider eco-system. It provides monitoring of cluster components and ships with a set of alerts to immediately notify the cluster administrator about any occurring problems and a set of https://grafana.com/[Grafana] dashboards.
+OpenShift Container Platformは、 https://prometheus.io[Prometheus] オープンソースプロジェクトとその広範なエコシステムをベースにした、構成済みで自己更新型の監視スタックを搭載して提供されます。クラスタコンポーネントの監視を提供し、発生した問題をクラスタ管理者に即座に通知する一連のアラートと一連の https://grafana.com/[Grafana] ダッシュボードを搭載しています。
 
 image::monitoring-diagram.png[Prometheus, 700]
 
-However, we will deploy custom *Prometheus* to scrape services metrics of Inventory and Catalog applications. Then we will visualize the metrics data via custom *Grafana* dashboards deployment.
+ただし、インベントリとカタログアプリケーションのサービスメトリクスをスクレイプするために、カスタムの *Prometheus* をデプロイします。そして、そのメトリクスデータを *Grafana* ダッシュボードを使って可視化していきます。
 
-On the {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-monitoring[Monitoring Topology View^], click on `+Add`, and choose "Container Image"
+{{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-monitoring[Monitoring Topology View^] で、 `+Add` をクリックし、 *Container Image* を選択します。
 
 image::add-to-project.png[Prometheus, 800]
 
-Fill out the following fields:
+以下の項目を記入してください。
 
 * *Image Name*: `prom/prometheus:latest`
 * *Application Name*: `prometheus-app`
 * *Name*: `prometheus`
 
-Press *Enter* then you will see *green checked* icon and *Validated* in 30 seconds.
+*Enter* を押すと、30秒後に *緑色のチェック付き* アイコンと *Validated* が表示されます。
 
-Leave the rest as-is and click *Create*:
+残りはそのままにして、 *Create* をクリックします。
 
 image::search-prometheus-image.png[Prometheus, 700]
 
-On the Topology view, you'll see prometheus spinning up. Once it completes, click on the arrow to access the prometheus query UI:
+Topology view では、 prometheus が回転しているのがわかります。それが完了したら、矢印をクリックして prometheus query UI にアクセスします。
 
 image::prometheus-route.png[Prometheus, 700]
 
-Which should load the Prometheus Web UI (we'll use this later):
+これは Prometheus Web UI をロードするはずです（これは後で使います）。
 
 image::prometheus-webui.png[Prometheus, 700]
 
 ==== Deploy Grafana
 
-Follow the same process as before: On the {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-monitoring[Monitoring Topology View^], click on `+Add`, and choose "Container Image", and fill in the fields:
+先ほどと同じ手順で行います。 {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-monitoring[Monitoring Topology View^] で、 `+Add` をクリックして、 *Container Image* ,を選択し、フィールドに記入します。
 
 * *Image Name*: `grafana/grafana:latest`
 * *Application*: `grafana-app`
 * *Name*: `grafana`
 
-Click the "Magnifying Glass" search icon next to the image name to confirm the image exists.
+image名の横にある "虫眼鏡" の検索アイコンをクリックして、image が存在することを確認してください。
 
-Press *Enter* then you will see *green checked* icon and *Validated* in 30 seconds.
+*Enter* を押すと、30秒後に *緑色のチェック付き* アイコンと *Validated* が表示されます。
 
-Leave the rest as-is and click *Create*:
+残りはそのままにして、 *Create* をクリックします。
 
 image::search-grafana-image.png[Grafana, 700]
 
-On the Topology view, you'll see Grafana spinning up. Once it completes, click on the arrow to access the Grafana UI:
+Topology view では、 Grafana が回転しているのがわかります。それが完了したら、矢印をクリックして Grafana UI にアクセスします。
 
 image::grafana-route.png[Prometheus, 700]
 
-Which should load the Grafana Web UI:
+これは Grafana Web UI をロードする必要があります。
 
 image::grafana-login.png[Grafana, 700]
 
-Log into Grafana web UI using the following values:
+以下の値を使用して Grafana Web UI にログインします。
 
 * Username: `admin`
 * Password: `admin`
 
-*Skip* the New Password (or change it to something else that you can remember)
+新しいパスワードを *スキップ* して下さい。(または覚えている他のものに変更)
 
-You will see the landing page of Grafana as shown:
+このように Grafana のランディングページが表示されます。
 
 image::grafana-webui.png[Grafana, 700]
 
 ==== 10. Add a data source to Grafana
 
-Click Add data source and select *Prometheus* as data source type.
+Add data source をクリックし、データソースのタイプとして *Prometheus* を選択します。
 
 image::grafana-datasource-types.png[Grafana, 700]
 
-Fill out the form with the following values:
+以下の値を記入してください。
 
 * *URL*: `http://prometheus.{{USER_ID}}-monitoring:9090`
 
-Click on *Save & Test* and confirm you get a success message:
+*Save & Test* をクリックして、成功のメッセージが表示されたことを確認します。
 
 image::grafana-ds-success.png[Grafana, 300]
 
-At this point Granana is set up to pull collected metrics from Prometheus as they are collected from the application(s) you are monitoring.
+この時点で、 Granana は、監視しているアプリケーションから収集したメトリクスを Prometheus から引き出すように設定されています。
 
 ==== 11. Utilize metrics specification for Inventory Microservice
 
-In this step, we will learn how _Inventory(Quarkus)_ application can utilize the MicroProfile Metrics specification through the *SmallRye Metrics extension*. _MicroProfile Metrics_ allows applications to gather various metrics and statistics that provide insights into what is happening inside the application.
+このステップでは、 _Inventory(Quarkus)_ アプリケーションが *SmallRye Metrics extension* を通じて MicroProfile Metrics 仕様を利用する方法を学びます。 _MicroProfile Metrics_ を使用すると、アプリケーション内で何が起こっているかについての洞察を提供する様々なメトリクスや統計情報を収集することができます。
 
-The metrics can be read remotely using JSON format or the *OpenMetrics* format, so that they can be processed by additional tools such as _Prometheus_, and stored for analysis and visualisation.
+メトリクスは、JSON 形式または *OpenMetrics* 形式を使用してリモートで読み込むことができます。
+_Prometheus_のような追加ツールで処理し、分析や可視化のために保存することができるようにします。
 
-Add the necessary Quarkus extensions to the Inventory application for using _smallrye-metrics_ using the following commands in a CodeReady terminal:
+CodeReady ターミナルで以下のコマンドを使用して、 _smallrye-metrics_ を使用するために必要な Quarkus の拡張機能を Inventory アプリケーションに追加します。
 
 [source,sh,role="copypaste"]
 ----
-mvn -q quarkus:add-extension -Dextensions="smallrye-metrics" -f $CHE_PROJECTS_ROOT/cloud-native-workshop-v2m2-labs/inventory
+mvn -q quarkus:add-extension -Dextensions="metrics" -f $CHE_PROJECTS_ROOT/cloud-native-workshop-v2m2-labs/inventory
 ----
 
-You should see in the output:
+出力を確認してみてください。
 
 [source,console]
 ----
-✅ Extension io.quarkus:quarkus-smallrye-metrics has been installed
+✅ Adding extension io.quarkus:quarkus-smallrye-metrics
 ----
 
-Let’s add a few annotations to make sure that our desired metrics are calculated over time and can be exported for processing by _Prometheus_ and _Grafana_.
+目的のメトリクスが時間の経過とともに計算され、 _Prometheus_ や _Grafana_ で処理するためにエクスポートできるように、いくつかのアノテーションを追加してみましょう。
 
-The metrics that we will gather are these:
+集めようとしているメトリクスは、以下のようなものです。
 
-* *performedChecksAll*: A counter of how many times _getAll()_ has been performed.
-* *checksTimerAll*: A measure of how long it takes to perform the _getAll()_ method
-* *performedChecksAvail*: A counter of how many times _getAvailability()_ is called
-* *checksTimerAvail*: A measure of how long it takes to perform the _getAvailability()_ method
+* *performedChecksAll*: _getAll()_ が何回実行されたかを表すカウンタ。
+* *checksTimerAll*: _getAll()_ メソッドを実行するのにかかる時間の目安。
+* *performedChecksAvail*: _getAvailability()_ が何回呼ばれたかを表すカウンタ
+* *checksTimerAvail*: _getAvailability()_ メソッドを実行するのにかかる時間の目安。
 
-In the _cloud-native-workshop-v2m2-labs/inventory_ project, open `src/main/java/com/redhat/coolstore/InventoryResource.java`. Replace the two methods _getAll()_ and
-_getAvailability()_ with the below code which adds several annotations for custom metrics (*@Counted*, *@Timed*):
+_cloud-native-workshop-v2m2-labs/inventory_ プロジェクトで、 `src/main/java/com/redhat/coolstore/InventoryResource.java` を開きます。
+2 つのメソッド _getAll()_ と _getAvailability()_ を、カスタム・メトリクス ( *@Counted* , *@Timed* ) のためのいくつかのアノテーションを追加した以下のコードで置き換えます。
 
 [source,java,role="copypaste"]
 ----
@@ -304,7 +309,7 @@ _getAvailability()_ with the below code which adds several annotations for custo
     }
 ----
 
-Add the necessary imports at the top:
+上部に必要なインポートを追加します。
 
 [source,java,role="copypaste"]
 ----
@@ -315,7 +320,7 @@ import org.eclipse.microprofile.metrics.annotation.Timed;
 
 ==== 12. Redeploy to OpenShift
 
-Repackage and redeploy the inventory application:
+インベントリアプリケーションをリパッケージして再配置します。
 
 [source,sh,role="copypaste"]
 ----
@@ -323,16 +328,17 @@ oc project {{ USER_ID }}-inventory && \
 mvn clean package -DskipTests -f $CHE_PROJECTS_ROOT/cloud-native-workshop-v2m2-labs/inventory
 ----
 
-You should get `BUILD SUCCESS` and then the application should be re-deployed. Watch the {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-inventory[Inventory Topology View^] until the app is re-deployed.
+`BUILD SUCCESS` を取得して、アプリが再デプロイされるはずです。
+アプリが再デプロイされるまで {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-inventory[Inventory Topology View^] を監視してください。
 
-Once it's done you should be able to see the raw metrics exposed by the app with this command in a Terminal:
+これが完了すると、ターミナルでこのコマンドを使用して、アプリによって公開されている生のメトリクスを見ることができるはずです。
 
 [source,sh,role="copypaste"]
 ----
 curl http://inventory-{{USER_ID}}-inventory.{{ ROUTE_SUBDOMAIN }}/metrics
 ----
 
-You will see a bunch of metrics in the OpenMetrics format:
+OpenMetrics形式のメトリクスの束が表示されます。
 
 [source,console]
 ----
@@ -351,17 +357,17 @@ vendor_memory_usedNonHeap_bytes 5.4685184E7
 ... and more
 ----
 
-This is what Prometheus will use to access and index the metrics from our app when we deploy it to the cluster. But first you must tell Prometheus about it!
+これは、クラスタにデプロイしたときに、プロメテウスがアプリのメトリクスにアクセスしてインデックスを作成するために使用するものです。しかし、最初に Prometheus にこのことを伝えなければなりません。
 
 ==== Configure Prometheus ConfigMap
 
-To instruct Prometheus to scrape metrics from our app, we need to create a Kubernetes _ConfigMap_.
+Prometheus にアプリからメトリクスをスクレイプするように指示するには、Kubernetes _ConfigMap_ を作成する必要があります。
 
-On the {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-monitoring[Monitoring Topology View^], click `+Add` on the left, and this time choose *YAML*:
+{{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-monitoring[Monitoring Topology View^] 上で、左の `+Add` をクリックし、今回は *YAML* を選択します。
 
 image::add-yaml.png[prometheus, 700]
 
-In the empty box, paste in the following YAML code:
+空のボックスに、以下のYAMLコードを貼り付けます。
 
 [source,yaml,role="copypaste"]
 ----
@@ -384,22 +390,23 @@ data:
         - targets: ['inventory.{{USER_ID}}-inventory.svc.cluster.local:8080']
 ----
 
-And click *Create*.
+*Create* をクリックして下さい。
 
-Config maps hold key-value pairs and in the above command a *prometheus-config* config map is created with *prometheus.yml* as the key and the above content as the value. Whenever a config map is injected into a container, it would appear as a file with the same name as the key, at specified path on the filesystem.
+Config maps はキーと値のペアを保持しており、上記のコマンドでは *prometheus-config* という Config maps が *prometheus.yml* をキー、上記の内容を値として作成されています。コンフィグマップがコンテナに注入されるたびに、ファイルシステム上の指定されたパスに、キーと同じ名前のファイルとして表示されます。
 
-Next, we need to _mount_ this ConfigMap in the filesystem of the Prometheus container so that it can read it. Run this command to alter the Prometheus deployment to mount it:
+次に、Prometheus コンテナが読めるように、この Config Map をファイルシステムに _マウント_ する必要があります。このコマンドを実行して、Prometheus デプロイメントをマウントするように変更します。
 
 [source,sh,role="copypaste"]
 ----
 oc set volume -n {{USER_ID}}-monitoring deployment/prometheus --add -t configmap --configmap-name=prometheus-config -m /etc/prometheus/prometheus.yml --sub-path=prometheus.yml && \
 oc rollout status -n {{USER_ID}}-monitoring -w deployment/prometheus
 ----
-This will trigger a new deployment of prometheus. Wait for it to finish!
+
+これは prometheus の新しいデプロイメントを指示します。完了までお待ちください!
 
 ==== 13. Generate some values for the metrics
 
-Now that Prometheus is scraping values from our app, let’s write a loop to call our inventory service multiple times so we can observe the metrics. Do this with the following commands:
+Prometheus がアプリから値を取得しているので、インベントリサービスを複数回呼び出すループを書いて、メトリクスを観察してみましょう。次のコマンドを使用します。
 
 [source,sh,role="copypaste"]
 ----
@@ -411,9 +418,9 @@ for i in $(seq 1 600) ; do
   sleep 1
 done
 ----
-Leave this loop running (it will end after 600 seconds, or 10 minutes)
+このループを実行したままにしておきます（600秒後、または10分後に終了します）。
 
-We have 3 ways to view the metrics:
+メトリクスを見る方法は3つあります。
 
 . `curl` commands (which you already did)
 . Prometheus Queries
@@ -421,59 +428,60 @@ We have 3 ways to view the metrics:
 
 ==== Using Prometheus
 
-Open the http://prometheus-{{USER_ID}}-monitoring.{{ ROUTE_SUBDOMAIN }}[Prometheus UI^] and input `performedChecks` and select the auto-completed value:
+http://prometheus-{{USER_ID}}-monitoring.{{ ROUTE_SUBDOMAIN }}[Prometheus UI^] を開き、 `performedChecks` と入力して自動補完の値を選択します。
 
 image::prometheus-metrics-console.png[metrics_prometheus, 900]
 
-Switch to *Graph* tab:
+*Graph* タブに切り替えます。
 
 image::prometheus-metrics-graph.png[metrics_prometheus, 900]
 
-You can play with the values for time and see different data across different time ranges for this metric. There are many other metrics you can query for, and perform quite complex queries using https://prometheus.io/docs/prometheus/latest/querying/basics/[Prom QL^] (Prometheus Query Language).
+このメトリックのために、時間の値で遊んだり、異なる時間範囲で異なるデータを見たりすることができます。
+他にも多くのメトリクスがあり、 https://prometheus.io/docs/prometheus/latest/querying/basics/[Prom QL^] (Prometheus Query Language) を使用してクエリを実行したり、非常に複雑なクエリを実行したりすることができます。
 
 ==== Using Grafana
 
-Open the http://grafana-{{USER_ID}}-monitoring.{{ ROUTE_SUBDOMAIN }}[Grafana UI^].
+http://grafana-{{USER_ID}}-monitoring.{{ ROUTE_SUBDOMAIN }}[Grafana UI^] を開きます。
 
-Select *New Dashboard* to create a new _Dashboard_ to review the metrics.
+*New Dashboard* を選択して、メトリクスを確認するための新しい _Dashboard_ を作成します。
 
 image::grafana-create-dashboard.png[metrics_grafana, 900]
 
-Click on *Add new panel* to add a new panel with a query:
+*Add new panel* をクリックすると、クエリで新しいパネルが追加されます。
 
 image::grafana-add-query.png[metrics_grafana, 700]
 
-Type in `performedChecks` in the _Metrics_ field, and choose the first auto-completed value:
+_Metrics_ フィールドに `performedChecks` と入力し、最初に自動補完された値を選択します。
 
 image::grafana-add-query-detail.png[metrics_grafana, 700]
 
-Press kbd:[ENTER] while the cursor is in the field, and the values should begin showing up. Choose *Last 15 Minutes* in the drop-down as shown:
+カーソルがフィールドに入っている間に kbd:[ENTER] を押すと、値が表示されます。表示されているようにドロップダウンから *Last 15 Minutes* を選択します。
 
 image::grafana-add-query-detail2.png[metrics_grafana, 700]
 
-You can fine tune the display, along with the type of graph (bar, line, gauge, etc). Using other options. When done, click the *Save* button, give your new dashboard a name, and click *Save*:
+グラフの種類（棒グラフ、線グラフ、ゲージなど）とともに、表示を微調整することができます。終わったら、*Save* ボタンをクリックして、新しいダッシュボードに名前を付けて、*Save* をクリックします。
 
 image::grafana-add-query-detail3.png[metrics_grafana, 700]
 
-This is optional, but you can add more Panels if you like, for example: The JVM RSS Value `process_resident_memory_bytes` (set the Visualization to `Gauge` and the Unit in _Field_ tab to `bytes(IEC)` on the _Visualization_, and the title to `Memory` on the _Panel Title_). It could look like:
+これはオプションですが、必要に応じて Panel を追加することもできます。JVM RSSの値 `process_resident_memory_bytes` (Visualizationの `Gauge` と _Field_ タブの単位を `bytes(IEC)` に、 _Panel Title_ のタイトルを `Memory` に設定します)。こんな感じになるかもしれません。
 
 image::grafana-add-query-detail4.png[metrics_grafana, 700]
 
-You can see more examples of more complex dashboard, and even import them into your own dashboards from the https://grafana.com/grafana/dashboards[Grafana Labs Dashboard community^].
+https://grafana.com/grafana/dashboards[Grafana Labs Dashboard community^] から、より複雑なダッシュボードの例を見ることができ、さらには自分のダッシュボードにインポートすることもできます。
 
 === Extra Credit: Spring Boot
 
-If you feel up to it, Spring Boot can also expose Metrics which can be collected by Prometheus and displayed with Grafana. To add metrics support to your Catalog service written with Spring Boot, you'll need to:
+Spring Boot は Prometheus が収集したメトリクスを公開し、Grafana で表示することもできます。Spring Boot で書かれたカタログサービスにメトリクスのサポートを追加するには、以下のようにする必要があります。
 
-. Add dependencies for Spring Boot Actuator and Prometheus
-. Configure `application-openshift.properties` with config values
-. Re-build and Re-deploy the app to OpenShift (in the {{USER_ID}}-catalog project) using commands from previous modules
-. Edit the Prometheus _ConfigMap_ to add another scrape job pointing at `catalog-springboot.{{USER_ID}}-catalog.svc.cluster.local:8080`
-. Re-deploy Prometheus to pick up the new config
-. Attempt to query Prometheus for the Spring Boot metrics(i.e. scrape_duration_seconds)
+. Spring Boot Actuator と Prometheus の依存関係を追加します
+.  `application-openshift.properties` を config 値で設定します。
+. 以前のモジュールのコマンドを使用して、アプリを再構築し、OpenShiftに再デプロイします。（ {{USER_ID}}-catalog project 内）
+. Prometheus _ConfigMap_ を編集して、 `catalog-springboot.{{USER_ID}}-catalog.svc.cluster.local:8080` を指す別のスクレイプジョブを追加します。
+. Prometheus を再デプロイして新しい config を取得します。
+. Prometheus に Spring Boot のメトリクス(scrape_duration_secondsなど)を問い合わせてみます。
 
-It is beyond the scope of this lab, but if you're interested, give it a go if you have extra time!
+このラボの範疇を超えていますが、興味のある方、時間に余裕のある方は、是非やってみてください。
 
 === Summary
 
-In this lab, you learned how to monitor cloud-native applications using Jaeger, Prometheus, and Grafana. You also learned how Quarkus makes your observation tasks easier as a developer and operator. You can use these techniques in future projects to observe your distributed cloud-native applications.
+このラボでは、 Jaeger、Prometheus、Grafana を使用してクラウドネイティブアプリケーションを監視する方法を学びました。また、 Quarkus を使用することで、開発者やオペレータとしての観察タスクが容易になることも学びました。これらのテクニックを将来のプロジェクトで使用して、分散型クラウドネイティブアプリケーションを監視することができます。
