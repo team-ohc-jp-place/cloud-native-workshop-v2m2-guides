@@ -45,7 +45,6 @@ CodeReady Workspaces の多くの機能は、コマンドからアクセスで�
 
 ==== Import Projects
 
-Let's import the project source code for this lab. Click on **Git Clone..** (or type kbd:[F1], enter 'git' and click on the auto-completed _Git Clone.._ )
 このラボのプロジェクトのソースコードをインポートしてみましょう。 **Git Clone..** をクリックします。(または kbd:[F1] と入力して 'git' と入力し、自動で作成された Git クローンをクリックします。)
 
 image::che-workspace-gitclone.png[cdw, 900]
