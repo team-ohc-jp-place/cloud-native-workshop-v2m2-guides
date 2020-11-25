@@ -59,6 +59,10 @@ https://github.com/RedHat-Middleware-Workshops/cloud-native-workshop-v2m2-labs.g
 
 image::crw-clone-repo.png[crw,900]
 
+*Select Repository Location* をクリックし、その後、 *Add to Workpace* をクリックして下さい。
+
+image::crw-add-workspace.png[crw, 600, align="center"]
+
 プロジェクトはワークスペースにインポートされ、プロジェクト エクスプローラに表示されます。
 
 image::crw-clone-explorer.png[crw,900]
@@ -75,9 +79,9 @@ cd $CHE_PROJECTS_ROOT/cloud-native-workshop-v2m2-labs && git checkout ocp-4.5
 [NOTE]
 ====
 CodeReady ワークスペースのターミナルウィンドウ。Developer ワークスペースで実行しているコンテナのいずれかのターミナルウィンドウを開くことができます。これらのラボの残りの部分については、ターミナルでコマンドを実行する必要がある場合はいつでも、右側の **>_ New Terminal** コマンドを使用することができます。
-====
 
 image::codeready-workspace-terminal.png[codeready-workspace-terminal, 700]
+====
 
 === Remove other projects
 
