@@ -3,7 +3,7 @@
 
 このラボでは、Javaリモートデバッグを使用して、coolstore マイクロサービスアプリケーションをデバッグし、Quarkus上でコードが実行される際の line-by-line のコード実行を調べます。
 
-==== 1. Enable Remote Debugging
+==== 1. リモートデバッグを有効にする
 
 リモートデバッグは、アプリケーション開発に便利なデバッグ技術で、別のマシン上のどこか別の場所で実行されているコードを調べて、バグや問題を調査するのに役立つコードを行ごとに実行することができます。リモートデバッグはJava SE標準のデバッグアーキテクチャの一部であり、 https://docs.oracle.com/javase/8/docs/technotes/guides/jpda/architecture.html[Java SE docs^] で詳細を学ぶことができます。
 
@@ -31,11 +31,12 @@ mvn quarkus:dev -f $CHE_PROJECTS_ROOT/cloud-native-workshop-v2m2-labs/inventory
 
 image::debug-che-quarkus.png[Quarkus Debug, 700]
 
-==== 2. Add a bug
+==== 2. バグを追加してみる
 
 デバッガを使って修正するバグを持つ新しいエンドポイントを追加してみましょう。
 
-_Explorer_ view に戻り、 `cloud-native-workshop-v2m2-lab` プロジェクトの下で、 `inventory/src/main/java/com/redhat/coolstore/InventoryResource.java` ファイルを開きます。off-by-oneエラーが発生するメソッドを追加します。
+_Explorer_ view に戻り、 `cloud-native-workshop-v2m2-lab` プロジェクトの下で、 `inventory/src/main/java/com/redhat/coolstore/InventoryResource.java` ファイルを開きます。
+バグを含むメソッドを追加します。
 
 [source,java,role="copypaste"]
 ----
@@ -51,7 +52,8 @@ _Explorer_ view に戻り、 `cloud-native-workshop-v2m2-lab` プロジェクト
     }
 ----
 
-このメソッドは在庫のある場所を取得し、その場所の名前の最後の文字を出力する。このメソッドを追加した後、 `Seoul` に在庫があるアイテム `165613` で試してみると、最後の文字 `l` が出力されるはずです。別のターミナルを開いてコマンドを実行してください。
+このメソッドは在庫のある場所を取得し、その場所の名前の最後の文字を出力します。
+このメソッドを追加した後、 `Seoul` に在庫があるアイテム `165613` で試してみると、最後の文字 `l` が出力されるはずです。別のターミナルを開いてコマンドを実行してください。
 
 [source,sh,role="copypaste"]
 ----
@@ -64,7 +66,7 @@ image::debug-che-quarkus-lastletter.png[Quarkus Debug, 700]
 
 `l` はありません! おそらくエラーを見つけることができるでしょうが、デバッガを見てみましょう。
 
-==== 3. Debug with CodeReady Workspaces
+==== 3. CodeReady Workspaces でデバッグをする
 
 左側のデバッグアイコンをクリックし、ドロップダウンで *Attach to App* を選択し、緑色の *Start Debugging* アイコンをクリックします。
 
@@ -109,7 +111,7 @@ image::debug-che-step-over.png[Step Over, 900]
 
 image::debug-che-step-over2.png[Step Over, 600]
 
-もう一歩踏み込んでみると、 `lastLetter` が空白 (空文字列) であることがよくわかります。これは off-by-one のエラーです!
+もう一歩踏み込んでみると、 `lastLetter` が空白 (空文字列) であることがよくわかります。これはバグです!
 
 image::debug-che-error.png[Step Over, 800]
 
@@ -117,9 +119,9 @@ Continueボタンをクリックしてメソッドを終了させ、空の値を
 
 image::debug-che-continue.png[Step Over, 600]
 
-==== 4. Fix and Confirm
+==== 4. 修正と確認
 
-off-by-one エラーは `substring()` の呼び出しを修正するだけで修正できます。 `substring()` の行を読み込むように変更することでバグを修正してください。
+バグは `substring()` の呼び出しを修正するだけで修正できます。 `substring()` の行を読み込むように変更することでバグを修正してください。
 
 [source,java,role="copypaste"]
 ----
