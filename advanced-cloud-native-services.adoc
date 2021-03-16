@@ -43,7 +43,7 @@ CodeReady Workspaces の多くの機能は、コマンドからアクセスで�
 メニューに表示されていないコマンドを実行する必要がある場合は、 kbd:[F1] を押すか、 kbd:[Control+SHIFT+P]を押してコマンドウィンドウを開くことができます。 +
  （Mac OS Xでは kbd:[Command+SHIFT+P] ）
 
-==== Import Projects
+==== プロジェクトのインポート
 
 このラボのプロジェクトのソースコードをインポートしてみましょう。 **Git Clone..** をクリックします。(または kbd:[F1] と入力して 'git' と入力し、自動で作成された Git クローンをクリックします。)
 
@@ -66,7 +66,7 @@ image::crw-add-workspace.png[crw, 600, align="center"]
 
 image::crw-clone-explorer.png[crw,900]
 
-==== IMPORTANT: 適切な Git branch を check out
+==== 重要: 適切な Git branch を check out
 
 プロジェクトファイルの正しいバージョンを使用していることを確認するには、CodeReadyターミナルでこのコマンドを実行してください。
 
@@ -82,13 +82,13 @@ CodeReady ワークスペースのターミナルウィンドウ。Developer ワ
 image::codeready-workspace-terminal.png[codeready-workspace-terminal, 700]
 ====
 
-=== Remove other projects
+=== 他のプロジェクトの削除
 
 今日、他のモジュール( `cloud-native-workshop-v2m1-lab` など)を完了した場合は、エクスプローラーでプロジェクト名を右クリックして削除を選択し、警告を受け入れてワークスペースから削除してください。このラボのためにインポートした新しいプロジェクトを削除しないように注意してください。
 
 image::remove-workspace.png[remove, 700]
 
-=== Login to OpenShift
+=== OpenShift へのログイン
 
 Eclipse Che ワークスペースは Kubernetes クラスタ上で実行されていますが、デフォルトの制限付きサービスアカウントで実行されているため、ほとんどのリソースタイプを作成することができません。他のモジュールを完了している場合は、もう一度ログインしてみましょう: *Login to OpenShift* をクリックして、与えられた資格情報を入力します。
 
@@ -121,7 +121,7 @@ Welcome! See 'oc help' to get started.
  *Login to OpenShift* でログインした後は、通常のターミナルとしては使えなくなります。ターミナルのウィンドウを閉じることができます。後からさらに端末を開いてもログインしたままになります
 ====
 
-==== 今日の最初のモジュールの場合はこれを行い、そうでない場合は Verifying the Dev Environment に進みます。
+==== 今日の最初のモジュールの場合はこれを行い、そうでない場合は Dev環境の確認 に進みます。
 
 これらのコマンドは、module 1 からのすべてのステップをリセットして再生し、終了するまでに4～5分かかるはずです。
 
@@ -152,11 +152,11 @@ sh /projects/cloud-native-workshop-v2m2-labs/monolith/scripts/deploy-coolstore.s
 
 コマンドが完了するのを待ちます。
 
-=== Verifying the Dev Environment
+=== Dev環境の確認
 
 前のモジュールでは、 *{{ USER_ID }}-coolstore-dev* という新しいOpenShiftプロジェクトを作成し、CoolStore monolith をデプロイした開発者個人のプロジェクトを表しています。
 
-==== Verify Application
+==== アプリケーションの確認
 
 それでは、 Monolith 用に作成されている OpenShift リソースを確認してみましょう。
 
@@ -200,7 +200,7 @@ coolstore のウェブインターフェースは、次のようになります�
 image::coolstore_web.png[route_link, 600]
 
 
-=== Verify Database
+=== データベースの確認
 
 実行中のPostgresコンテナには、CodeReady Workspaces Terminalウィンドウを介して以下のようにしてログインすることができます。
 
