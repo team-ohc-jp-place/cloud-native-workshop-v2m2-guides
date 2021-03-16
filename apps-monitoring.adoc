@@ -65,7 +65,7 @@ metadata:
 
 image::jaeger_top.png[create_dialog, 500]
 
-==== 3. Observe Jaeger UI
+==== 3. Jaeger UI を確認する
 
 デプロイが完了したら（紺色の丸印！）、 https://jaeger-all-in-one-inmemory-{{USER_ID}}-monitoring.{{ ROUTE_SUBDOMAIN}}[Jaeger UI^] を開きます。
 
@@ -74,7 +74,7 @@ image::jaeger_top.png[create_dialog, 500]
 
 image::jaeger-ui.png[jaeger_ui, 700]
 
-==== 4. Utilizing Opentracing with Inventory (Quarkus)
+==== 4. Inventory で Opentracing を活用する (Quarkus)
 
 クラウドネイティブアプリケーションの一部として Quarkus で書かれたインベントリサービスを呼び出す、 Spring Boot で書かれたカタログサービスがあります。これらのアプリケーションは、 Jaeger を使って簡単にトレースすることができます。
 
@@ -100,7 +100,7 @@ mvn -q quarkus:add-extension -Dextensions="smallrye-opentracing" -f $CHE_PROJECT
 https://vertx.io/[Vert.x^] 、 http://camel.apache.org/[Apache Camel^] 、 http://infinispan.org/[Infinispan^] 、Spring DI互換性（ `@Autowired` など）など、人気のあるフレームワークの Quarkusの https://quarkus.io/extensions/[拡張機能^] は他にもたくさんあります。
 ====
 
-==== 5. Create the configuration
+==== 5. Jeager の Configuration の作成
 
 このステップを始める前に、 {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-monitoring[Topology View^] にアクセスして *jaeger-collector* サービスを確認し、_jaeger_ デプロイメントをクリックして _Resources_ タブを選択して、 Jaeger によって公開されているサービスを表示します。
 
@@ -131,7 +131,7 @@ workspace `cloud-native-workshop-v2m2-lab` の下にある `inventory` プロジ
 アプリケーションには特定のトレースコードは含まれていません。デフォルトでは、アプリに送信された RESTful リクエストは、MicroProfile Tracing のおかげで *コードの変更を必要とせず* にトレースされます。また、トレース情報を強化し、他のメソッドやクラスを手動でトレースすることも可能です。これについての詳細は、 https://github.com/eclipse/microprofile-opentracing/blob/master/spec/src/main/asciidoc/microprofile-opentracing.asciidoc[MicroProfile OpenTracing specification^] 仕様を参照してください。
 ====
 
-==== 6. Re-Deploy to OpenShift
+==== 6. OpenShift への再デプロイ
 
 ターミナルを介してインベントリアプリケーションをリパッケージし、再デプロイします。
 
@@ -143,7 +143,7 @@ mvn package -DskipTests -f $CHE_PROJECTS_ROOT/cloud-native-workshop-v2m2-labs/in
 
 コンソールと {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-inventory[Inventory Topology View^] で、再構築と再展開が完了するのを待ちます。
 
-==== 7. Observing Jaeger Tracing
+==== 7. Jaeger トレースの観測
 
 ネットワークとデータトランザクションをトレースするために、 CodeReady Workspaces Terminal を介して *curl* コマンドを使用してInventoryサービスを呼び出します。
 
@@ -173,7 +173,7 @@ image::jaeger-span.png[jaeger_ui, 700]
 
 アプリケーションがより複雑になり、多くのマイクロサービスが互いに呼び合うようになると、これらの Span やトレースはより複雑になりますが、アプリの問題点も明らかになります。
 
-==== 8. Deploy Prometheus and Grafana to OpenShift
+==== 8. Prometheus を OpenShift へデプロイする
 
 OpenShift Container Platformは、 https://prometheus.io[Prometheus] オープンソースプロジェクトとその広範なエコシステムをベースにした、構成済みで自己更新型の監視スタックを搭載して提供されます。クラスタコンポーネントの監視を提供し、発生した問題をクラスタ管理者に即座に通知する一連のアラートと一連の https://grafana.com/[Grafana] ダッシュボードを搭載しています。
 
@@ -197,7 +197,8 @@ image::add-to-project.png[Prometheus, 800]
 
 image::search-prometheus-image.png[Prometheus, 700]
 
-Topology view では、 prometheus が回転しているのがわかります。それが完了したら、矢印をクリックして prometheus query UI にアクセスします。
+Topology view では、 prometheus がデプロイされているのがわかります。
+それが完了したら、矢印をクリックして prometheus query UI にアクセスします。
 
 image::prometheus-route.png[Prometheus, 700]
 
@@ -205,7 +206,7 @@ image::prometheus-route.png[Prometheus, 700]
 
 image::prometheus-webui.png[Prometheus, 700]
 
-==== 9. Deploy Grafana
+==== 9. Grafana を OpenShift へデプロイする
 
 先ほどと同じ手順で行います。 {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-monitoring[Monitoring Topology View^] で、 `+Add` をクリックして、 *Container Image* ,を選択し、フィールドに記入します。
 
@@ -221,7 +222,8 @@ image名の横にある "虫眼鏡" の検索アイコンをクリックして�
 
 image::search-grafana-image.png[Grafana, 700]
 
-Topology view では、 Grafana が回転しているのがわかります。それが完了したら、矢印をクリックして Grafana UI にアクセスします。
+Topology view では、 Grafana がデプロイされているのがわかります。
+それが完了したら、矢印をクリックして Grafana UI にアクセスします。
 
 image::grafana-route.png[Prometheus, 700]
 
@@ -240,7 +242,7 @@ image::grafana-login.png[Grafana, 700]
 
 image::grafana-webui.png[Grafana, 700]
 
-==== 10. Add a data source to Grafana
+==== 10. Grafana へデータソースを追加する
 
 Add data source をクリックし、データソースのタイプとして *Prometheus* を選択します。
 
@@ -256,7 +258,7 @@ image::grafana-ds-success.png[Grafana, 300]
 
 この時点で、 Granana は、監視しているアプリケーションから収集したメトリクスを Prometheus から引き出すように設定されています。
 
-==== 11. Utilize metrics specification for Inventory Microservice
+==== 11. Inventory Microservice のメトリクスの活用
 
 このステップでは、 _Inventory(Quarkus)_ アプリケーションが *SmallRye Metrics extension* を通じて MicroProfile Metrics 仕様を利用する方法を学びます。 _MicroProfile Metrics_ を使用すると、アプリケーション内で何が起こっているかについての洞察を提供する様々なメトリクスや統計情報を収集することができます。
 
@@ -318,7 +320,7 @@ import org.eclipse.microprofile.metrics.annotation.Counted;
 import org.eclipse.microprofile.metrics.annotation.Timed;
 ----
 
-==== 12. Redeploy to OpenShift
+==== 12. OpenShift へ再デプロイ
 
 インベントリアプリケーションをリパッケージして再配置します。
 
@@ -359,9 +361,9 @@ vendor_memory_usedNonHeap_bytes 5.4685184E7
 
 これは、クラスタにデプロイしたときに、プロメテウスがアプリのメトリクスにアクセスしてインデックスを作成するために使用するものです。しかし、最初に Prometheus にこのことを伝えなければなりません。
 
-==== Configure Prometheus ConfigMap
+==== Prometheus ConfigMap の構成
 
-Prometheus にアプリからメトリクスをスクレイプするように指示するには、Kubernetes _ConfigMap_ を作成する必要があります。
+Prometheus にアプリからメトリクスを取得するように指示するには、Kubernetes _ConfigMap_ を作成する必要があります。
 
 {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-monitoring[Monitoring Topology View^] 上で、左の `+Add` をクリックし、今回は *YAML* を選択します。
 
@@ -404,7 +406,7 @@ oc rollout status -n {{USER_ID}}-monitoring -w deployment/prometheus
 
 これは prometheus の新しいデプロイメントを指示します。完了までお待ちください!
 
-==== 13. Generate some values for the metrics
+==== 13. メトリクスの値を生成する
 
 Prometheus がアプリから値を取得しているので、インベントリサービスを複数回呼び出すループを書いて、メトリクスを観察してみましょう。次のコマンドを使用します。
 
@@ -426,7 +428,7 @@ done
 . Prometheus Queries
 . Grafana Dashboards
 
-==== Using Prometheus
+==== 14. Prometheus を使ってみる
 
 http://prometheus-{{USER_ID}}-monitoring.{{ ROUTE_SUBDOMAIN }}[Prometheus UI^] を開き、 `performedChecks` と入力して自動補完の値を選択します。
 
@@ -439,7 +441,7 @@ image::prometheus-metrics-graph.png[metrics_prometheus, 900]
 このメトリックのために、時間の値で遊んだり、異なる時間範囲で異なるデータを見たりすることができます。
 他にも多くのメトリクスがあり、 https://prometheus.io/docs/prometheus/latest/querying/basics/[Prom QL^] (Prometheus Query Language) を使用してクエリを実行したり、非常に複雑なクエリを実行したりすることができます。
 
-==== Using Grafana
+==== 15. Grafana を使ってみる
 
 http://grafana-{{USER_ID}}-monitoring.{{ ROUTE_SUBDOMAIN }}[Grafana UI^] を開きます。
 
@@ -469,7 +471,7 @@ image::grafana-add-query-detail4.png[metrics_grafana, 700]
 
 https://grafana.com/grafana/dashboards[Grafana Labs Dashboard community^] から、より複雑なダッシュボードの例を見ることができ、さらには自分のダッシュボードにインポートすることもできます。
 
-=== Extra Credit: Spring Boot
+=== 参考情報: Spring Boot
 
 Spring Boot は Prometheus が収集したメトリクスを公開し、Grafana で表示することもできます。Spring Boot で書かれたカタログサービスにメトリクスのサポートを追加するには、以下のようにする必要があります。
 
