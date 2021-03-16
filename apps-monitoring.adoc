@@ -59,7 +59,8 @@ metadata:
   namespace: {{ USER_ID }}-monitoring
 ----
 
-{{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-monitoring[Topology View^] では、Jaegerがデプロイされているのが確認できます。
+{{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-monitoring[Topology View^] 
+では、Jaegerがデプロイされているのが確認できます。
 
 image::jaeger_top.png[create_dialog, 500]
 
