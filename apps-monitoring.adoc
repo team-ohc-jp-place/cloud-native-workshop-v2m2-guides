@@ -25,7 +25,7 @@ image::quarkus-jaeger-prometheus.png[logo, 700]
 * 中間ゲートウェイを介して時系列をプッシュすることができます (Pushing time series is supported via an intermediary gateway)
 * サービスの発見または静的な設定 (Service discovery or static configuration)
 
-==== 1. Create OpenShift Project
+==== 1. OpenShift プロジェクトの作成
 
 このステップでは、CoolStore アプリケーション用の新しい監視ツールを展開します。
 そのため、monolith や以前に作成した他のマイクロサービスとは別のプロジェクトを作成しておきます。
@@ -42,7 +42,7 @@ image::create_project.png[create_dialog, 700]
 
 image::create_monitoring_dialog.png[create_dialog, 700]
 
-==== 2. Deploy Jaeger to OpenShift
+==== 2. OpenShift へ Jaeger を デプロイする
 
 新しいプロジェクトで `+Add` をクリックし、 *From Catalog* を選択します。
 
@@ -65,7 +65,7 @@ metadata:
 
 image::jaeger_top.png[create_dialog, 500]
 
-==== 4. Observe Jaeger UI
+==== 3. Observe Jaeger UI
 
 デプロイが完了したら（紺色の丸印！）、 https://jaeger-all-in-one-inmemory-{{USER_ID}}-monitoring.{{ ROUTE_SUBDOMAIN}}[Jaeger UI^] を開きます。
 
@@ -74,7 +74,7 @@ image::jaeger_top.png[create_dialog, 500]
 
 image::jaeger-ui.png[jaeger_ui, 700]
 
-==== 5. Utilizing Opentracing with Inventory (Quarkus)
+==== 4. Utilizing Opentracing with Inventory (Quarkus)
 
 クラウドネイティブアプリケーションの一部として Quarkus で書かれたインベントリサービスを呼び出す、 Spring Boot で書かれたカタログサービスがあります。これらのアプリケーションは、 Jaeger を使って簡単にトレースすることができます。
 
@@ -100,7 +100,7 @@ mvn -q quarkus:add-extension -Dextensions="smallrye-opentracing" -f $CHE_PROJECT
 https://vertx.io/[Vert.x^] 、 http://camel.apache.org/[Apache Camel^] 、 http://infinispan.org/[Infinispan^] 、Spring DI互換性（ `@Autowired` など）など、人気のあるフレームワークの Quarkusの https://quarkus.io/extensions/[拡張機能^] は他にもたくさんあります。
 ====
 
-==== 6. Create the configuration
+==== 5. Create the configuration
 
 このステップを始める前に、 {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-monitoring[Topology View^] にアクセスして *jaeger-collector* サービスを確認し、_jaeger_ デプロイメントをクリックして _Resources_ タブを選択して、 Jaeger によって公開されているサービスを表示します。
 
@@ -131,7 +131,7 @@ workspace `cloud-native-workshop-v2m2-lab` の下にある `inventory` プロジ
 アプリケーションには特定のトレースコードは含まれていません。デフォルトでは、アプリに送信された RESTful リクエストは、MicroProfile Tracing のおかげで *コードの変更を必要とせず* にトレースされます。また、トレース情報を強化し、他のメソッドやクラスを手動でトレースすることも可能です。これについての詳細は、 https://github.com/eclipse/microprofile-opentracing/blob/master/spec/src/main/asciidoc/microprofile-opentracing.asciidoc[MicroProfile OpenTracing specification^] 仕様を参照してください。
 ====
 
-==== 7. Re-Deploy to OpenShift
+==== 6. Re-Deploy to OpenShift
 
 ターミナルを介してインベントリアプリケーションをリパッケージし、再デプロイします。
 
@@ -143,7 +143,7 @@ mvn package -DskipTests -f $CHE_PROJECTS_ROOT/cloud-native-workshop-v2m2-labs/in
 
 コンソールと {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-inventory[Inventory Topology View^] で、再構築と再展開が完了するのを待ちます。
 
-==== 8. Observing Jaeger Tracing
+==== 7. Observing Jaeger Tracing
 
 ネットワークとデータトランザクションをトレースするために、 CodeReady Workspaces Terminal を介して *curl* コマンドを使用してInventoryサービスを呼び出します。
 
@@ -173,7 +173,7 @@ image::jaeger-span.png[jaeger_ui, 700]
 
 アプリケーションがより複雑になり、多くのマイクロサービスが互いに呼び合うようになると、これらの Span やトレースはより複雑になりますが、アプリの問題点も明らかになります。
 
-==== 9. Deploy Prometheus and Grafana to OpenShift
+==== 8. Deploy Prometheus and Grafana to OpenShift
 
 OpenShift Container Platformは、 https://prometheus.io[Prometheus] オープンソースプロジェクトとその広範なエコシステムをベースにした、構成済みで自己更新型の監視スタックを搭載して提供されます。クラスタコンポーネントの監視を提供し、発生した問題をクラスタ管理者に即座に通知する一連のアラートと一連の https://grafana.com/[Grafana] ダッシュボードを搭載しています。
 
@@ -205,7 +205,7 @@ image::prometheus-route.png[Prometheus, 700]
 
 image::prometheus-webui.png[Prometheus, 700]
 
-==== Deploy Grafana
+==== 9. Deploy Grafana
 
 先ほどと同じ手順で行います。 {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-monitoring[Monitoring Topology View^] で、 `+Add` をクリックして、 *Container Image* ,を選択し、フィールドに記入します。
 
