@@ -44,11 +44,9 @@ image::create_monitoring_dialog.png[create_dialog, 700]
 
 ==== 2. OpenShift へ Jaeger を デプロイする
 
-新しいプロジェクトで `+Add` をクリックし、 *From Catalog* を選択します。
+Jaeger をデプロイするには、ページ上の `YAML` コンポーネントをクリックします。
 
-jaeger サーバーを導入するには、右上の `+` アイコンをクリックします。
-
-image::plus-icon.png[serverless, 500]
+image::yaml-editor.png[serverless, 800]
 
 以下の _Service_ を `YAML` エディタでコピーし、 *Create* をクリックします。
 
@@ -92,7 +90,6 @@ mvn -q quarkus:add-extension -Dextensions="smallrye-opentracing" -f $CHE_PROJECT
 ✅ Extension io.quarkus:quarkus-smallrye-opentracing has been installed
 ----
 
-それから `BUILD SUCCESS`。
 これにより、インベントリマイクロサービスのために拡張機能の依存関係が `pom.xml` に追加されることが保証されます。
 
 [NOTE]
@@ -155,7 +152,7 @@ URL="http://$(oc get route -n {{ USER_ID }}-inventory inventory -o jsonpath={% r
 
 for i in $(seq 1 10) ; do
   curl -s $URL/services/inventory/165613
-  sleep .2
+  sleep 2
 done
 ----
 
