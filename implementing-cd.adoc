@@ -5,7 +5,7 @@
 
 このステップでは、別の本番環境を設定し、開発者や DevOps チームが開発者 *(あなたのことです！)* から本番環境にコードを移行する際のベストプラクティスやテクニックを探っていきます。
 
-== Production vs. Development
+== 本番環境 vs. 開発環境
 
 既存の *{{USER_ID}}-coolstore-dev* project は、コード変更後のアプリの新バージョンをビルドしてデプロイするための開発環境として利用されています。
 
@@ -13,7 +13,7 @@ OpenShift上の実際のプロジェクトでは、開発環境とテスト環�
 
 このシナリオを簡単にするために、私たちは開発環境と本番環境のみを使用し、テスト/QA環境は使用しません。
 
-=== 1. Create the production environment
+=== 1. 本番環境の作成
 
 {{ CONSOLE_URL }}/topology/ns/{{ USER_ID }}-coolstore-dev[Topology View^] に戻って、 プロジェクトのドロップダウンをクリックして、 *Create Project* を選択します。
 
@@ -32,7 +32,7 @@ image::create_project.png[create_dialog, 600]
 
 これで *{{USER_ID}}-coolstore-prod* という新しいOpenShiftプロジェクトが作成され、そこから本番アプリケーションが実行されます。
 
-=== 2. Add the production elements
+=== 2. 本番環境のセットアップ
 
 今回は本番用のテンプレートを使ってオブジェクトを作成します。
 
@@ -104,7 +104,7 @@ image::coolstore_prod_jenkins.png[create_new, 700]
 
 次のステップでは、OpenShiftのパイプラインビルドを使って、アプリを開発環境から本番環境に昇格させていきます。さっそくやってみましょう。
 
-=== Promoting Apps Across Environments with Pipelines
+=== パイプラインを用いて、Dev環境からProd環境へデプロイ
 
 ここまでは開発環境のOpenShiftに手動でアプリをビルドしてデプロイしてきました。ローカル開発には便利なのですが、テスト環境や本番環境に拡張するとエラーになりやすい配信方法です。
 
@@ -121,7 +121,7 @@ OpenShiftは、開発者がJenkins自動化エンジンで実行するための 
 
 最後のステップで使用した本番環境テンプレートの一部として、Pipeline ビルドオブジェクトが作成されました。通常、パイプラインには、開発環境でプロジェクトをビルドし、結果のイメージをローカルリポジトリに保存し、イメージを実行してそれに対してテストを実行し、結果のイメージをテストや本番環境などの他の環境に転送するために人の承認を待つというステップが含まれています。
 
-==== 3. Inspect the Pipeline Definition
+==== 3. パイプラインの設定の確認
 
 [NOTE]
 ====
@@ -147,7 +147,7 @@ oc describe bc/monolith-pipeline -n {{USER_ID}}-coolstore-prod
 
 このワークショップでは、パイプラインを簡単にするために、ビルドとテストをシミュレートして、人間の入力を省略しています。パイプラインが完了すると、 `openshift` オブジェクト内の上記の `tag()` メソッドを使って、開発環境から本番環境にアプリをデプロイします。
 
-==== 4. Promote the dev image to production using the pipeline
+==== 4. パイプラインを用いて、Dev環境イメージをProd環境へデプロイ
 
 ビルドパイプラインを起動してみましょう。
 
@@ -169,7 +169,7 @@ image::pipe-done.png[Prod, 700]
 
 次のステップでは、パイプラインにヒューマンインタラクション要素を追加して、プロジェクトリーダーであるあなたが変更の承認を担当できるようにします。
 
-==== 5. Adding Pipeline Approval Steps
+==== 5. パイプラインへ承認ステップを追加
 
 前のステップでは、OpenShift Pipelineを使用して、開発環境から本番環境への変更のビルドとデプロイのプロセスを自動化しました。このステップでは、パイプラインに最終チェックポイントを追加します。
 
@@ -199,7 +199,7 @@ image::pipe-edit2.png[Prod, 700]
 
 *Save* をクリックしてください。
 
-==== 6. Make a simple change to the app
+==== 6. アプリケーションを変更してみる
 
 承認ステップが整ったので、coolstore のヘッダーの背景色を青に変更したいという、開発者からの変更をシミュレーションしてみましょう。
 
@@ -258,7 +258,7 @@ image::pipe-orig.png[Prod, 700]
 
 *dev* での変更は上手くいったので、新しい承認ステップを使って、 *prod* への変更を進めていきましょう。
 
-==== 7. Run the pipeline again
+==== 7. もう一度パイプラインを実行
 
 もう一度、 {{ CONSOLE_URL }}/k8s/ns/{{USER_ID}}-coolstore-prod/buildconfigs/monolith-pipeline[Pipeline Details Page^] に移動して、 *Actions > Start Build* を選択してパイプラインを起動します。
 
@@ -277,7 +277,7 @@ image::pipe-start2.png[Prod, 700]
 
 image::pipe-jenkins-prompt.png[Prod, 700]
 
-=== 8. Approve the change to go live
+=== 8. 変更を承認してProd環境へプッシュ
 
 *Proceed* をクリックすると、本番環境にプッシュする変更が承認されます。また、変更が不要な場合や承認されていない場合には、パイプラインを直ちに停止する *Abort* をクリックすることもできます。
 
