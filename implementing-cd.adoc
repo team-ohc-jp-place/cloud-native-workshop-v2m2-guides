@@ -220,6 +220,10 @@ image::pipe-edit2.png[Prod, 700]
 ----
 JSPATH="$CHE_PROJECTS_ROOT/cloud-native-workshop-v2m2-labs/monolith/src/main/webapp/app/services/catalog.js"
 CATALOGHOST=$(oc get route -n {{ USER_ID}}-catalog catalog-springboot -o jsonpath={% raw %}"{.spec.host}"{% endraw %})
+----
+
+[source,sh,role="copypaste"]
+----
 sed -i 's/REPLACEURL/'$CATALOGHOST'/' "$JSPATH"
 ----
 
