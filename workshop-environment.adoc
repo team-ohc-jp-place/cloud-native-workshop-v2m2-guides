@@ -1,5 +1,6 @@
 = ワークショップの環境
 :experimental:
+:imagesdir: images
 
 == 最初のステップ: ユーザー名の確認
 

@@ -1,5 +1,6 @@
 = Lab2 - Debugging Applications
 :experimental:
+:imagesdir: images
 
 このラボでは、Javaリモートデバッグを使用して、coolstore マイクロサービスアプリケーションをデバッグし、Quarkus上でコードが実行される際の line-by-line のコード実行を調べます。
 

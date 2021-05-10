@@ -1,5 +1,6 @@
 = Advanced Cloud-Native Services
 :experimental:
+:imagesdir: images
 
 *Cloud Native Workshop - Module 1* を終了した場合、JBoss EAP と OpenShift を使用して既存のアプリケーションをクラウドに移行する方法を学び、マイクロサービスを使用して既存のアプリケーションをモダナイズするための OpenShift の力を垣間見ることができました。 +
 Module 1 を学習しなかった場合、または学習を開始したが終了しなかった場合は、以下のスクリプトを実行して追いつくことができます。
@@ -16,20 +17,29 @@ Import Projects セクションにスキップしてください。
 
 https://www.eclipse.org/che/[Eclipse Che^] をベースにしたオンライン IDE である Red Hat CodeReady Workspaces を使用します。 *ファイルへの変更は数秒ごとに自動保存される* ので、明示的に変更を保存する必要はありません。
 
-開始するには、 {{ ECLIPSE_CHE_URL }}[CodeReady Workspaces インスタンスにアクセス^] し、 割り当てられたユーザー名とパスワードを使用してログインします。 (例: `{{ USER_ID }}/{{ CHE_USER_PASSWORD }}`)
+開始するには、 {{ ECLIPSE_CHE_URL }}[CodeReady Workspaces インスタンスにアクセス^] し、 割り当てられたユーザー名とパスワードを使用してログインします。
+ (例: `{{ USER_ID }}/{{ CHE_USER_PASSWORD }}`)
 
 image::che-login.png[cdw, 700]
 
-ログインすると、個人のダッシュボードが表示されます。以下のように、左側にあるあらかじめ作成されたワークスペースの名前をクリックします（割り当てられた番号によって名前が異なります）。また、中央のワークスペースの名前をクリックして、画面右上のOpenと書かれた緑色の {{ USER_ID }}-namespace をクリックします。
+ログインすると、個人のダッシュボードが表示されます。
+以下のように、左側にあるあらかじめ作成されたワークスペースの名前をクリックします（割り当てられた番号によって名前が異なります）。
+
+image::crw-landing.png[cdw, 700]
+
+また、中央のワークスペースの名前をクリックして、画面右上のOpenと書かれた緑色の {{ USER_ID }}-namespace をクリックします。
+
+image::crw-landing-start.png[cdw, 700]
 
 1～2分後、ワークスペースに入れられます。
 
 image::che-workspace.png[cdw, 900]
 
-このIDEは、Eclipse Cheをベースにしています。 +
+このIDEは、Eclipse Cheをベースにしています。
 （Eclipse Che は、MicroSoft VS Code editorをベースにしています）。
 
-プロジェクトエクスプローラ、検索、バージョン管理(Gitなど)、デバッグ、その他のプラグインの間を移動するためのアイコンが左に表示されています。このワークショップではこれらを使います。自由にクリックして何ができるか見てみてください。
+プロジェクトエクスプローラ、検索、バージョン管理(Gitなど)、デバッグ、その他のプラグインの間を移動するためのアイコンが左に表示されています。
+このワークショップではこれらを使います。自由にクリックして何ができるか見てみてください。
 
 image::crw-icons.png[cdw, 400]
 
