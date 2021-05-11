@@ -1,4 +1,4 @@
-= ワークショップの環境
+= Workshop Environment
 :experimental:
 :imagesdir: images
 
