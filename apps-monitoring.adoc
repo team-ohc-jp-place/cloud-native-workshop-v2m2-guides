@@ -498,7 +498,7 @@ Spring Boot は Prometheus が収集したメトリクスを公開し、Grafana 
 
 [TIP]
 ====
-Try adding:
+以下のコードを、pom.xml に追加します:
 [source,properties,role="copypaste"]
 ----
 <dependency>
@@ -506,14 +506,16 @@ Try adding:
 	<artifactId>micrometer-registry-prometheus</artifactId>
 </dependency>
 ----
-to the pom.xml.
-To configure the actuator, the following properties will need to be set:
+
+アクチュエータを設定するには、以下のプロパティを設定する必要があります:
 [source,properties,role="copypaste"]
 ----
 management.metrics.export.prometheus.enabled=true
 management.endpoints.web.exposure.include=info,health,metrics,prometheus
 ----
-This will expose prometheus-formatted metrics at /actuator/prometheus. The following prometheus configuration will allow you to scrape those metrics:
+
+これにより、/actuator/prometheusにprometheus 形式のメトリクスが公開されます。
+以下のprometheusの設定により、これらのメトリクスをスクレイピングすることができます。
 [source,yaml,role="copypaste"]
 ----
     - job_name: 'catalog-springboot'
