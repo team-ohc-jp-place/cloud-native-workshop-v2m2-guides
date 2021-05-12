@@ -494,7 +494,7 @@ Spring Boot は Prometheus が収集したメトリクスを公開し、Grafana 
 . Prometheus を再デプロイして新しい config を取得します。
 . Prometheus に Spring Boot のメトリクス(scrape_duration_secondsなど)を問い合わせてみます。
 
-このラボの範疇を超えていますが、興味のある方、時間に余裕のある方は、是非やってみてください。
+このラボではご紹介のみになりますが、もし興味のある方、時間に余裕のある方は、是非やってみてください。
 
 [TIP]
 ====
