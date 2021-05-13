@@ -68,7 +68,7 @@ https://github.com/RedHat-Middleware-Workshops/cloud-native-workshop-v2m2-labs.g
 
 image::crw-clone-repo.png[crw,900]
 
-*Select Repository Location* をクリックし、その後、 *Add to Workpace* をクリックして下さい。
+*Select Repository Location* をクリックし、その後、 *Open in New Window* をクリックして下さい。すぐに新しいWebブラウザが開きます。
 
 image::crw-add-workspace.png[crw, 600, align="center"]
 
@@ -82,7 +82,7 @@ image::crw-clone-explorer.png[crw,900]
 
 [source,sh,role="copypaste"]
 ----
-cd $CHE_PROJECTS_ROOT/cloud-native-workshop-v2m2-labs && git checkout ocp-4.5
+cd $CHE_PROJECTS_ROOT/cloud-native-workshop-v2m2-labs && git checkout ocp-4.7
 ----
 
 [NOTE]
@@ -100,10 +100,15 @@ image::remove-workspace.png[remove, 700]
 
 === OpenShift へのログイン
 
-Eclipse Che ワークスペースは Kubernetes クラスタ上で実行されていますが、デフォルトの制限付きサービスアカウントで実行されているため、ほとんどのリソースタイプを作成することができません。他のモジュールを完了している場合は、もう一度ログインしてみましょう: *Login to OpenShift* をクリックして、与えられた資格情報を入力します。
+Eclipse Che ワークスペースは Kubernetes クラスタ上で実行されていますが、デフォルトの制限付きサービスアカウントで実行されているため、
+ほとんどのリソースタイプを作成することができません。
+他のモジュールを完了している場合は、すでにログインしていると思いますが、 *Login to OpenShift* をクリックして、ログインをしてみましょう。
 
-* Username: `{{ USER_ID }}`
-* Password: `{{ OPENSHIFT_USER_PASSWORD }}`
+[NOTE]
+====
+*Login to OpenShift* をクリックすると、CodeReady Workspacesは以下のコマンドを実行します。
+*oc login https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT --insecure-skip-tls-verify=true --username={{ USER_ID }} --password={{ OPENSHIFT_USER_PASSWORD }}*
+====
 
 image::cmd-login.png[login,700]
 
@@ -203,11 +208,11 @@ image::coolstore-dev-topology.png[crw,700]
 
 実行中の monolith にアクセスするためのルートリンク（矢印）をクリックして、 monolith にアクセスできることを確認してください。
 
-image::route_link.png[route_link]
+image::route_link.png[route_link, 500]
 
 coolstore のウェブインターフェースは、次のようになります。
 
-image::coolstore_web.png[route_link, 600]
+image::coolstore_web.png[route_link, 800]
 
 
 === データベースの確認

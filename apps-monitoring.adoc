@@ -46,7 +46,7 @@ image::create_monitoring_dialog.png[create_dialog, 700]
 
 ==== 2. OpenShift へ Jaeger を デプロイする
 
-Jaeger をデプロイするには、ページ上の `YAML` コンポーネントをクリックします。
+Jaegerサーバーをデプロイするには、Topologyビューで `YAML` をクリックします。
 
 image::yaml-editor.png[serverless, 800]
 
@@ -304,6 +304,7 @@ _cloud-native-workshop-v2m2-labs/inventory_ プロジェクトで、 `src/main/j
 [source,java,role="copypaste"]
 ----
     private final MeterRegistry registry;
+
     InventoryResource(MeterRegistry registry) {
         this.registry = registry;
     }
@@ -444,6 +445,11 @@ done
 
 http://prometheus-{{USER_ID}}-monitoring.{{ ROUTE_SUBDOMAIN }}[Prometheus UI^] を開き、 `performedChecks` と入力して自動補完の値を選択します。
 
+[NOTE]
+====
+"Warning: Error fetching server time: Detected 54.50800013542175 seconds time difference between your browser and the server. Prometheus relies on accurate time and time drift might cause unexpected query results". と表示されることがあります。この場合は、無視して構いません。
+====
+
 image::prometheus-metrics-console.png[metrics_prometheus, 900]
 
 *Graph* タブに切り替えます。
@@ -499,7 +505,7 @@ Spring Boot は Prometheus が収集したメトリクスを公開し、Grafana 
 [TIP]
 ====
 以下のコードを、pom.xml に追加します:
-[source,properties,role="copypaste"]
+[source,xml,role="copypaste"]
 ----
 <dependency>
 	<groupId>io.micrometer</groupId>
@@ -514,7 +520,7 @@ management.metrics.export.prometheus.enabled=true
 management.endpoints.web.exposure.include=info,health,metrics,prometheus
 ----
 
-これにより、/actuator/prometheusにprometheus 形式のメトリクスが公開されます。
+これにより、`/actuator/prometheus` にprometheus 形式のメトリクスが公開されます。
 以下のprometheusの設定により、これらのメトリクスをスクレイピングすることができます。
 [source,yaml,role="copypaste"]
 ----
